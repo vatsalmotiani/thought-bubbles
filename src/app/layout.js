@@ -5,7 +5,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Thought Bubbles Advertising",
+  title: {
+    absolute: "Thought Bubbles Advertising",
+    template: "%s | Thought Bubbles Advertising",
+  },
   description: "Thought Bubbles Advertising",
   icons: {
     icon: "/favicon.svg", // /public path

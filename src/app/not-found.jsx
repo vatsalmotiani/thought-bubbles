@@ -1,9 +1,15 @@
 import { Poppins } from "next/font/google";
 import Button from "@/components/Button";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
 });
+
+export const metadata = {
+  title: { absolute: "Page Not Found" },
+};
+
 export default function notFound() {
   return (
     <div className='flex justify-center flex-col items-center h-3/5'>

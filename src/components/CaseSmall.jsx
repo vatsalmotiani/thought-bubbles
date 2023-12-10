@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Caveat, Poppins, Noto_Sans } from "next/font/google";
 
 const poppins = Poppins({
@@ -13,16 +14,19 @@ const noto = Noto_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
 });
-export default function CaseSmall({ img, name, category }) {
+export default function CaseSmall({ img, name, category, link = "/" }) {
   return (
     <div>
-      <Image
-        src={img}
-        height={300}
-        width={350}
-        alt={name}
-        className='my-3 border-b-8 duration-300 rounded-3xl border-sky-300 hover:border-tb-blue drop-shadow-sm'
-      />
+      <Link href={link}>
+        <Image
+          src={img}
+          height={300}
+          width={350}
+          alt={name}
+          className='my-3 border-b-8 duration-300 rounded-3xl border-sky-300 hover:border-tb-blue drop-shadow-sm'
+        />
+      </Link>
+
       <p className={`${poppins.className} ps-3  text-tb-black text-bold text-lg`}>{name}</p>
       <p className={`${noto.className} ps-3 text-gray-500`}>{category.join(", ")}</p>
     </div>

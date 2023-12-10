@@ -1,6 +1,6 @@
 import Title from "@/components/Title";
 import Service from "@/components/Service";
-import CasePreview from "@/components/CasePreview";
+import CaseSmall from "@/components/CaseSmall";
 
 export default function Home() {
   const serviceList = ["Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
@@ -26,7 +26,7 @@ export default function Home() {
         heading='Helping Brands Break out of their Bubble'
         subheading="Here's where the magic happens! Get an inside look at our success stories—a mix of creativity, problem-solving, and awesome collaborations with our amazing clients."
       />
-      <CasePreview
+      <CaseSmall
         img='/assets/case0.jpg'
         name='Inter Times'
         category={["Branding"]}

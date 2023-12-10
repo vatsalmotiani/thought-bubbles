@@ -13,7 +13,7 @@ const noto = Noto_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
 });
-export default function CasePreview({ img, name, category }) {
+export default function CaseSmall({ img, name, category }) {
   return (
     <div>
       <Image

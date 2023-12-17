@@ -18,7 +18,7 @@ const noto = Noto_Sans({
 
 export default function Footer() {
   return (
-    <div className='bg-white h-72 flex flex-col justify-between px-20 py-10 items-center'>
+    <div className='h-72 bg-white flex flex-col justify-between px-20 py-10 items-center'>
       <div className='flex justify-between pb-8 w-2/3'>
         <Image
           height={89}

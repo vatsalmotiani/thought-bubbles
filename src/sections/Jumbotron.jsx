@@ -30,7 +30,7 @@ export default function Jumbotron({ img, heading, subheading, body }) {
     //     <p className={` ${noto.className} text-gray-500 text-lg `}>{body}</p>
     //   </div>
     // </div>
-    <div className={`flex flex-col mt-20 mb-60 justify-center items-center`}>
+    <div className={`flex flex-col my-20 justify-center items-center`}>
       <Image
         src={img.src}
         alt={img.alt}
@@ -38,11 +38,11 @@ export default function Jumbotron({ img, heading, subheading, body }) {
         width={img.width}
         className='mx-20 mb-20'
       />
-      <div className={`w-2/3 2xl:w-1/3`}>
-        {/* <p className={` ${caveat.className}  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p> */}
+      {/* <div className={`w-2/3 2xl:w-1/3`}>
+        <p className={` ${caveat.className}  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p>
         <p className={` ${poppins.className} text-tb-dark text-2xl  py-4 `}>{subheading}</p>
         <p className={` ${noto.className} text-gray-500 text-lg `}>{body}</p>
-      </div>
+      </div> */}
     </div>
   );
 }

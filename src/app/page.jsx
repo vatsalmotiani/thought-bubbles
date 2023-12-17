@@ -7,9 +7,9 @@ import Jumbotron from "@/sections/Jumbotron";
 export default function Home() {
   const serviceList = ["Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
   return (
-    <div className='h-screen'>
+    <div className=''>
       <Jumbotron
-        img={{ src: "/assets/JumboDes.png", width: 610, height: 354, alt: "dummy" }}
+        img={{ src: "/assets/JumboDes.svg", width: 764, height: 443, alt: "dummy" }}
         heading='Think Different'
         subheading='Take the next step and try different'
         body='Est sint laboris ut nisi amet velit cillum fugiat deserunt. Labore id quis irure irure consectetur esse. Occaecat Lorem do labore minim dolor qui occaecat laborum Lorem labore veniam reprehenderit ex cupidatat mollit. Qui est ipsum ullamco ullamco voluptate non. Consequat ea anim ea velit qeo'

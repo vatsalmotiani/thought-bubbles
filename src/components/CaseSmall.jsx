@@ -27,7 +27,7 @@ export default function CaseSmall({ img, name, category, link = "/" }) {
         />
       </Link>
 
-      <p className={`${poppins.className} ps-3  text-tb-black text-bold text-lg`}>{name}</p>
+      <p className={`${poppins.className} ps-3  text-tb-black font-medium text-lg`}>{name}</p>
       <p className={`${noto.className} ps-3 text-gray-500`}>{category.join(", ")}</p>
     </div>
   );

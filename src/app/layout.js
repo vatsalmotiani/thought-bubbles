@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} bg-tb-bg flex flex-col h-screen justify-between`}>
         <Navbar />
         {children}
-
         <Footer />
       </body>
     </html>

@@ -3,11 +3,13 @@ import Service from "@/components/Service";
 import CaseSmall from "@/components/CaseSmall";
 import OurWork from "@/sections/OurWork";
 import Jumbotron from "@/sections/Jumbotron";
+import FAQ from "@/sections/FAQ";
+import CTA from "@/sections/CTA";
 
 export default function Home() {
   const serviceList = ["Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
   return (
-    <div className='mb-20'>
+    <div className='h-auto'>
       <Jumbotron
         img={{ src: "/assets/JumboDes.svg", width: 764, height: 443, alt: "dummy" }}
         heading='Think Different'
@@ -32,6 +34,9 @@ export default function Home() {
       </div>
 
       <OurWork />
+      <CTA />
+
+      <FAQ />
     </div>
   );
 }

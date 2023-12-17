@@ -24,7 +24,7 @@ export default function CaseLarge({ img, name, body, category, metrics, link = "
           height={430}
           width={502}
           alt={name}
-          className='border-b-8 duration-300 rounded-3xl border-sky-300 hover:border-tb-blue drop-shadow-sm'
+          className='border-b-8 duration-300 rounded-3xl border-sky-200 drop-shadow-sm hover:border-tb-blue  hover:drop-shadow-lg'
         />
       </Link>
 

@@ -1,11 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, Linkedin, Facebook } from "react-feather";
+import { Instagram, Linkedin, Facebook } from "react-feather"; // ICONS
+import { Caveat, Poppins, Noto_Sans } from "next/font/google"; // FONT
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const noto = Noto_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 export default function Footer() {
   return (
-    <div className='bg-white h-96 flex flex-col justify-between px-20 py-10'>
-      <div className='flex justify-between pb-8'>
+    <div className='bg-white h-72 flex flex-col justify-between px-20 py-10 items-center'>
+      <div className='flex justify-between pb-8 w-2/3'>
         <Image
           height={89}
           width={187}
@@ -26,7 +40,7 @@ export default function Footer() {
           <p className='text-base'>XYZ</p>
         </div>
       </div>
-      <span>
+      <span className='w-2/3'>
         <hr />
         <div className='flex pt-8 '>
           <Link href='https://www.instagram.com/thoughtbubbles_/'>

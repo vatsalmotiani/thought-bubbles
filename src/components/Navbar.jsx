@@ -42,7 +42,7 @@ export default function Navbar() {
           return (
             <Link
               key={url}
-              className={`px-4  hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue" : "text-gray-500"}`}
+              className={`px-4  hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue" : "text-tb-body"}`}
               href={url}
             >
               {name}

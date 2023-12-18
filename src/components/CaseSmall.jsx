@@ -15,7 +15,7 @@ export default function CaseSmall({ img, name, category, link = "/" }) {
       </Link>
 
       <p className={`font-poppins ps-3  text-tb-black font-medium text-lg`}>{name}</p>
-      <p className={`font-noto ps-3 text-gray-500`}>{category.join(", ")}</p>
+      <p className={`font-noto ps-3 text-tb-body`}>{category.join(", ")}</p>
     </div>
   );
 }

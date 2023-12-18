@@ -22,6 +22,7 @@ module.exports = {
         "tb-blue": "#00B6E7",
         "tb-black": "#1E1E1E",
         "tb-bg": "#F2F2F2",
+        "tb-body": "#828282",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -60,6 +61,7 @@ module.exports = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "4xl": "2.75rem",
       },
       keyframes: {
         "accordion-down": {

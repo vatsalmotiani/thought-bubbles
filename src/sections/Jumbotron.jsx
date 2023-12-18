@@ -1,18 +1,5 @@
 import Image from "next/image";
-import { Caveat, Poppins, Noto_Sans } from "next/font/google"; // FONT
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const noto = Noto_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
+// FONT
 
 export default function Jumbotron({ img, heading, subheading, body }) {
   return (
@@ -25,9 +12,9 @@ export default function Jumbotron({ img, heading, subheading, body }) {
     //     className='mx-20'
     //   />
     //   <div className={`w-1/3 `}>
-    //     {/* <p className={` ${caveat.className}  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p> */}
-    //     <p className={` ${poppins.className} text-tb-dark text-2xl  py-4 `}>{subheading}</p>
-    //     <p className={` ${noto.className} text-gray-500 text-lg `}>{body}</p>
+    //     {/* <p className={` font-caveat  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p> */}
+    //     <p className={` font-poppins text-tb-dark text-2xl  py-4 `}>{subheading}</p>
+    //     <p className={` font-noto text-gray-500 text-lg `}>{body}</p>
     //   </div>
     // </div>
     <div className={`flex flex-col my-20 justify-center items-center`}>
@@ -39,9 +26,9 @@ export default function Jumbotron({ img, heading, subheading, body }) {
         className='mx-20 mb-20'
       />
       {/* <div className={`w-2/3 2xl:w-1/3`}>
-        <p className={` ${caveat.className}  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p>
-        <p className={` ${poppins.className} text-tb-dark text-2xl  py-4 `}>{subheading}</p>
-        <p className={` ${noto.className} text-gray-500 text-lg `}>{body}</p>
+        <p className={` font-caveat  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p>
+        <p className={` font-poppins text-tb-dark text-2xl  py-4 `}>{subheading}</p>
+        <p className={` font-noto text-gray-500 text-lg `}>{body}</p>
       </div> */}
     </div>
   );

@@ -1,20 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Linkedin, Facebook } from "react-feather"; // ICONS
-import { Caveat, Poppins, Noto_Sans } from "next/font/google"; // FONT
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const noto = Noto_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
+// FONT
 
 export default function Footer() {
   return (

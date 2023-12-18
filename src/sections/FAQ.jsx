@@ -2,20 +2,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Image from "next/image";
 ////////////////////////////////
 
-import { Caveat, Poppins, Noto_Sans } from "next/font/google"; // FONT
+// FONT
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const noto = Noto_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
 ////////////////////////////////
 
 export default function FAQ() {
@@ -29,14 +17,14 @@ export default function FAQ() {
       />
 
       <div className='ms-14 flex flex-col py-14'>
-        <p className={`${poppins.className} text-2xl text-white`}>Got any questions? We&apos;ve got you!</p>
+        <p className={`font-poppins text-2xl text-white`}>Got any questions? We&apos;ve got you!</p>
         <Accordion
           type='single'
           collapsible
           defaultValue='item-1'
         >
           <AccordionItem value='item-1'>
-            <AccordionTrigger>What sets your agency apart from competitors??</AccordionTrigger>
+            <AccordionTrigger>What sets your agency apart from competitors?</AccordionTrigger>
             <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
           </AccordionItem>
           <AccordionItem value='item-2'>

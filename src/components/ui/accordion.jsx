@@ -4,24 +4,6 @@ import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
-////////////////////////////////
-
-import { Caveat, Poppins, Noto_Sans } from "next/font/google"; // FONT
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-const noto = Noto_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-////////////////////////////////
-
 import { cn } from "@/lib/utils";
 
 const Accordion = AccordionPrimitive.Root;
@@ -39,7 +21,7 @@ const AccordionTrigger = React.forwardRef(({ className, children, ...props }, re
   <AccordionPrimitive.Header className='flex'>
     <AccordionPrimitive.Trigger
       ref={ref}
-      className={cn(" flex flex-1 items-center text-gray-100 font-medium text-lg justify-between transition-all  [&[data-state=open]>svg]:rotate-180", poppins.className, className)}
+      className={cn("font-poppins flex flex-1 items-center text-gray-100 font-medium text-lg justify-between transition-all  [&[data-state=open]>svg]:rotate-180", className)}
       {...props}
     >
       {children}
@@ -55,7 +37,7 @@ const AccordionContent = React.forwardRef(({ className, children, ...props }, re
     className='overflow-hidden text-base text-gray-300 transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
     {...props}
   >
-    <div className={cn("pt-4", noto.className, className)}>{children}</div>
+    <div className={cn("pt-4 font-noto", className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   content: ["./components/**/*.{js,jsx}", "./app/**/*.{js,jsx}", "./src/**/*.{js,jsx}"],
@@ -11,6 +12,12 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        caveat: ["Caveat", "cursive"],
+        noto: ["Noto Sans", "sans-serif"],
+      },
+
       colors: {
         "tb-blue": "#00B6E7",
         "tb-black": "#1E1E1E",

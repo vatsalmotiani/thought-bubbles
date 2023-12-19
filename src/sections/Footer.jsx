@@ -13,18 +13,45 @@ export default function Footer() {
           src='/tb-logo.svg'
           alt='Thought Bubbles Logo'
         />
-
-        <div className=''>
-          <p className='text-lg'>Work</p>
-          <p className='text-base'>XYZ</p>
-          <p className='text-base'>XYZ</p>
-          <p className='text-base'>XYZ</p>
+        <div className='font-noto  flex flex-col'>
+          <p className='text-tb-black'>Services</p>
+          <p className='text-tb-body hover:text-tb-blue duration-300'>Digital Marketing</p>
+          <p className='text-tb-body hover:text-tb-blue duration-300'>Copywriting</p>
+          <p className='text-tb-body hover:text-tb-blue duration-300'>Branding</p>
+          <p className='text-tb-body hover:text-tb-blue duration-300'>Social Media</p>
+          <p className='text-tb-body hover:text-tb-blue duration-300'>Production</p>
         </div>
-        <div className=''>
-          <p className='text-lg'>Work</p>
-          <p className='text-base'>XYZ</p>
-          <p className='text-base'>XYZ</p>
-          <p className='text-base'>XYZ</p>
+        <div className='font-noto text-tb-black flex flex-col'>
+          <Link
+            href='/'
+            className='hover:text-tb-blue  duration-300 '
+          >
+            Home
+          </Link>
+          <Link
+            href='/about'
+            className='hover:text-tb-blue  duration-300 '
+          >
+            About
+          </Link>
+          <Link
+            href='/work'
+            className='hover:text-tb-blue  duration-300 '
+          >
+            Work
+          </Link>
+          <Link
+            href='/careers'
+            className='hover:text-tb-blue  duration-300 '
+          >
+            Careers
+          </Link>
+          <Link
+            href='/contact-us'
+            className='hover:text-tb-blue  duration-300 '
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
       <span className='w-2/3'>

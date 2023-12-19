@@ -5,7 +5,7 @@ import Button from "./Button";
 
 export default function CaseLarge({ img, name, body, category, metrics, link = "/" }) {
   return (
-    <div className='flex'>
+    <div className='flex m-8'>
       <Link href={link}>
         <Image
           src={img}

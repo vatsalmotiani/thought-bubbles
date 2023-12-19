@@ -25,24 +25,23 @@ export default function Navbar() {
     },
   ];
   return (
-    <div className='flex justify-around items-center px-6 py-6'>
-      <div className='flex items-center '>
-        <Link href='/'>
-          <Image
-            src='/tb-logo.svg'
-            width={137}
-            height={66}
-            alt='Thought Bubbles Logo'
-          />
-        </Link>
-      </div>
+    <div className='flex justify-around items-center px-6 pt-8'>
+      <Link href='/'>
+        <Image
+          src='/tb-logo.svg'
+          width={137}
+          height={66}
+          alt='Thought Bubbles Logo'
+        />
+      </Link>
+
       <div className={`font-poppins text-lg lowercase`}>
         {navLinks.map(({ name, url }) => {
           const isActive = pathname.startsWith(url);
           return (
             <Link
               key={url}
-              className={`px-4  hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue" : "text-tb-body"}`}
+              className={`px-8  hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue" : "text-tb-body"}`}
               href={url}
             >
               {name}

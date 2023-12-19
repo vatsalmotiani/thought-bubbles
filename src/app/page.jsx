@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className='h-auto'>
       <Jumbotron
-        img={{ src: "/assets/JumboDes.svg", width: 764, height: 443, alt: "dummy" }}
+        img={{ src: "/assets/JumboDes.svg", width: 764, height: 443, alt: "Think Different - Thought Bubbles" }}
         heading='Think Different'
         subheading='Take the next step and try different'
         body='Est sint laboris ut nisi amet velit cillum fugiat deserunt. Labore id quis irure irure consectetur esse. Occaecat Lorem do labore minim dolor qui occaecat laborum Lorem labore veniam reprehenderit ex cupidatat mollit. Qui est ipsum ullamco ullamco voluptate non. Consequat ea anim ea velit qeo'

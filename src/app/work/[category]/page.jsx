@@ -60,15 +60,15 @@ export default function WorkCase({ params }) {
   const cat = params.category;
   const pathname = usePathname();
   return (
-    <>
+    <div className=''>
       {/* <Jumbotron img={{ src: "/assets/JumboDes2.svg", width: 300, height: 181, alt: "Think Different - Thought Bubbles" }} /> */}
-      <div className='flex my-14 justify-center'>
+      <div className='flex my-14 justify-center items-center'>
         {serviceList.map((service, i) => {
           return (
             <Link
-              href={`/work/${service.replace(/\s+/g, "-").toLowerCase()}`}
+              href={`/work/${slugify(service)}`}
               key={i}
-              className={`font-poppins font-medium text-lg text-tb-black px-8 ${pathname === "/" ? "active" : ""}`}
+              className={`font-poppins font-medium text-lg  px-8 ${pathname === `/work/${slugify(service)}` ? "text-tb-blue bg-white rounded-3xl border-2 border-gray-200 p-2" : "text-tb-body  hover:text-tb-black"}`}
             >
               {service}
             </Link>
@@ -77,23 +77,37 @@ export default function WorkCase({ params }) {
       </div>
       {/* DISPLAYING DYNAMIC CASES */}
       <div className='flex flex-col '>
-        {caseList
-          .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
-          .map((filteredCase) => {
-            return (
-              <CaseLarge
-                key={filteredCase.id}
-                img={filteredCase.img}
-                name={filteredCase.name}
-                category={filteredCase.category}
-                body={filteredCase.body}
-                metrics={filteredCase.metrics}
-                link={`/work/cases/${slugify(filteredCase.name)}`}
-              />
-            );
-          })}
+        {cat !== "all"
+          ? caseList
+              .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
+              .map((filteredCase) => {
+                return (
+                  <CaseLarge
+                    key={filteredCase.id}
+                    img={filteredCase.img}
+                    name={filteredCase.name}
+                    category={filteredCase.category}
+                    body={filteredCase.body}
+                    metrics={filteredCase.metrics}
+                    link={`/work/cases/${slugify(filteredCase.name)}`}
+                  />
+                );
+              })
+          : caseList.map((filteredCase) => {
+              return (
+                <CaseLarge
+                  key={filteredCase.id}
+                  img={filteredCase.img}
+                  name={filteredCase.name}
+                  category={filteredCase.category}
+                  body={filteredCase.body}
+                  metrics={filteredCase.metrics}
+                  link={`/work/cases/${slugify(filteredCase.name)}`}
+                />
+              );
+            })}
       </div>
       .
-    </>
+    </div>
   );
 }

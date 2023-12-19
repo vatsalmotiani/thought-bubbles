@@ -21,7 +21,7 @@ const AccordionTrigger = React.forwardRef(({ className, children, ...props }, re
   <AccordionPrimitive.Header className='flex'>
     <AccordionPrimitive.Trigger
       ref={ref}
-      className={cn("font-poppins flex flex-1 items-center text-gray-100 font-medium text-lg justify-between transition-all  [&[data-state=open]>svg]:rotate-180", className)}
+      className={cn(" font-poppins flex flex-1 items-center text-gray-100 font-medium text-lg justify-between transition-all  [&[data-state=open]>svg]:rotate-180", className)}
       {...props}
     >
       {children}

@@ -4,6 +4,7 @@ import CaseLarge from "@/components/CaseLarge";
 import Jumbotron from "@/sections/Jumbotron";
 import Link from "next/link";
 import { slugify, slugifyList } from "@/lib/utils";
+import Title from "@/components/Title";
 
 export default function WorkCase({ params }) {
   const serviceList = ["All", "Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
@@ -62,13 +63,17 @@ export default function WorkCase({ params }) {
   return (
     <div className=''>
       {/* <Jumbotron img={{ src: "/assets/JumboDes2.svg", width: 300, height: 181, alt: "Think Different - Thought Bubbles" }} /> */}
+      <Title
+        heading='Case Studies'
+        subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
+      />
       <div className='flex my-14 justify-center items-center'>
         {serviceList.map((service, i) => {
           return (
             <Link
               href={`/work/${slugify(service)}`}
               key={i}
-              className={`font-poppins font-medium text-lg  px-8 ${pathname === `/work/${slugify(service)}` ? "text-tb-blue bg-white rounded-3xl border-2 border-gray-200 p-2" : "text-tb-body  hover:text-tb-black"}`}
+              className={`font-poppins font-medium text-lg px-8 ${pathname === `/work/${slugify(service)}` ? "text-tb-blue" : "text-tb-black duratiion-300 hover:text-neutral-500"}`}
             >
               {service}
             </Link>
@@ -76,7 +81,7 @@ export default function WorkCase({ params }) {
         })}
       </div>
       {/* DISPLAYING DYNAMIC CASES */}
-      <div className='flex flex-col '>
+      <div className='flex flex-col items-center'>
         {cat !== "all"
           ? caseList
               .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))

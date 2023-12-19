@@ -5,7 +5,7 @@ import Button from "./Button";
 
 export default function CaseLarge({ img, name, body, category, metrics, link = "/" }) {
   return (
-    <div className='flex m-8'>
+    <div className='w-fit flex justify-center items-center m-8'>
       <Link href={link}>
         <Image
           src={img}
@@ -16,10 +16,10 @@ export default function CaseLarge({ img, name, body, category, metrics, link = "
         />
       </Link>
 
-      <div className='ms-12 flex justify-center flex-col w-1/4'>
-        <p className={`font-noto text-tb-body pb-2`}>{category.join(", ")}</p>
+      <div className='ms-12 flex flex-col'>
+        {/* <p className={`font-noto text-tb-body pb-2`}>{category.join(", ")}</p> */}
         <p className={`font-poppins  text-tb-black text-bold text-3xl`}>{name}</p>
-        <p className={`font-noto py-6 text-base  text-tb-body`}>{body}</p>
+        <p className={`font-noto py-6 text-base  text-tb-body w-96`}>{body}</p>
 
         <div className='flex pb-4'>
           {metrics

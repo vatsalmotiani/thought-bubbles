@@ -19,9 +19,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} bg-tb-bg flex flex-col h-screen justify-between`}>
+      <body className={`${inter.className} flex flex-col min-h-screen relative bg-tb-bg`}>
         <Navbar />
-        {children}
+        <div className='flex-grow'>{children}</div>
         <Footer />
       </body>
     </html>

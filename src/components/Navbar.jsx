@@ -2,6 +2,7 @@
 import Image from "next/image";
 
 import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -37,7 +38,7 @@ export default function Navbar() {
 
       <div className={`font-poppins text-lg lowercase`}>
         {navLinks.map(({ name, url }) => {
-          const isActive = pathname.startsWith(url);
+          const isActive = pathname.startsWith(`${url}`);
           return (
             <Link
               key={url}

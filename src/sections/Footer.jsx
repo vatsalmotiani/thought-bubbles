@@ -5,7 +5,7 @@ import { Instagram, Linkedin, Facebook } from "react-feather"; // ICONS
 
 export default function Footer() {
   return (
-    <div className='h-72 bg-white flex flex-col justify-between px-20 py-14 items-center'>
+    <div className='h-96 bg-white flex flex-col justify-between px-20 py-14 items-center'>
       <div className='flex justify-between pb-8 w-2/3'>
         <Image
           height={89}
@@ -13,7 +13,7 @@ export default function Footer() {
           src='/tb-logo.svg'
           alt='Thought Bubbles Logo'
         />
-        <div className='font-noto  flex flex-col'>
+        <div className='font-noto flex flex-col '>
           <p className='text-tb-black'>Services</p>
           <p className='text-tb-body hover:text-tb-blue duration-300'>Digital Marketing</p>
           <p className='text-tb-body hover:text-tb-blue duration-300'>Copywriting</p>
@@ -54,7 +54,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <span className='w-2/3'>
+      <span className='w-2/3 '>
         <hr />
         <div className='flex pt-8 '>
           <Link href='https://www.instagram.com/thoughtbubbles_/'>

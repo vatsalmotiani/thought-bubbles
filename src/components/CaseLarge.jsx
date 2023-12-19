@@ -38,7 +38,7 @@ export default function CaseLarge({ img, name, body, category, metrics, link = "
         </div>
         <Button
           type='white'
-          href={link}
+          link={link}
         />
       </div>
     </div>

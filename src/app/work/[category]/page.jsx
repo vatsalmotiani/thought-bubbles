@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import CaseLarge from "@/components/CaseLarge";
 import Jumbotron from "@/sections/Jumbotron";
 import Link from "next/link";
-import { slugify } from "@/lib/utils";
+import { slugify, slugifyList } from "@/lib/utils";
 
 export default function WorkCase({ params }) {
   const serviceList = ["All", "Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
@@ -78,7 +78,7 @@ export default function WorkCase({ params }) {
       {/* DISPLAYING DYNAMIC CASES */}
       <div className='flex flex-col '>
         {caseList
-          .filter((caseStudy) => slugify(caseStudy.category).includes(cat))
+          .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
           .map((filteredCase) => {
             return (
               <CaseLarge
@@ -88,6 +88,7 @@ export default function WorkCase({ params }) {
                 category={filteredCase.category}
                 body={filteredCase.body}
                 metrics={filteredCase.metrics}
+                link={`/work/cases/${slugify(filteredCase.name)}`}
               />
             );
           })}

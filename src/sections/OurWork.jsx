@@ -27,7 +27,7 @@ export default function OurWork() {
         </span>
       </div>
       <Button
-        link='/work'
+        link='/work/all'
         type='White'
         content='View All'
       />

@@ -35,7 +35,7 @@ export default function Footer() {
             About
           </Link>
           <Link
-            href='/work'
+            href='/work/all'
             className='hover:text-tb-blue  duration-300 '
           >
             Work

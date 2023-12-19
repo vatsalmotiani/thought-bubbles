@@ -17,7 +17,7 @@ export default function Navbar() {
     },
     {
       name: "Work",
-      url: "/work",
+      url: "/work/all",
     },
     {
       name: "Contact Us",

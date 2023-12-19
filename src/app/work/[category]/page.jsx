@@ -1,12 +1,11 @@
+"use client";
+import { usePathname } from "next/navigation";
 import CaseLarge from "@/components/CaseLarge";
 import Jumbotron from "@/sections/Jumbotron";
 import Link from "next/link";
+import { slugify } from "@/lib/utils";
 
-export const metadata = {
-  title: "Work",
-};
-
-export default function Work() {
+export default function WorkCase({ params }) {
   const serviceList = ["All", "Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
   const caseList = [
     {
@@ -58,7 +57,8 @@ export default function Work() {
       objective: "Lip excepteur Lorem cupidatat cillum. Deserunt nulla in exercitation. Ipsum ea quis dolor. Nostrud laboris",
     },
   ];
-  const cat = "Production";
+  const cat = params.category;
+  const pathname = usePathname();
   return (
     <>
       {/* <Jumbotron img={{ src: "/assets/JumboDes2.svg", width: 300, height: 181, alt: "Think Different - Thought Bubbles" }} /> */}
@@ -66,9 +66,9 @@ export default function Work() {
         {serviceList.map((service, i) => {
           return (
             <Link
-              href={`/work/category/${service.replace(/\s+/g, "-").toLowerCase()}`}
+              href={`/work/${service.replace(/\s+/g, "-").toLowerCase()}`}
               key={i}
-              className='font-poppins font-medium text-lg text-tb-black px-8'
+              className={`font-poppins font-medium text-lg text-tb-black px-8 ${pathname === "/" ? "active" : ""}`}
             >
               {service}
             </Link>
@@ -78,7 +78,7 @@ export default function Work() {
       {/* DISPLAYING DYNAMIC CASES */}
       <div className='flex flex-col '>
         {caseList
-          .filter((c) => c.category.includes(cat))
+          .filter((caseStudy) => slugify(caseStudy.category).includes(cat))
           .map((filteredCase) => {
             return (
               <CaseLarge

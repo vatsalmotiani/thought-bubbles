@@ -12,20 +12,20 @@ export default function OurWork() {
         subheading="Here's where the magic happens! Get an inside look at our success stories—a mix of creativity, problem-solving, and awesome collaborations with our amazing clients."
       />
       <div className='flex my-8'>
-        <span className='me-8'>
-          <CaseSmall
-            img='/assets/case0.jpg'
-            name='Inter Times'
-            category={["Branding"]}
-          />
-        </span>
-        <span className=''>
-          <CaseSmall
-            img='/assets/case0.jpg'
-            name='Inter Times'
-            category={["Branding"]}
-          />
-        </span>
+        {caseList.map((filteredCase) => {
+          return (
+            <span
+              key={filteredCase.id}
+              className='me-8'
+            >
+              <CaseSmall
+                img={filteredCase.img}
+                name={filteredCase.name}
+                category={filteredCase.category}
+              />
+            </span>
+          );
+        })}
       </div>
       <Button
         link='/work/all'

@@ -30,8 +30,10 @@ export default function Navbar() {
       <Link href='/'>
         <Image
           src='/tb-logo.svg'
-          width={137}
-          height={66}
+          width='137'
+          height='0'
+          sizes='100vw'
+          className='h-auto'
           alt='Thought Bubbles Logo'
         />
       </Link>

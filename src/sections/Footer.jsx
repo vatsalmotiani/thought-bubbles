@@ -8,8 +8,10 @@ export default function Footer() {
     <div className='h-96 bg-white flex flex-col justify-between px-20 py-14 items-center'>
       <div className='flex justify-between pb-8 w-2/3'>
         <Image
-          height={89}
-          width={187}
+          width='187'
+          height='0'
+          sizes='100vw'
+          className='h-auto'
           src='/tb-logo.svg'
           alt='Thought Bubbles Logo'
         />

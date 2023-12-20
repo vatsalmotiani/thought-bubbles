@@ -1,7 +1,8 @@
-import Button from "@/components/Button";
 import Image from "next/image";
-import { findCase } from "@/data/caseList";
 import Link from "next/link";
+import CaseSmall from "@/components/CaseSmall";
+import caseList from "@/data/caseList";
+import { findCase } from "@/data/caseList";
 import { ArrowLeft } from "react-feather"; // ICONS
 
 export default function CasePage({ params }) {
@@ -10,19 +11,14 @@ export default function CasePage({ params }) {
 
   return (
     <div className='flex flex-col items-center pb-14'>
-      <div className='flex flex-col'>
+      <div className='flex flex-col w-4/6'>
         <div className='pt-12 pb-8'>
-          {/* <Button
-            link='/work/all'
-            content='Back'
-            type='white'
-          /> */}
           <Link
             href='/work/all'
             className='text-gray-500 hover:text-gray-600 duration-300 flex'
           >
             <ArrowLeft className='pe-2' />
-            Back
+            All Cases
           </Link>
         </div>
 
@@ -41,6 +37,40 @@ export default function CasePage({ params }) {
         </div>
         <p className={`font-poppins text-tb-black text-2xl  py-4`}>Objective</p>
         <p className={`font-poppins  text-tb-body text-base`}>{objective}</p>
+      </div>
+
+      {/* GALLERY */}
+      <div className='flex flex-col bg-tb-black w-full items-center my-14'>
+        <div className='flex flex-col w-4/6 py-14'>
+          <p className={`font-poppins text-white text-2xl  pb-8`}>Gallery</p>
+
+          <Image
+            src={img}
+            alt={name}
+            height='0'
+            width='0'
+            sizes='100vw'
+            className='rounded-4xl h-[484px] w-[1021px] z-10  col-start-1 row-start-1'
+          />
+        </div>
+      </div>
+      <div className='flex flex-col w-4/6'>
+        <p className={`font-poppins  text-tb-body text-base`}>{body}</p>
+        <p className={`font-poppins text-tb-black text-2xl  py-4`}>Checkout Other Case Studies</p>
+        <div className='flex'>
+          {caseList
+            .filter((c) => c.name !== name)
+            .map((filteredCase) => {
+              return (
+                <span
+                  key={filteredCase.id}
+                  className='me-8'
+                >
+                  <CaseSmall caseStudy={filteredCase} />
+                </span>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

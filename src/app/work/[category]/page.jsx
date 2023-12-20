@@ -40,12 +40,7 @@ export default function WorkCase({ params }) {
                 return (
                   <CaseLarge
                     key={filteredCase.id}
-                    img={filteredCase.img}
-                    name={filteredCase.name}
-                    category={filteredCase.category}
-                    body={filteredCase.body}
-                    metrics={filteredCase.metrics}
-                    link={`/work/cases/${slugify(filteredCase.name)}`}
+                    caseStudy={filteredCase}
                   />
                 );
               })
@@ -53,12 +48,7 @@ export default function WorkCase({ params }) {
               return (
                 <CaseLarge
                   key={filteredCase.id}
-                  img={filteredCase.img}
-                  name={filteredCase.name}
-                  category={filteredCase.category}
-                  body={filteredCase.body}
-                  metrics={filteredCase.metrics}
-                  link={`/work/cases/${slugify(filteredCase.name)}`}
+                  caseStudy={filteredCase}
                 />
               );
             })}

@@ -6,6 +6,8 @@ const caseList = [
     img: "/assets/dummy1.jpg",
     name: "Inter Times",
     category: ["Branding"],
+    shortDescription: "This project lorem ipsum solid transparent white",
+    gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
     body: "Non minim excepteur Lorem cupidatat cillum. Deserunt nulla in exercitation. Ipsum ea quis dolor. Nostrud laboris irure non anim Lorem dolor.",
     metrics: [
       { metric: "Solid", value: "Gold" },
@@ -18,6 +20,8 @@ const caseList = [
     img: "/assets/dummy1.jpg",
     name: "Something Else",
     category: ["Digital Marketing"],
+    gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
+    shortDescription: "This project lorem ipsum solid tr white",
     body: "Steve minim excepteur Lorem cupidatat cillum. Deserunt nulla in exercitation. Ipsum ea quis dolor. Nostrud laboris irure non anim Lorem dolor.",
     metrics: [
       { metric: "Olive", value: "Nana" },
@@ -30,6 +34,8 @@ const caseList = [
     img: "/assets/dummy1.jpg",
     name: "John Station",
     category: ["Production"],
+    gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
+    shortDescription: "This project lorem ipsum solid tr white",
     body: "Tim excepteur Lorem cupidatat cillum. Deserunt nulla in exercitation. Ipsum ea quis dolor. Nostrud laboris irure non anim Lorem dolor.",
     metrics: [
       { metric: "Adam", value: "Jacob" },
@@ -42,6 +48,8 @@ const caseList = [
     img: "/assets/dummy1.jpg",
     name: "Multiple",
     category: ["Production", "Copywriting", "Digital Marketing"],
+    gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
+    shortDescription: "This project lorem ipsum solid tr white",
     body: "Tim excepteur Lorem cupidatat cillum. Deserunt nulla in exercitation. Ipsum ea quis dolor. Nostrud laboris irure non anim Lorem dolor.",
     metrics: [
       { metric: "Adam", value: "Jacob" },

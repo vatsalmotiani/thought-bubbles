@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import Button from "./Button";
+import { slugify } from "@/lib/utils";
 
-export default function CaseLarge({ img, name, body, category, metrics, link = "/" }) {
+export default function CaseLarge({ caseStudy }) {
   return (
     <div className='w-fit flex justify-center items-center m-8'>
-      <Link href={link}>
+      <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
         <Image
-          src={img}
+          src={caseStudy.img}
           height={430}
           width={502}
           alt={name}
@@ -17,13 +17,13 @@ export default function CaseLarge({ img, name, body, category, metrics, link = "
       </Link>
 
       <div className='ms-12 flex flex-col'>
+        <p className={`font-poppins  text-tb-black text-2xl`}>{caseStudy.name}</p>
         {/* <p className={`font-noto text-tb-body pb-2`}>{category.join(", ")}</p> */}
-        <p className={`font-poppins  text-tb-black text-bold text-3xl`}>{name}</p>
-        <p className={`font-noto py-6 text-base  text-tb-body w-96`}>{body}</p>
+        <p className={`font-noto py-6 text-base  text-tb-body w-96`}>{caseStudy.shortDescription}</p>
 
         <div className='flex pb-4'>
-          {metrics
-            ? metrics.map((m) => {
+          {caseStudy.metrics
+            ? caseStudy.metrics.map((m) => {
                 return (
                   <div
                     key={m.metric}
@@ -38,7 +38,7 @@ export default function CaseLarge({ img, name, body, category, metrics, link = "
         </div>
         <Button
           type='white'
-          link={link}
+          link={`/work/cases/${slugify(caseStudy.name)}`}
         />
       </div>
     </div>

@@ -18,11 +18,7 @@ export default function OurWork() {
               key={filteredCase.id}
               className='me-8'
             >
-              <CaseSmall
-                img={filteredCase.img}
-                name={filteredCase.name}
-                category={filteredCase.category}
-              />
+              <CaseSmall caseStudy={filteredCase} />
             </span>
           );
         })}

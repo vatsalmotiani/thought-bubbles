@@ -15,7 +15,7 @@ export default function Footer() {
           src='/tb-logo.svg'
           alt='Thought Bubbles Logo'
         />
-        <div className='font-noto flex flex-col '>
+        <div className=' flex flex-col '>
           <p className='text-tb-black'>Services</p>
           <p className='text-tb-body hover:text-tb-blue duration-300'>Digital Marketing</p>
           <p className='text-tb-body hover:text-tb-blue duration-300'>Copywriting</p>
@@ -23,7 +23,7 @@ export default function Footer() {
           <p className='text-tb-body hover:text-tb-blue duration-300'>Social Media</p>
           <p className='text-tb-body hover:text-tb-blue duration-300'>Production</p>
         </div>
-        <div className='font-noto text-tb-black flex flex-col'>
+        <div className=' text-tb-black flex flex-col'>
           <Link
             href='/'
             className='hover:text-tb-blue  duration-300 '

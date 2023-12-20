@@ -4,6 +4,7 @@ const caseList = [
   {
     id: "1",
     img: "/assets/dummy1.jpg",
+    client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "Inter Times",
     category: ["Branding"],
     shortDescription: "This project lorem ipsum solid transparent white",
@@ -18,6 +19,7 @@ const caseList = [
   {
     id: "2",
     img: "/assets/dummy1.jpg",
+    client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "Something Else",
     category: ["Digital Marketing"],
     gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
@@ -32,6 +34,7 @@ const caseList = [
   {
     id: "3",
     img: "/assets/dummy1.jpg",
+    client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "John Station",
     category: ["Production"],
     gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
@@ -46,6 +49,7 @@ const caseList = [
   {
     id: "4",
     img: "/assets/dummy1.jpg",
+    client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "Multiple",
     category: ["Production", "Copywriting", "Digital Marketing"],
     gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],

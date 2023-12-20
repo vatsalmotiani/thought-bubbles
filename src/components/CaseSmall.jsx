@@ -15,9 +15,9 @@ export default function CaseSmall({ caseStudy }) {
         />
       </Link>
 
-      <p className={`font-poppins ps-3  text-tb-black font-medium text-lg`}>{caseStudy.name}</p>
-      <p className={`font-noto ps-3 text-gray-400`}>{caseStudy.category.join(", ")}</p>
-      {/* <p className={`font-noto ps-3 text-tb-body`}>{caseStudy.shortDescription}</p> */}
+      <p className='font-poppins ps-3  text-tb-black font-medium text-lg'>{caseStudy.name}</p>
+      <p className=' ps-3 text-gray-400'>{caseStudy.category.join(", ")}</p>
+      {/* <p className=' ps-3 text-tb-body'>{caseStudy.shortDescription}</p> */}
     </div>
   );
 }

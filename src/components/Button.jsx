@@ -11,7 +11,7 @@ export default function Button({ link = "/", content = "View", type = "blue" }) 
     case "white":
       return (
         <Link href={link}>
-          <div className={`font-noto bg-white border-2 border-gray-200 rounded-2xl  max-w-max px-8 py-3 mt-4 text-tb-body hover:text-gray-600 hover:bg-gray-100 duration-300 hover:drop-shadow-sm`}>{content}</div>
+          <div className={` bg-white border-2 border-gray-200 rounded-2xl  max-w-max px-8 py-3 mt-4 text-tb-body hover:text-gray-600 hover:bg-gray-100 duration-300 hover:drop-shadow-sm`}>{content}</div>
         </Link>
       );
   }

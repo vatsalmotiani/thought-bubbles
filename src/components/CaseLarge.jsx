@@ -9,17 +9,18 @@ export default function CaseLarge({ caseStudy }) {
       <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
         <Image
           src={caseStudy.img}
-          height={430}
-          width={502}
+          height='0'
+          width='0'
           alt={name}
-          className='border-b-8 duration-300 rounded-3xl border-sky-200 drop-shadow-sm hover:border-tb-blue  hover:drop-shadow-lg'
+          sizes='100vw'
+          className='h-[430px] w-[500px] border-b-8 duration-300 rounded-3xl border-sky-200 drop-shadow-sm hover:border-tb-blue  hover:drop-shadow-lg'
         />
       </Link>
 
       <div className='ms-12 flex flex-col'>
-        <p className={`font-poppins  text-tb-black text-2xl`}>{caseStudy.name}</p>
-        {/* <p className={`font-noto text-tb-body pb-2`}>{category.join(", ")}</p> */}
-        <p className={`font-noto py-6 text-base  text-tb-body w-96`}>{caseStudy.shortDescription}</p>
+        <p className='font-poppins  text-tb-black text-2xl'>{caseStudy.name}</p>
+        {/* <p className=' text-tb-body pb-2'>{category.join(", ")}</p> */}
+        <p className='py-6 text-base  text-tb-body w-96'>{caseStudy.shortDescription}</p>
 
         <div className='flex pb-4'>
           {caseStudy.metrics
@@ -29,8 +30,8 @@ export default function CaseLarge({ caseStudy }) {
                     key={m.metric}
                     className='flex flex-col me-8'
                   >
-                    <p className={`font-noto  text-tb-black  font-medium`}>{m.metric}</p>
-                    <p className={`font-noto  text-tb-body`}>{m.value}</p>
+                    <p className=' text-tb-black  font-medium'>{m.metric}</p>
+                    <p className=' text-tb-body'>{m.value}</p>
                   </div>
                 );
               })

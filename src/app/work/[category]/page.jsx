@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import CaseLarge from "@/components/CaseLarge";
-import Jumbotron from "@/sections/Jumbotron";
+import Jumbotron from "@/components/Jumbotron";
 import Link from "next/link";
 import { slugify, slugifyList } from "@/lib/utils";
 import Title from "@/components/Title";

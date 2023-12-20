@@ -1,6 +1,7 @@
 import Title from "@/components/Title";
 import CaseSmall from "@/components/CaseSmall";
 import Button from "@/components/Button";
+import caseList from "@/data/caseList";
 
 export default function OurWork() {
   return (

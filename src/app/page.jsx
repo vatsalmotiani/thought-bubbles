@@ -5,9 +5,9 @@ import OurWork from "@/sections/OurWork";
 import Jumbotron from "@/sections/Jumbotron";
 import FAQ from "@/sections/FAQ";
 import CTA from "@/sections/CTA";
+import serviceList from "@/data/services";
 
 export default function Home() {
-  const serviceList = ["Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"];
   return (
     <div className='h-auto'>
       <Jumbotron

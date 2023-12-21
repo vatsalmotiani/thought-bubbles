@@ -4,7 +4,7 @@ import { slugify } from "@/lib/utils";
 
 export default function CaseCard({ caseStudy }) {
   return (
-    <div>
+    <div className='mx-8 my-8'>
       <Link
         className='flex flex-col'
         href={`/work/cases/${slugify(caseStudy.name)}`}
@@ -15,7 +15,7 @@ export default function CaseCard({ caseStudy }) {
           width='0'
           alt={caseStudy.name}
           sizes='100vw'
-          className='h-[430px] w-[500px] duration-300 rounded-3xl shadow-xl'
+          className='h-[200px] w-[200px] md:h-[430px] md:w-[500px] duration-300 rounded-3xl shadow-xl'
         />
         {/* <p className='ps-3 font-poppins text-tb-black font-medium text-lg'>{caseStudy.name}</p>
         <p className=' ps-3 text-gray-400'>{caseStudy.category.join(", ")}</p> */}

@@ -36,10 +36,10 @@ export function Metrics({ metrics }) {
 
 export function Paragraph({ heading, body }) {
   return (
-    <>
+    <div className='flex flex-col'>
       {heading && <p className='font-poppins text-tb-black font-medium text-lg pb-2'>{heading}</p>}
       <p className='  w-[720px] max-w-full mb-8'>{body}</p>
-    </>
+    </div>
   );
 }
 
@@ -48,21 +48,21 @@ export default function CasePage({ params }) {
   const caseFound = findCase(slug);
 
   return (
-    <div className='flex'>
-      <div className='w-1/2 '>
-        <Paragraph
-          heading='Objective'
-          body={caseFound.objective}
-        />
-        <Paragraph
-          heading='Description'
-          body={caseFound.body}
-        />
-      </div>
+    <div className='flex flex-wrap'>
+      <Paragraph
+        heading='Objective'
+        body={caseFound.objective}
+      />
+      <Paragraph
+        heading='Description'
+        body={caseFound.body}
+      />
 
-      <div className='flex flex-col w-1/2'>
+      {/* </div> */}
+
+      {/* <div className='flex flex-col w-1/2'>
         <div className='flex py-8'>{caseFound.metrics && <Metrics metrics={caseFound.metrics} />}</div>
-      </div>
+      </div> */}
 
       {/* <GallerySec
         img={img}

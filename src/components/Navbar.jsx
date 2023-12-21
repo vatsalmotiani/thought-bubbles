@@ -12,10 +12,7 @@ export default function Navbar() {
       name: "About",
       url: "/about",
     },
-    {
-      name: "Careers",
-      url: "/careers",
-    },
+
     {
       name: "Work",
       url: "/work/all",
@@ -27,7 +24,7 @@ export default function Navbar() {
     },
   ];
   return (
-    <div className='flex justify-around items-center px-6 pt-8'>
+    <div className='flex w-[1080px] justify-between items-center px-6 pt-8'>
       <Link href='/'>
         <Image
           src='/tb-logo.svg'
@@ -39,13 +36,13 @@ export default function Navbar() {
         />
       </Link>
 
-      <div className={`font-poppins text-lg lowercase`}>
+      <div className='font-poppins font-medium text-lg lowercase'>
         {navLinks.map(({ name, url, parent }) => {
           const isActive = pathname.startsWith(`${url}`) || pathname.startsWith(`${parent}`);
           return (
             <Link
               key={url}
-              className={`px-8  hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue " : "text-tb-black"}`}
+              className={`px-8 hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue " : "text-tb-black"}`}
               href={url}
             >
               {name}

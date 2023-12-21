@@ -17,8 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className='font-noto text-gray-600 flex flex-col min-h-screen relative bg-tb-bg'>
-        <Navbar />
-        <div className='flex-grow '>{children}</div>
+        <div className='justify-center flex'>
+          <Navbar />
+        </div>
+        <div className='flex-grow'>{children}</div>
         <Footer />
       </body>
     </html>

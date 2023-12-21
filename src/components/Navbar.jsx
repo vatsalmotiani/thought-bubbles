@@ -19,6 +19,7 @@ export default function Navbar() {
     {
       name: "Work",
       url: "/work/all",
+      parent: "/work",
     },
     {
       name: "Contact Us",
@@ -39,8 +40,8 @@ export default function Navbar() {
       </Link>
 
       <div className={`font-poppins text-lg lowercase`}>
-        {navLinks.map(({ name, url }) => {
-          const isActive = pathname.startsWith(`${url}`);
+        {navLinks.map(({ name, url, parent }) => {
+          const isActive = pathname.startsWith(`${url}`) || pathname.startsWith(`${parent}`);
           return (
             <Link
               key={url}

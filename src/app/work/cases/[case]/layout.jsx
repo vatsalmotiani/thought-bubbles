@@ -12,7 +12,7 @@ export function BackButton() {
   return (
     <Link
       href='/work/all'
-      className='text-gray-500 hover:text-gray-600 duration-300 flex'
+      className='text-tb-black hover:text-gray-600 duration-300 flex'
     >
       <ArrowLeft className='pe-2' />
       All Cases
@@ -24,7 +24,7 @@ export function Banner({ name, category, img, client }) {
   return (
     <div className='flex items-center'>
       <div className='flex flex-col me-14 w-1/2'>
-        <p className='font-poppins text-tb-black text-6xl font-medium '>{name}</p>
+        <p className='font-poppins text-tb-black text-5xl font-semibold '>{name}</p>
         <p className='text-lg  text-tb-body pt-4'>{category.join(", ")}</p>
         <div className='flex flex-col mt-14'>
           <Image
@@ -65,16 +65,16 @@ export function Banner({ name, category, img, client }) {
 
 export function Navigation({ name, pathname }) {
   return (
-    <div className='flex items-center'>
+    <div className='flex items-center font-poppins text-tb-black font-medium text-lg duration-300 '>
       <Link
         href={`/work/cases/${slugify(name)}`}
-        className={`font-poppins font-medium text-lg me-14 duration-300 ${pathname === `/work/cases/${slugify(name)}` ? "bg-neutral-200 rounded-2xl px-4 py-2 border-2 border-neutral-200 " : "text-tb-black  hover:text-neutral-500"}`}
+        className={`me-8 px-4 py-2 ${pathname === `/work/cases/${slugify(name)}` ? "bg-neutral-200 rounded-2xl border-2 border-neutral-200 " : " hover:text-tb-body"}`}
       >
         About
       </Link>
       <Link
         href={`/work/cases/${slugify(name)}/gallery`}
-        className={`font-poppins font-medium text-lg me-14 duration-300 ${pathname === `/work/cases/${slugify(name)}/gallery` ? "bg-neutral-200 rounded-2xl px-4 py-2 border-2 border-neutral-200 " : "text-tb-black  hover:text-neutral-500"}`}
+        className={`me-8 px-4 py-2 ${pathname === `/work/cases/${slugify(name)}/gallery` ? "bg-neutral-200 rounded-2xl border-2 border-neutral-200 " : " hover:text-tb-body"}`}
       >
         Gallery
       </Link>
@@ -112,7 +112,7 @@ export default function CaseLayout({ children, params }) {
   return (
     <section>
       <div className='flex flex-col items-center pb-14'>
-        <div className='flex flex-col w-4/6'>
+        <div className='flex flex-col w-5/6'>
           <div className='pt-12 pb-8'>
             <BackButton />
           </div>
@@ -127,7 +127,7 @@ export default function CaseLayout({ children, params }) {
               name={name}
               pathname={pathname}
             />
-            <hr className='my-8 border-1  border-gray-300' />
+            <hr className='my-8 border-1 w-full border-gray-300' />
           </div>
 
           {children}

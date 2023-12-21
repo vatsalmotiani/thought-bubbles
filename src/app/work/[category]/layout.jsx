@@ -7,17 +7,27 @@ import { usePathname } from "next/navigation";
 
 export function NavigationService({ services, pathname }) {
   {
-    return services.map((service, i) => {
-      return (
+    return (
+      <>
         <Link
-          href={`/work/${slugify(service)}`}
-          key={i}
-          className={`font-poppins font-medium text-lg me-14 duration-300 ${pathname === `/work/${slugify(service)}` ? "bg-neutral-200 rounded-2xl px-4 py-2 border-2 border-neutral-200 " : "text-tb-black  hover:text-neutral-500"}`}
+          href='/work/all'
+          className={`text-tb-black font-poppins font-medium text-lg me-8 px-4 py-2  duration-300 ${pathname === "/work/all" ? "bg-neutral-200 rounded-2xl  border-2 border-neutral-200 " : "hover:text-tb-body"}`}
         >
-          {service}
+          All
         </Link>
-      );
-    });
+        {services.map((service, i) => {
+          return (
+            <Link
+              href={`/work/${slugify(service)}`}
+              key={i}
+              className={`text-tb-black font-poppins font-medium text-lg me-8 px-4 py-2  duration-300 ${pathname === `/work/${slugify(service)}` ? "bg-neutral-200 rounded-2xl  border-2 border-neutral-200 " : "hover:text-tb-body"}`}
+            >
+              {service}
+            </Link>
+          );
+        })}
+      </>
+    );
   }
 }
 

@@ -1,6 +1,7 @@
 import CaseLarge from "@/components/CaseLarge";
 import { slugify, slugifyList } from "@/lib/utils";
 import caseList from "@/data/caseList";
+import CaseCard from "@/components/CaseCard";
 
 export default function WorkCase({ params }) {
   const cat = params.category;
@@ -11,18 +12,26 @@ export default function WorkCase({ params }) {
             .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
             .map((filteredCase) => {
               return (
-                <CaseLarge
+                <CaseCard
                   key={filteredCase.id}
                   caseStudy={filteredCase}
                 />
+                // <CaseLarge
+                //   key={filteredCase.id}
+                //   caseStudy={filteredCase}
+                // />
               );
             })
         : caseList.map((filteredCase) => {
             return (
-              <CaseLarge
+              <CaseCard
                 key={filteredCase.id}
                 caseStudy={filteredCase}
               />
+              // <CaseLarge
+              //   key={filteredCase.id}
+              //   caseStudy={filteredCase}
+              // />
             );
           })}
     </div>

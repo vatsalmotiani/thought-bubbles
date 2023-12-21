@@ -1,3 +1,4 @@
+"use client";
 import Title from "@/components/Title";
 import Service from "@/components/Service";
 import CaseSmall from "@/components/CaseSmall";
@@ -7,6 +8,7 @@ import serviceList from "@/data/services";
 import Button from "@/components/Button";
 import caseList from "@/data/caseList";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export function OurWork() {
   return (
@@ -60,7 +62,10 @@ export function CTA({ title, img }) {
 
 export function FAQ() {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+    >
       <div className='py-14 flex align-middle justify-center bg-tb-black'>
         <Image
           src='assets/faq-des.svg'
@@ -91,7 +96,7 @@ export function FAQ() {
           </Accordion>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }
 

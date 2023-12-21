@@ -23,7 +23,7 @@ export function BackButton() {
 export function Banner({ name, category, img, client }) {
   return (
     <div className='flex items-center'>
-      <div className='flex flex-col me-14 w-2/3'>
+      <div className='flex flex-col me-14 w-1/2'>
         <p className='font-poppins text-tb-black text-6xl font-medium '>{name}</p>
         <p className='text-lg  text-tb-body pt-4'>{category.join(", ")}</p>
         <div className='flex flex-col mt-14'>
@@ -48,7 +48,7 @@ export function Banner({ name, category, img, client }) {
           ))}
         </div> */}
       </div>
-      <div className='grid py-8 w-1/3'>
+      <div className='grid py-8 w-1/2'>
         <Image
           src={img}
           alt={name}
@@ -65,20 +65,20 @@ export function Banner({ name, category, img, client }) {
 
 export function Navigation({ name, pathname }) {
   return (
-    <>
+    <div className='flex items-center'>
       <Link
         href={`/work/cases/${slugify(name)}`}
-        className={`font-poppins font-medium text-lg me-14 ${pathname === `/work/cases/${slugify(name)}` ? "text-tb-blue" : "text-tb-black duratiion-300 hover:text-neutral-500"}`}
+        className={`font-poppins font-medium text-lg me-14 duration-300 ${pathname === `/work/cases/${slugify(name)}` ? "bg-neutral-200 rounded-2xl px-4 py-2 border-2 border-neutral-200 " : "text-tb-black  hover:text-neutral-500"}`}
       >
         About
       </Link>
       <Link
         href={`/work/cases/${slugify(name)}/gallery`}
-        className={`font-poppins font-medium text-lg me-14 ${pathname === `/work/cases/${slugify(name)}/gallery` ? "text-tb-blue" : "text-tb-black duratiion-300 hover:text-neutral-500"}`}
+        className={`font-poppins font-medium text-lg me-14 duration-300 ${pathname === `/work/cases/${slugify(name)}/gallery` ? "bg-neutral-200 rounded-2xl px-4 py-2 border-2 border-neutral-200 " : "text-tb-black  hover:text-neutral-500"}`}
       >
         Gallery
       </Link>
-    </>
+    </div>
   );
 }
 
@@ -122,11 +122,12 @@ export default function CaseLayout({ children, params }) {
             img={img}
             client={client}
           />
-          <div className='flex my-14 items-center'>
+          <div className='flex flex-col m6-14 '>
             <Navigation
               name={name}
               pathname={pathname}
             />
+            <hr className='my-8 border-1  border-gray-300' />
           </div>
 
           {children}

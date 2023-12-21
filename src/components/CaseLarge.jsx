@@ -11,7 +11,7 @@ export default function CaseLarge({ caseStudy }) {
           src={caseStudy.img}
           height='0'
           width='0'
-          alt={name}
+          alt={caseStudy.name}
           sizes='100vw'
           className='h-[430px] w-[500px] border-b-8 duration-300 rounded-3xl border-sky-200 drop-shadow-sm hover:border-tb-blue  hover:drop-shadow-lg'
         />

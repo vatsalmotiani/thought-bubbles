@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={`font-noto flex flex-col min-h-screen relative bg-tb-bg`}>
         <Navbar />
-        <div className='flex-grow'>{children}</div>
+        <div className='flex-grow '>{children}</div>
         <Footer />
       </body>
     </html>

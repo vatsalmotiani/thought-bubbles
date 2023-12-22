@@ -36,13 +36,13 @@ export default function Navbar() {
         />
       </Link>
 
-      <div className='font-poppins font-medium text-lg lowercase'>
+      <div className='font-poppins text-base font-medium lowercase'>
         {navLinks.map(({ name, url, parent }) => {
           const isActive = pathname.startsWith(`${url}`) || pathname.startsWith(`${parent}`);
           return (
             <Link
               key={url}
-              className={`px-8 hover:text-cyan-500 duration-300 ${isActive ? "text-tb-blue " : "text-tb-black"}`}
+              className={`px-8  ${isActive ? "text-tb-blue " : "text-tb-black hover:text-tb-body duration-300"}`}
               href={url}
             >
               {name}

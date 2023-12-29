@@ -33,7 +33,7 @@ export function Banner({ name, category, img, client }) {
             height='0'
             width='0'
             sizes='100vw'
-            className='h-auto w-[120px]'
+            className='h-auto w-[160px]'
           />
           <p className=' mt-4 text-tb-body text-base'>{client.name}</p>
         </div>
@@ -55,9 +55,9 @@ export function Banner({ name, category, img, client }) {
           height='0'
           width='0'
           sizes='100vw'
-          className='rounded-4xl h-[430px] w-[500px] z-10  col-start-1 row-start-1'
+          className='rounded-4xl h-[400px] w-[800px] z-10  col-start-1 row-start-1'
         />
-        <div className='col-start-1 row-start-1 bg-gradient-to-r from-sky-300 to-tb-blue ms-4 mt-4 rounded-4xl h-[430px] w-[500px]' />
+        <div className='col-start-1 row-start-1 bg-gradient-to-r from-sky-300 to-tb-blue ms-4 mt-4 rounded-4xl h-[400px] w-[800px]' />
       </div>
     </div>
   );
@@ -82,7 +82,7 @@ export function Navigation({ name, pathname }) {
   );
 }
 
-export function RelatedCases() {
+export function RelatedCases({ name }) {
   return (
     <div className='flex flex-col'>
       <p className='font-poppins text-tb-black text-2xl  pb-4'>Checkout Other Case Studies</p>
@@ -132,7 +132,7 @@ export default function CaseLayout({ children, params }) {
 
           {children}
           <hr className='my-8 border-1  border-gray-300' />
-          <RelatedCases />
+          <RelatedCases name={name} />
         </div>
       </div>
     </section>

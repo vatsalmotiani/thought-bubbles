@@ -24,7 +24,7 @@ export default function Navbar() {
     },
   ];
   return (
-    <div className='flex w-[1080px] justify-between items-center px-6 pt-8'>
+    <div className='flex w-5/6 justify-between items-center px-6 pt-8'>
       <Link href='/'>
         <Image
           src='/tb-logo.svg'
@@ -36,7 +36,7 @@ export default function Navbar() {
         />
       </Link>
 
-      <div className='font-poppins text-base font-medium lowercase'>
+      <div className='text-base font-medium'>
         {navLinks.map(({ name, url, parent }) => {
           const isActive = pathname.startsWith(`${url}`) || pathname.startsWith(`${parent}`);
           return (

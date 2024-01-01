@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { sendEmail } from "@/lib/utils";
 import Button from "@/components/Button";
+import { AlertCircle } from "react-feather";
 
 export default function Form() {
   // const router = useRouter();
@@ -22,11 +23,11 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-[600px]'
+      className='w-full'
     >
-      <span className='flex flex-col mb-7'>
+      <div className='flex flex-col mb-7'>
         <label
-          className='text-tb-black font-poppins font-medium text-lg'
+          className='font-medium ms-2'
           htmlFor='name'
         >
           Name
@@ -37,10 +38,10 @@ export default function Form() {
           className='rounded-xl px-4 py-3 mt-2'
           {...register("name")}
         />
-      </span>
-      <span className='flex flex-col mb-7'>
+      </div>
+      <div className='flex flex-col mb-7'>
         <label
-          className='text-tb-black font-poppins font-medium text-lg'
+          className='font-medium ms-2'
           htmlFor='name'
         >
           Email Address<span className='text-red-600'> *</span>
@@ -52,11 +53,18 @@ export default function Form() {
           {...register("mail", { required: "Email Address is required" })}
           aria-invalid={errors.mail ? "true" : "false"}
         />
-        {errors.mail && <p className='text-red-400 ps-4 pt-2'>{errors.mail?.message}</p>}
-      </span>
-      <span className='flex flex-col mb-7'>
+        {errors.mail && (
+          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
+            <span className='me-2'>
+              <AlertCircle size={20} />
+            </span>
+            {errors.mail?.message}
+          </p>
+        )}
+      </div>
+      <div className='flex flex-col'>
         <label
-          className='text-tb-black font-poppins font-medium text-lg'
+          className='font-medium ms-2'
           htmlFor='message'
         >
           Message<span className='text-red-600'> * </span>
@@ -74,9 +82,15 @@ export default function Form() {
             },
           })}
         ></textarea>
-        {errors.message && <p className='text-red-400 ps-4 pt-2'>{errors.message?.message}</p>}
-      </span>
-
+        {errors.message && (
+          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
+            <span className='me-2'>
+              <AlertCircle size={20} />
+            </span>
+            {errors.message?.message}
+          </p>
+        )}
+      </div>
       <Button
         type='Submit'
         content='Submit'

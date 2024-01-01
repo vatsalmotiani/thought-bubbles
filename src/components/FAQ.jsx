@@ -14,7 +14,7 @@ export function FAQ() {
       />
 
       <div className='ms-14 flex flex-col py-14'>
-        <p className={`font-poppins text-2xl text-white`}>Got any questions? We&apos;ve got you!</p>
+        <p className='font-poppins text-2xl text-white'>Got any questions? We&apos;ve got you!</p>
         <Accordion
           type='single'
           collapsible

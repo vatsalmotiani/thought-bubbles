@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import caseList from "@/data/caseList";
 import Image from "next/image";
 import { FAQ } from "../components/FAQ";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 export function OurWork() {
   return (
@@ -16,7 +17,32 @@ export function OurWork() {
         heading='Helping Brands Break out of their Bubble'
         subheading="Here's where the magic happens! Get an inside look at our success stories—a mix of creativity, problem-solving, and awesome collaborations with our amazing clients."
       />
-      <div className='flex my-8'>
+      <div className='my-14 w-2/3 '>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+            dragFree: true,
+          }}
+        >
+          <CarouselContent className='-ml-0'>
+            {caseList.map((filteredCase) => {
+              return (
+                <CarouselItem
+                  key={filteredCase.id}
+                  className='md:basis-1/2 lg:basis-1/4'
+                >
+                  <CaseSmall caseStudy={filteredCase} />{" "}
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+
+      {/* <div className='flex my-8'>
         {caseList.map((filteredCase) => {
           return (
             <span
@@ -27,7 +53,7 @@ export function OurWork() {
             </span>
           );
         })}
-      </div>
+      </div> */}
       <Button
         link='/work/all'
         type='White'
@@ -58,6 +84,34 @@ export function CTA({ title, img }) {
   );
 }
 
+export function ServiceCarousel() {
+  return (
+    <div className='my-14 lg:w-[900px] md: sm:w-[600px] xl:flex xl:justify-center'>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+      >
+        <CarouselContent className=''>
+          {serviceList.map((service) => {
+            return (
+              <CarouselItem
+                key={service}
+                className='basis-auto'
+              >
+                <Service serviceName={service} />
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div className='h-auto'>
@@ -67,21 +121,12 @@ export default function Home() {
         subheading='Take the next step and try different'
         body='Est sint laboris ut nisi amet velit cillum fugiat deserunt. Labore id quis irure irure consectetur esse. Occaecat Lorem do labore minim dolor qui occaecat laborum Lorem labore veniam reprehenderit ex cupidatat mollit. Qui est ipsum ullamco ullamco voluptate non. Consequat ea anim ea velit qeo'
       />
-      <div className='my-16'>
+      <div className='mt-16 flex flex-col items-center'>
         <Title
           heading="We're your brand's best friend"
           subheading="We're the crew that turns brand dreams into reality. Explore our services - we're the wingmen your brand can't do without!"
         />
-        <div className='flex mt-8 justify-center'>
-          {serviceList.map((service) => {
-            return (
-              <Service
-                key={service}
-                serviceName={service}
-              />
-            );
-          })}
-        </div>
+        <ServiceCarousel />
       </div>
 
       <OurWork />

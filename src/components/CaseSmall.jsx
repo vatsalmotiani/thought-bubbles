@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function CaseSmall({ caseStudy }) {
   return (
-    <div>
+    <div className='max-w-max'>
       <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
         <Image
           src={caseStudy.img}
@@ -12,7 +12,7 @@ export default function CaseSmall({ caseStudy }) {
           width={0}
           sizes='100vw'
           alt={caseStudy.name}
-          className='h-[350px] w-[400px] my-3 drop-shadow-sm duration-300 rounded-3xl'
+          className='h-[150px] w-[200px] sm:h-[350px] sm:w-[400px] my-3 drop-shadow-sm duration-300 rounded-3xl'
         />
       </Link>
 

@@ -50,7 +50,7 @@ export default function Form() {
           type='email'
           placeholder='your@email.com'
           className='rounded-xl px-4 py-3 mt-2'
-          {...register("mail", { required: "Email Address is required" })}
+          {...register("email", { required: "Email Address is required" })}
           aria-invalid={errors.mail ? "true" : "false"}
         />
         {errors.mail && (

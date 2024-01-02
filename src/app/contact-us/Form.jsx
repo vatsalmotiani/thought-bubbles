@@ -6,19 +6,23 @@ import Button from "@/components/Button";
 import { AlertCircle } from "react-feather";
 
 export default function Form() {
-  // const router = useRouter();
-  // const [formData, setFormData] = useState({ name: "", email: "", number: "", message: "" });
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // const [data, setData] = useState("");
 
-  function onSubmit(data) {
+  // function onSubmit(data) {
+  //   setIsLoading(true);
+  //   sendEmail(data);
+  // }
+
+  const onSubmit = (data) => {
+    setIsLoading(true);
     sendEmail(data);
-  }
+  };
 
   return (
     <form
@@ -53,12 +57,43 @@ export default function Form() {
           {...register("email", { required: "Email Address is required" })}
           aria-invalid={errors.mail ? "true" : "false"}
         />
-        {errors.mail && (
+        {errors.email && (
           <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
             <span className='me-2'>
               <AlertCircle size={20} />
             </span>
-            {errors.mail?.message}
+            {errors.email?.message}
+          </p>
+        )}
+      </div>
+      <div className='flex flex-col mb-7'>
+        <label
+          className='font-medium ms-2'
+          htmlFor='name'
+        >
+          What are you looking for?
+        </label>
+        <select
+          {...register("purpose")}
+          className='rounded-xl px-4 py-3 mt-2'
+        >
+          <option
+            disabled
+            selected
+            value='Other'
+          >
+            Select Answer
+          </option>
+          <option value='Potential Client'>To Work Together</option>
+          <option value='Job Application'>A Job Oppurtunity</option>
+          <option value='Other'>Other</option>
+        </select>
+        {errors.purpose && (
+          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
+            <span className='me-2'>
+              <AlertCircle size={20} />
+            </span>
+            {errors.purpose?.message}
           </p>
         )}
       </div>
@@ -91,18 +126,14 @@ export default function Form() {
           </p>
         )}
       </div>
-      <Button
-        type='Submit'
-        content='Submit'
-      />
 
-      {/* <button
-        // disabled={isLoading}
-        className=' font-poppins bg-sky-400 border-2 border-sky-500 rounded-xl drop-shadow-sm max-w-max px-6 py-3 mt-4 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg'
+      <button
+        disabled={isLoading}
+        className='w-full disabled:bg-sky-200 disabled:border-sky-200 disabled:drop-shadow-none bg-sky-400 border-2 border-sky-500 rounded-xl drop-shadow-sm px-6 py-3 mt-4 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg'
       >
-        {isLoading && <span>Submitting...</span>}
+        {isLoading && <span>Submitted</span>}
         {!isLoading && <span>Submit</span>}
-      </button> */}
+      </button>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { toast } from "sonner";
 
 export function cn(...inputs) {
   // to combine string and variables for className
@@ -26,9 +27,12 @@ export function sendEmail(data) {
   })
     .then((res) => res.json())
     .then((response) => {
-      alert(response.message);
+      toast.success(response.message, { duration: 4000, closeButton: true });
+      return 1;
     })
     .catch((err) => {
-      alert(err);
+      toast.error("Something went wrong. Try Again Later");
+
+      // alert(err);
     });
 }

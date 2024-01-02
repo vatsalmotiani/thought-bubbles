@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         </div>
         <div className='flex-grow'>{children}</div>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

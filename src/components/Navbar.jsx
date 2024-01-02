@@ -32,7 +32,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='bg-white md:bg-transparent w-full'>
+    <nav className='bg-white md:bg-transparent w-full font-medium font-poppins'>
       <div className='max-w-7xl mx-auto pb-4 md:pb-0 pt-4 px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center '>
@@ -43,7 +43,7 @@ export default function Navbar() {
               >
                 <Image
                   src='/tb-logo.svg'
-                  width='137'
+                  width='100'
                   height='0'
                   sizes='100vw'
                   className='h-auto'

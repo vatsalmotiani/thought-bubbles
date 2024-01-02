@@ -22,7 +22,7 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full'
+      className='mt-7 w-full'
     >
       <div className='flex flex-col mb-7'>
         <label
@@ -33,7 +33,7 @@ export default function Form() {
         </label>
         <input
           type='name'
-          placeholder='Enter Name'
+          placeholder='Your Name'
           className='rounded-xl px-4 py-3 mt-2 duration-500 active:outline-none focus:outline-none'
           {...register("name")}
         />
@@ -48,7 +48,7 @@ export default function Form() {
         <input
           type='email'
           placeholder='your@email.com'
-          className='rounded-xl px-4 py-3 mt-2'
+          className='rounded-xl px-4 py-3 mt-2 duration-500 active:outline-none focus:outline-none'
           {...register("email", { required: "Email Address is required" })}
           aria-invalid={errors.mail ? "true" : "false"}
         />
@@ -70,7 +70,7 @@ export default function Form() {
         </label>
         <select
           {...register("purpose")}
-          className='rounded-xl px-4 py-3 mt-2'
+          className='rounded-xl px-4 py-3 mt-2 duration-500 active:outline-none focus:outline-none'
         >
           <option
             disabled
@@ -102,8 +102,8 @@ export default function Form() {
         </label>
         <textarea
           rows={4}
-          placeholder='Type your message'
-          className='w-full resize-none rounded-xl px-4 py-3 mt-2'
+          placeholder='Your message...'
+          className='w-full resize-none rounded-xl px-4 py-3 mt-2 duration-500 active:outline-none focus:outline-none'
           {...register("message", {
             required: "Message is required",
             maxLength: {

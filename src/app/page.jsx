@@ -30,7 +30,7 @@ export function OurWork() {
               return (
                 <CarouselItem
                   key={filteredCase.id}
-                  className='md:basis-1/2 lg:basis-1/4'
+                  className='md:basis-1/2 lg:basis-1/3'
                 >
                   <CaseSmall caseStudy={filteredCase} />{" "}
                 </CarouselItem>

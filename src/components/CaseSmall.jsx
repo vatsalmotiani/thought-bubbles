@@ -8,11 +8,10 @@ export default function CaseSmall({ caseStudy }) {
       <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
         <Image
           src={caseStudy.img}
-          height={0}
-          width={0}
-          sizes='100vw'
+          height={350}
+          width={400}
           alt={caseStudy.name}
-          className='h-[150px] w-[200px] sm:h-[350px] sm:w-[400px] my-3 drop-shadow-sm duration-300 rounded-3xl'
+          className='my-3 drop-shadow-sm duration-300 rounded-3xl'
         />
       </Link>
 

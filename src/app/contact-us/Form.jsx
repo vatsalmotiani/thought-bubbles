@@ -35,7 +35,7 @@ export default function Form() {
         <input
           type='name'
           placeholder='Enter Name'
-          className='rounded-xl px-4 py-3 mt-2'
+          className='rounded-xl px-4 py-3 mt-2 duration-500 active:outline-none focus:outline-none'
           {...register("name")}
         />
       </div>

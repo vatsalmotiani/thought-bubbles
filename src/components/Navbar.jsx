@@ -32,7 +32,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='bg-white md:bg-transparent w-full font-medium font-poppins'>
+    <nav className='bg-white md:bg-transparent w-full font-medium font-poppins border-b-2 pb-4 border-neutral-100'>
       <div className='max-w-7xl mx-auto pb-4 md:pb-0 pt-4 px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center '>
@@ -59,7 +59,7 @@ export default function Navbar() {
                 return (
                   <Link
                     key={url}
-                    className={`p-2 ${isActive ? "text-tb-blue " : "text-tb-black hover:text-tb-body duration-300"}`}
+                    className={`px-4 ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                     href={url}
                   >
                     {name}

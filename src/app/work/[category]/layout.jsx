@@ -11,7 +11,7 @@ export function NavigationService({ services, pathname }) {
       <>
         <Link
           href='/work/all'
-          className={`text-tb-black font-poppins font-medium text-lg mx-6 px-4 py-2  duration-300 ${pathname === "/work/all" ? "bg-neutral-200 rounded-2xl  border-2 border-neutral-200 " : "hover:text-tb-body"}`}
+          className={`text-tb-black font-poppins font-medium text-lg mx-6 px-4 py-2  duration-300 ${pathname === "/work/all" ? "bg-neutral-100 rounded-2xl  border-2 border-neutral-100 " : "hover:text-tb-body"}`}
         >
           All
         </Link>
@@ -20,7 +20,7 @@ export function NavigationService({ services, pathname }) {
             <Link
               href={`/work/${slugify(service)}`}
               key={i}
-              className={`text-tb-black font-poppins font-medium text-lg mx-6 px-4 py-2  duration-300 ${pathname === `/work/${slugify(service)}` ? "bg-neutral-200 rounded-2xl  border-2 border-neutral-200 " : "hover:text-tb-body"}`}
+              className={`text-tb-black font-poppins font-medium text-lg mx-6 px-4 py-2  duration-300 ${pathname === `/work/${slugify(service)}` ? "bg-neutral-100 rounded-2xl  border-2 border-neutral-100 " : "hover:text-tb-body"}`}
             >
               {service}
             </Link>

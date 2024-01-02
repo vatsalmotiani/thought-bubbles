@@ -25,7 +25,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className='h-auto bg-white flex flex-col justify-between px-8 md:px-20 py-8 lg:py-14 items-center'>
+    <footer className='border-t-2 border-gray-100 h-auto bg-white flex flex-col justify-between px-8 md:px-20 py-8 lg:py-14 items-center'>
       <div className='flex flex-col md:flex-row justify-between pb-8 w-full'>
         <Image
           width='0'
@@ -64,9 +64,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className='w-full'>
-        <hr />
-        <div className='flex pt-8 '>
+      <div className='w-full border-t-2 border-gray-100'>
+        <div className='flex pt-8'>
           <Link href='https://www.instagram.com/thoughtbubbles_/'>
             <Instagram
               color='gray'
@@ -87,6 +86,6 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

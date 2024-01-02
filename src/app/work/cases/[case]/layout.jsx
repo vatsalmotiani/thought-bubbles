@@ -28,11 +28,11 @@ export default function CaseLayout({ children, params }) {
             name={name}
             pathname={pathname}
           />
-          <hr className='my-8 border-1 w-full border-gray-300' />
+          <hr className='my-8 border-1 w-full border-gray-200' />
         </div>
 
         {children}
-        <hr className='my-8 border-1  border-gray-300' />
+        <hr className='my-8 border-1  border-gray-200' />
         <RelatedCases name={name} />
       </div>
     </div>

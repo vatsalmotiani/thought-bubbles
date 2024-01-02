@@ -11,7 +11,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 
 export function OurWork() {
   return (
-    <div className='bg-white flex flex-col items-center w-screen py-16'>
+    <div className='bg-tb-bg flex flex-col items-center w-screen py-16'>
       <Title
         sectionName='Our Work'
         heading='Helping Brands Break out of their Bubble'

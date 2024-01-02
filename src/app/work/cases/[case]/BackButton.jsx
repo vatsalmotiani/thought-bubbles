@@ -6,7 +6,7 @@ export function BackButton() {
   return (
     <Link
       href='/work/all'
-      className='text-tb-black hover:text-gray-600 duration-300 flex'
+      className='text-tb-black hover:text-neutral-600 duration-300 flex'
     >
       <ArrowLeft className='pe-2' />
       All Cases

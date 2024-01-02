@@ -12,6 +12,10 @@ export default function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
   const navLinks = [
     {
+      name: "Home",
+      url: "/",
+    },
+    {
       name: "About",
       url: "/about",
     },
@@ -32,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='bg-white md:bg-transparent w-full font-medium font-poppins border-b-2 pb-4 border-neutral-100'>
+    <nav className='bg-white md:bg-transparent w-full font-medium font-poppins border-b-2 md:pb-4 border-neutral-100 mb-8'>
       <div className='max-w-7xl mx-auto pb-4 md:pb-0 pt-4 px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center '>
@@ -55,7 +59,8 @@ export default function Navbar() {
           <div className='hidden md:block'>
             <div className='ml-4 flex items-center space-x-4 '>
               {navLinks.map(({ name, url, parent }) => {
-                const isActive = pathname.startsWith(`${url}`) || pathname.startsWith(`${parent}`);
+                const isActive = pathname == url || pathname.startsWith(`${parent}`);
+
                 return (
                   <Link
                     key={url}

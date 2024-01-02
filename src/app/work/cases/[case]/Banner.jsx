@@ -22,7 +22,7 @@ export function Banner({ name, category, img, client }) {
               {category.map((c, i) => (
                 <p
                   key={i}
-                  className='rounded-2xl text-gray-600 bg-white me-2 w-fit py-2 px-4 border-gray-600 border-1'
+                  className='rounded-2xl text-neutral-600 bg-white me-2 w-fit py-2 px-4 border-neutral-600 border-1'
                 >
                   {c}
                 </p>

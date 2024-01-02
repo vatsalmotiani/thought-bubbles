@@ -35,12 +35,12 @@ export default function CategoryLayout({ children, params }) {
   const cat = params.category;
   const pathname = usePathname();
   return (
-    <div className=''>
+    <div className='mt-4'>
       {/* <Jumbotron img={{ src: "/assets/JumboDes2.svg", width: 300, height: 181, alt: "Think Different - Thought Bubbles" }} /> */}
-      {/* <Title
+      <Title
         heading='Case Studies'
         subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
-      /> */}
+      />
       <div className='flex my-14 justify-center items-center'>
         <NavigationService
           services={serviceList}

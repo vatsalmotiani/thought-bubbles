@@ -16,9 +16,12 @@ export function slugify(item) {
   return item.replace(/\s+/g, "-").toLowerCase();
 }
 
+export function getRandom(list) {
+  return list[Math.floor(Math.random() * list.length)];
+}
+
 export function sendEmail(data) {
   // api call to send email
-  console.log("sendEmail function: ", data);
   const apiEndpoint = "/api/email";
 
   fetch(apiEndpoint, {

@@ -33,7 +33,7 @@ export default function Form() {
         <input
           type='name'
           placeholder='Your Name'
-          className='bg-gray-100 rounded-xl px-4 py-3 mt-2 focus:outline-gray-200'
+          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
           {...register("name")}
         />
       </div>
@@ -47,7 +47,7 @@ export default function Form() {
         <input
           type='email'
           placeholder='your@email.com'
-          className='bg-gray-100 rounded-xl px-4 py-3 mt-2 focus:outline-gray-200'
+          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
           {...register("email", { required: "Email Address is required" })}
           aria-invalid={errors.mail ? "true" : "false"}
         />
@@ -69,7 +69,7 @@ export default function Form() {
         </label>
         <select
           {...register("purpose")}
-          className='bg-gray-100 rounded-xl px-4 py-3 mt-2 focus:outline-gray-200'
+          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
         >
           <option
             disabled
@@ -102,7 +102,7 @@ export default function Form() {
         <textarea
           rows={4}
           placeholder='Your message...'
-          className='w-full resize-none bg-gray-100 rounded-xl px-4 py-3 mt-2 focus:outline-gray-200'
+          className='w-full resize-none bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
           {...register("message", {
             required: "Message is required",
             maxLength: {

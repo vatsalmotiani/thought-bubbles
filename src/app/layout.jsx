@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata = {
@@ -16,10 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={`font-noto flex flex-col min-h-screen relative bg-tb-bg`}>
-        <Navbar />
+      <body className='font-noto text-neutral-600 flex flex-col min-h-screen relative bg-white'>
+        <div className='justify-center flex'>
+          <Navbar />
+        </div>
         <div className='flex-grow'>{children}</div>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

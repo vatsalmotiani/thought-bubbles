@@ -61,6 +61,36 @@ const caseList = [
     ],
     objective: "Lip excepteur Lorem cupidatat cillum. Deserunt nulla in exercitation. Ipsum ea quis dolor. Nostrud laboris",
   },
+  {
+    id: "5",
+    img: "/assets/dummy1.jpg",
+    client: { name: "ABC Corporation", logo: "/assets/client0.png" },
+    name: "Brand X Revamp",
+    category: ["Branding", "Marketing"],
+    gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
+    shortDescription: "Revamping Brand X with innovative strategies.",
+    body: "Revamping Brand X involved extensive market research, creative brainstorming sessions, and the development of a comprehensive strategy to redefine its identity. The project aimed to reposition Brand X in the market, targeting a younger demographic while retaining its loyal customer base.",
+    metrics: [
+      { metric: "Brand Reach", value: "Increased by 40%" },
+      { metric: "Customer Engagement", value: "Up by 25%" },
+    ],
+    objective: "To enhance Brand X's appeal and market positioning.",
+  },
+  {
+    id: "6",
+    img: "/assets/dummy1.jpg",
+    client: { name: "ABC Corporation", logo: "/assets/client0.png" },
+    name: "Everything",
+    category: ["Branding", "Copywriting", "Digital Marketing", "Social Media", "Production", "Logo", "Print"],
+    gallery: ["/assets/dummy1.jpg", "/assets/dummy1.jpg"],
+    shortDescription: "Revamping Everything with innovative strategies.",
+    body: "Revamping Everything involved extensive market research, creative brainstorming sessions, and the development of a comprehensive strategy to redefine its identity. The project aimed to reposition Everything in the market, targeting a younger demographic while retaining its loyal customer base.",
+    metrics: [
+      { metric: "Brand Reach", value: "Increased by 40%" },
+      { metric: "Customer Engagement", value: "Up by 25%" },
+    ],
+    objective: "To enhance Brand X's appeal and market positioning.",
+  },
 ];
 
 export const findCase = (slug) => {

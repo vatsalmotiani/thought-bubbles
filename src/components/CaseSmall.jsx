@@ -4,19 +4,20 @@ import Link from "next/link";
 
 export default function CaseSmall({ caseStudy }) {
   return (
-    <div>
+    <div className='max-w-max'>
       <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
         <Image
           src={caseStudy.img}
-          height={300}
-          width={350}
+          height={350}
+          width={400}
           alt={caseStudy.name}
-          className='my-3 border-b-8 duration-300 rounded-3xl border-sky-300 hover:border-tb-blue drop-shadow-sm'
+          className='my-3 drop-shadow-sm duration-300 rounded-3xl'
         />
       </Link>
 
-      <p className='font-poppins ps-3  text-tb-black font-medium text-lg'>{caseStudy.name}</p>
-      <p className=' ps-3 text-gray-400'>{caseStudy.category.join(", ")}</p>
+      <p className='ps-3 text-tb-black'>{caseStudy.name}</p>
+
+      {/* <p className=' ps-3 text-neutral-400'>{caseStudy.category.join(", ")}</p> */}
       {/* <p className=' ps-3 text-tb-body'>{caseStudy.shortDescription}</p> */}
     </div>
   );

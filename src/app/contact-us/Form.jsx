@@ -14,11 +14,6 @@ export default function Form() {
     formState: { errors },
   } = useForm();
 
-  // function onSubmit(data) {
-  //   setIsLoading(true);
-  //   sendEmail(data);
-  // }
-
   const onSubmit = (data) => {
     setIsLoading(true);
     sendEmail(data);

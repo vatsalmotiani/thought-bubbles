@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
+import MotionWrap from "./MotionWrap";
 
 export const metadata = {
   title: {
@@ -21,7 +22,10 @@ export default function RootLayout({ children }) {
         <div className='justify-center flex'>
           <Navbar />
         </div>
-        <div className='flex-grow'>{children}</div>
+        <div className='flex-grow'>
+          {children}
+          {/* <MotionWrap>{children}</MotionWrap> */}
+        </div>
         <Footer />
         <Toaster />
       </body>

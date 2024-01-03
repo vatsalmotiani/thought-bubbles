@@ -1,10 +1,12 @@
+// TODO: Need Mobile Navbar to be above content when toggled. Currently moves the content
+
 "use client";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "react-feather";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -45,14 +47,16 @@ export default function Navbar() {
                 href='/'
                 onClick={() => setNavOpen(false)}
               >
-                <Image
-                  src='/tb-logo.svg'
-                  width='100'
-                  height='0'
-                  sizes='100vw'
-                  className='h-auto'
-                  alt='Thought Bubbles Logo'
-                />
+                <motion.div whileHover={{ scale: 0.96 }}>
+                  <Image
+                    src='/tb-logo.svg'
+                    width='100'
+                    height='0'
+                    sizes='100vw'
+                    className='h-auto'
+                    alt='Thought Bubbles Logo'
+                  />
+                </motion.div>
               </Link>
             </div>
           </div>
@@ -67,7 +71,7 @@ export default function Navbar() {
                     className={`px-4 ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                     href={url}
                   >
-                    {name}
+                    <motion.div whileHover={{ scale: 0.96 }}>{name}</motion.div>
                   </Link>
                 );
               })}
@@ -87,11 +91,11 @@ export default function Navbar() {
         <div className='md:hidden bg-white '>
           <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
             {navLinks.map(({ name, url, parent }) => {
-              const isActive = pathname.startsWith(`${url}`) || pathname.startsWith(`${parent}`);
+              const isActive = pathname == url || pathname.startsWith(`${parent}`);
               return (
                 <Link
                   key={url}
-                  className={`p-2 block ${isActive ? "text-tb-blue " : "text-tb-black hover:text-tb-body duration-300"}`}
+                  className={`p-2 block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                   href={url}
                   onClick={handleNav}
                 >

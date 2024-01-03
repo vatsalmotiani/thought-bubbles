@@ -1,33 +1,67 @@
-import CaseLarge from "@/components/CaseLarge";
-import { slugify, slugifyList, getRandom } from "@/lib/utils";
+"use client";
+import { motion } from "framer-motion";
+import { slugifyList } from "@/lib/utils";
 import caseList from "@/data/caseList";
 import CaseCard from "@/components/CaseCard";
-import CaseSmall from "@/components/CaseSmall";
-import tailwindColours from "@/data/tailwindColours";
+
+// const parentDiv = {
+//   hidden: {},
+//   show: {
+//     transition: {
+//       staggerChildren: 0.4,
+//     },
+//   },
+// };
+
+// const cards = {
+//   hidden: { opacity: 0, y: 30 },
+//   show: {
+//     y: 0,
+//     transition: {
+//       duration: 0.25,
+//       type: "spring",
+//     },
+//   },
+// };
 
 export default function WorkCase({ params }) {
   const cat = params.category;
   return (
-    <div className='flex flex-wrap justify-center'>
+    <motion.div
+      // initial='hidden'
+      // animate='show'
+      // variants={parentDiv}
+      className='flex flex-wrap justify-center'
+    >
       {cat !== "all"
         ? caseList
             .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
             .map((filteredCase) => {
               return (
-                <CaseCard
+                <motion.div
                   key={filteredCase.id}
-                  caseStudy={filteredCase}
-                />
+                  // variants={cards}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
+                  viewport={{ once: true }}
+                >
+                  <CaseCard caseStudy={filteredCase} />
+                </motion.div>
               );
             })
         : caseList.map((filteredCase) => {
             return (
-              <CaseCard
+              <motion.div
                 key={filteredCase.id}
-                caseStudy={filteredCase}
-              />
+                // variants={cards}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
+                viewport={{ once: true }}
+              >
+                <CaseCard caseStudy={filteredCase} />
+              </motion.div>
             );
           })}
-    </div>
+    </motion.div>
   );
 }

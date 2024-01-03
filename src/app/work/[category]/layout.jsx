@@ -44,13 +44,15 @@ export default function CategoryLayout({ children, params }) {
         heading='Case Studies'
         subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
       />
-      <div className='flex my-14 justify-center items-center'>
-        <NavigationService
-          services={serviceList}
-          pathname={pathname}
-        />
+      <div className='flex flex-col items-center'>
+        <div className='flex my-14 justify-center items-center'>
+          <NavigationService
+            services={serviceList}
+            pathname={pathname}
+          />
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   );
 }

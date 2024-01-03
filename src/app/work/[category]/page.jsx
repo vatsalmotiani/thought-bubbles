@@ -27,12 +27,7 @@ import CaseCard from "@/components/CaseCard";
 export default function WorkCase({ params }) {
   const cat = params.category;
   return (
-    <motion.div
-      // initial='hidden'
-      // animate='show'
-      // variants={parentDiv}
-      className='flex flex-wrap justify-center'
-    >
+    <div className='flex flex-wrap justify-center md:w-5/6'>
       {cat !== "all"
         ? caseList
             .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
@@ -40,7 +35,6 @@ export default function WorkCase({ params }) {
               return (
                 <motion.div
                   key={filteredCase.id}
-                  // variants={cards}
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
                   viewport={{ once: true }}
@@ -53,7 +47,6 @@ export default function WorkCase({ params }) {
             return (
               <motion.div
                 key={filteredCase.id}
-                // variants={cards}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
                 viewport={{ once: true }}
@@ -62,6 +55,6 @@ export default function WorkCase({ params }) {
               </motion.div>
             );
           })}
-    </motion.div>
+    </div>
   );
 }

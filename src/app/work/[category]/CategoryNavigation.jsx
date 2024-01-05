@@ -4,13 +4,16 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { slugify } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+// import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
 export default function CategoryNavigation({ services }) {
   {
     const serviceClass = "text-tb-black font-poppins font-medium mx-2 px-4 py-2 duration-300";
     const activeServiceClass = "bg-neutral-100 rounded-2xl  border-2 border-neutral-100 ";
     const pathname = usePathname();
+
     return (
-      <>
+      <div className='flex my-14 justify-center items-center'>
         <Link
           href='/work/all'
           className={`${serviceClass} ${pathname === "/work/all" ? `${activeServiceClass}` : "hover:text-tb-body"}`}
@@ -28,7 +31,7 @@ export default function CategoryNavigation({ services }) {
             </Link>
           );
         })}
-      </>
+      </div>
     );
   }
 }

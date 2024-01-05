@@ -10,9 +10,7 @@ export default function CategoryLayout({ children }) {
         subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
       />
       <div className='flex flex-col items-center'>
-        <div className='flex my-14 justify-center items-center'>
-          <CategoryNavigation services={serviceList} />
-        </div>
+        <CategoryNavigation services={serviceList} />
         {children}
       </div>
     </div>

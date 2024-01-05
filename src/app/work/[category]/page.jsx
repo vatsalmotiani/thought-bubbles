@@ -4,26 +4,6 @@ import { slugifyList } from "@/lib/utils";
 import caseList from "@/data/caseList";
 import CaseCard from "@/components/CaseCard";
 
-// const parentDiv = {
-//   hidden: {},
-//   show: {
-//     transition: {
-//       staggerChildren: 0.4,
-//     },
-//   },
-// };
-
-// const cards = {
-//   hidden: { opacity: 0, y: 30 },
-//   show: {
-//     y: 0,
-//     transition: {
-//       duration: 0.25,
-//       type: "spring",
-//     },
-//   },
-// };
-
 export default function WorkCase({ params }) {
   const cat = params.category;
   return (

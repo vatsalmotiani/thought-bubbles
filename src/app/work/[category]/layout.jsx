@@ -11,6 +11,7 @@ export default function CategoryLayout({ children }) {
       />
       <div className='flex flex-col items-center'>
         <CategoryNavigation services={serviceList} />
+
         {children}
       </div>
     </div>

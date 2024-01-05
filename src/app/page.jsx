@@ -1,6 +1,6 @@
 import Title from "@/components/Title";
 import Service from "@/components/Service";
-import CaseSmall from "@/components/CaseSmall";
+import CaseCard from "@/components/CaseCard";
 import Jumbotron from "@/components/Jumbotron";
 import serviceList from "@/data/services";
 import Button from "@/components/Button";
@@ -30,9 +30,9 @@ export function OurWork() {
               return (
                 <CarouselItem
                   key={filteredCase.id}
-                  className='md:basis-1/2 lg:basis-1/3'
+                  className='basis-full sm:basis-1/2 2xl:basis-1/4'
                 >
-                  <CaseSmall caseStudy={filteredCase} />{" "}
+                  <CaseCard caseStudy={filteredCase} />
                 </CarouselItem>
               );
             })}
@@ -42,18 +42,6 @@ export function OurWork() {
         </Carousel>
       </div>
 
-      {/* <div className='flex my-8'>
-        {caseList.map((filteredCase) => {
-          return (
-            <span
-              key={filteredCase.id}
-              className='me-8'
-            >
-              <CaseSmall caseStudy={filteredCase} />
-            </span>
-          );
-        })}
-      </div> */}
       <Button
         link='/work/all'
         type='White'

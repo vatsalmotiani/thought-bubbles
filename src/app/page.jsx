@@ -9,44 +9,61 @@ import Image from "next/image";
 import { FAQ } from "../components/FAQ";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
+export function ServiceCarousel() {
+  return (
+    <div className='w-5/6 md:w-2/3 xl:w-max flex items-center my-8 sm:mt-14 text-center overflow-x-auto pb-4'>
+      {serviceList.map((service) => {
+        return (
+          <Service
+            key={service}
+            serviceName={service}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 export function OurWork() {
   return (
-    <div className='bg-tb-bg flex flex-col items-center w-screen py-16'>
-      <Title
-        sectionName='Our Work'
-        heading='Helping Brands Break out of their Bubble'
-        subheading="Here's where the magic happens! Get an inside look at our success stories—a mix of creativity, problem-solving, and awesome collaborations with our amazing clients."
-      />
-      <div className='my-14 w-2/3 '>
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-            dragFree: true,
-          }}
-        >
-          <CarouselContent className='-ml-0'>
-            {caseList.map((filteredCase) => {
-              return (
-                <CarouselItem
-                  key={filteredCase.id}
-                  className='basis-full sm:basis-1/2 2xl:basis-1/4'
-                >
-                  <CaseCard caseStudy={filteredCase} />
-                </CarouselItem>
-              );
-            })}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </div>
+    <div className='bg-tb-bg flex justify-center py-14'>
+      <div className='w-5/6 flex flex-col items-center'>
+        <Title
+          sectionName='Our Work'
+          heading='Helping Brands Break out of their Bubble'
+          subheading="Here's where the magic happens! Get an inside look at our success stories—a mix of creativity, problem-solving, and awesome collaborations with our amazing clients."
+        />
+        <div className='my-8 md:my-14 w-full'>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className='mx-8'
+          >
+            <CarouselContent>
+              {caseList.map((filteredCase) => {
+                return (
+                  <CarouselItem
+                    key={filteredCase.id}
+                    className='basis-full sm:basis-1/2 lg:basis-1/4 flex justify-center'
+                  >
+                    <CaseCard caseStudy={filteredCase} />
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
 
-      <Button
-        link='/work/all'
-        type='White'
-        content='View All'
-      />
+        <Button
+          link='/work/all'
+          type='blue'
+          content='View All'
+        />
+      </div>
     </div>
   );
 }
@@ -68,34 +85,6 @@ export function CTA({ title, img }) {
         height={300}
         width={300}
       />
-    </div>
-  );
-}
-
-export function ServiceCarousel() {
-  return (
-    <div className='my-14 lg:w-[900px] md: sm:w-[600px] xl:flex xl:justify-center'>
-      <Carousel
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-      >
-        <CarouselContent className=''>
-          {serviceList.map((service) => {
-            return (
-              <CarouselItem
-                key={service}
-                className='basis-auto'
-              >
-                <Service serviceName={service} />
-              </CarouselItem>
-            );
-          })}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export function RelatedCases({ name }) {
               return (
                 <CarouselItem
                   key={filteredCase.id}
-                  className='basis-full sm:basis-1/2 lg:basis-1/4   '
+                  className='basis-full sm:basis-1/2 lg:basis-1/4'
                 >
                   <CaseCard caseStudy={filteredCase} />
                 </CarouselItem>

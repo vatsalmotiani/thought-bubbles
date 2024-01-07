@@ -7,7 +7,7 @@ import CaseCard from "@/components/CaseCard";
 export default function WorkCase({ params }) {
   const cat = params.category;
   return (
-    <div className='flex flex-wrap justify-center md:w-5/6'>
+    <div className='flex flex-wrap justify-center md:w-5/6 mt-8'>
       {cat !== "all"
         ? caseList
             .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))

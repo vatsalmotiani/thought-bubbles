@@ -13,7 +13,7 @@ export default function CategoryNavigation({ services }) {
     const pathname = usePathname();
 
     return (
-      <div className='w-5/6 md:w-2/3 xl:w-max flex items-center mt-8 sm:mt-14 text-center overflow-x-auto pb-4 b'>
+      <div className='w-5/6 md:w-2/3 xl:w-max flex items-center mt-8 sm:mt-14 text-center overflow-x-auto pb-4'>
         {/* <span className='visible xl:invisible fixed'>
           <ArrowLeft />
         </span> */}

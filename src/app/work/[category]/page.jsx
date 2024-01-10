@@ -18,7 +18,7 @@ export default function WorkCase({ params }) {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
                   viewport={{ once: true }}
-                  className='mx-4 mb-8'
+                  className='mx-4 mb-8 md:mb-2'
                 >
                   <CaseCard caseStudy={filteredCase} />
                 </motion.div>
@@ -31,7 +31,7 @@ export default function WorkCase({ params }) {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
                 viewport={{ once: true }}
-                className='mx-4 mb-8'
+                className='mx-4 mb-8 md:mb-2'
               >
                 <CaseCard caseStudy={filteredCase} />
               </motion.div>

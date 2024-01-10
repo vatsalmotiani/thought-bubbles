@@ -16,6 +16,7 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         caveat: ["Caveat", "cursive"],
         noto: ["Noto Sans", "sans-serif"],
+        bebas: ["Bebas Neue", "sans-serif"],
       },
 
       colors: {

@@ -27,6 +27,17 @@ export default function Button({ link = "/", content = "View", type = "blue" }) 
           </motion.div>
         </Link>
       );
+    case "outline":
+      return (
+        <Link href={link}>
+          <motion.div
+            whileHover={{ scale: 0.96 }}
+            className={`${commonClasses} text-white border-white hover:bg-white hover:text-tb-black`}
+          >
+            {content}
+          </motion.div>
+        </Link>
+      );
     case "submit":
       return <button className='w-full disabled:bg-sky-200 disabled:border-sky-200 disabled:drop-shadow-none bg-sky-400 border-2 border-sky-500 rounded-xl drop-shadow-sm px-6 py-3 mt-4 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg'>{content}</button>;
   }

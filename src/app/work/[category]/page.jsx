@@ -15,8 +15,8 @@ export default function WorkCase({ params }) {
               return (
                 <motion.div
                   key={filteredCase.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
+                  initial={{ opacity: 0, y: 100, rotate: -10 }}
+                  whileInView={{ opacity: 1, y: 0, rotate: 0, transition: { delay: 0.2, bounce: 0.4, duration: 0.8, type: "spring" } }}
                   viewport={{ once: true }}
                   className='mx-4 mb-8 md:mb-2'
                 >
@@ -28,8 +28,8 @@ export default function WorkCase({ params }) {
             return (
               <motion.div
                 key={filteredCase.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.15, delay: 0.25 } }}
+                initial={{ opacity: 0, y: 100, rotate: -10 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0, transition: { delay: 0.2, bounce: 0.4, duration: 0.8, type: "spring" } }}
                 viewport={{ once: true }}
                 className='mx-4 mb-8 md:mb-2'
               >

@@ -42,16 +42,18 @@ export function OurWork() {
             className='mx-8'
           >
             <CarouselContent>
-              {caseList.map((filteredCase) => {
-                return (
-                  <CarouselItem
-                    key={filteredCase.id}
-                    className='basis-full sm:basis-1/2 lg:basis-1/4 flex justify-center'
-                  >
-                    <CaseCard caseStudy={filteredCase} />
-                  </CarouselItem>
-                );
-              })}
+              {caseList
+                .filter((item) => item.favourite === true) // only favoutites
+                .map((filteredCase) => {
+                  return (
+                    <CarouselItem
+                      key={filteredCase.id}
+                      className='basis-full sm:basis-1/2 lg:basis-1/4 flex justify-center'
+                    >
+                      <CaseCard caseStudy={filteredCase} />
+                    </CarouselItem>
+                  );
+                })}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />

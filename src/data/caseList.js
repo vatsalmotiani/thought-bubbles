@@ -18,6 +18,7 @@ const caseList = [
   },
   {
     id: "2",
+    favourite: true,
     img: "/assets/dummy1.jpg",
     client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "Something Else",
@@ -33,6 +34,7 @@ const caseList = [
   },
   {
     id: "3",
+    favourite: true,
     img: "/assets/dummy1.jpg",
     client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "John Station",
@@ -48,6 +50,7 @@ const caseList = [
   },
   {
     id: "4",
+    favourite: true,
     img: "/assets/dummy1.jpg",
     client: { name: "Mile Stone Management", logo: "/assets/client0.png" },
     name: "Multiple",
@@ -64,6 +67,7 @@ const caseList = [
   {
     id: "5",
     img: "/assets/dummy1.jpg",
+    favourite: true,
     client: { name: "ABC Corporation", logo: "/assets/client0.png" },
     name: "Brand X Revamp",
     category: ["Branding", "Marketing"],
@@ -109,6 +113,7 @@ const caseList = [
 
   {
     id: "8",
+    favourite: true,
     img: "/assets/dummy1.jpg",
     client: { name: "PQR Co.", logo: "/assets/client0.png" },
     name: "Website Redesign and User Experience Enhancement",
@@ -139,6 +144,7 @@ const caseList = [
   },
   {
     id: "10",
+    favourite: true,
     img: "/assets/dummy1.jpg",
     client: { name: "EFG Corporation", logo: "/assets/client0.png" },
     name: "Event Branding and Promotion",
@@ -154,6 +160,7 @@ const caseList = [
   },
   {
     id: "11",
+    favourite: true,
     img: "/assets/dummy1.jpg",
     client: { name: "LMN Enterprises", logo: "/assets/client0.png" },
     name: "Social Media Campaign Optimization",

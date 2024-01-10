@@ -1,17 +1,30 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Button({ link = "/", content = "View", type = "blue" }) {
+  const commonClasses = "max-w-max text-sm sm:text-base rounded-xl drop-shadow-sm px-4 py-2 sm:px-6 sm:py-3 border-2 duration-300";
   switch (type.toLowerCase()) {
     case "blue":
       return (
         <Link href={link}>
-          <div className=' bg-sky-400 border-2 border-sky-500 rounded-xl drop-shadow-sm max-w-max px-6 py-3 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg'>{content}</div>
+          <motion.div
+            whileHover={{ scale: 0.96 }}
+            className={`${commonClasses} text-white bg-sky-400 border-sky-500 hover:bg-sky-500 `}
+          >
+            {content}
+          </motion.div>
         </Link>
       );
     case "white":
       return (
         <Link href={link}>
-          <div className=' bg-white border-2 border-neutral-100 rounded-2xl  max-w-max px-8 py-3 mt-4 hover:text-neutral-600 hover:bg-neutral-100 duration-300 hover:drop-shadow-sm'>{content}</div>
+          <motion.div
+            whileHover={{ scale: 0.96 }}
+            className={`${commonClasses} hover:text-neutral-600 hover:bg-neutral-100 bg-white border-neutral-100 `}
+          >
+            {content}
+          </motion.div>
         </Link>
       );
     case "submit":

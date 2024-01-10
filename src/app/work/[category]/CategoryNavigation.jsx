@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight } from "react-feather";
 
 export default function CategoryNavigation({ services }) {
   {
-    const serviceClass = "px-4 py-2 mx-3 sm:mx-4 text-tb-black font-poppins font-medium xl:mx-2  duration-300 ";
+    const serviceClass = "px-4 py-2 mx-2 text-tb-black font-poppins font-medium xl:mx-2 duration-300 whitespace-nowrap";
     const activeServiceClass = "bg-neutral-100 rounded-2xl  border-2 border-neutral-100 ";
     const pathname = usePathname();
 
@@ -17,20 +17,26 @@ export default function CategoryNavigation({ services }) {
         {/* <span className='visible xl:invisible fixed'>
           <ArrowLeft />
         </span> */}
-        <Link
-          href='/work/all'
-          className={`${serviceClass} ${pathname === "/work/all" ? `${activeServiceClass}` : "hover:text-tb-body"}`}
-        >
-          <motion.div whileHover={{ scale: 0.96 }}>All</motion.div>
+        <Link href='/work/all'>
+          <motion.div
+            className={`${serviceClass} ${pathname === "/work/all" ? `${activeServiceClass}` : "hover:text-tb-body"}`}
+            whileHover={{ scale: 0.96 }}
+          >
+            All
+          </motion.div>
         </Link>
         {services.map((service, i) => {
           return (
             <Link
               href={`/work/${slugify(service)}`}
               key={i}
-              className={`${serviceClass} ${pathname === `/work/${slugify(service)}` ? `${activeServiceClass}` : "hover:text-tb-body"}`}
             >
-              <motion.div whileHover={{ scale: 0.96 }}>{service}</motion.div>
+              <motion.div
+                className={`${serviceClass} ${pathname === `/work/${slugify(service)}` ? `${activeServiceClass}` : "hover:text-tb-body"}`}
+                whileHover={{ scale: 0.96 }}
+              >
+                {service}
+              </motion.div>
             </Link>
           );
         })}

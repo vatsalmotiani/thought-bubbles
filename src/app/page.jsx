@@ -12,7 +12,7 @@ import clientList from "@/data/clients";
 
 export function ServiceCarousel() {
   return (
-    <div className='w-5/6 md:w-2/3 xl:w-max flex items-center my-8 sm:mt-14 text-center overflow-x-auto pb-4'>
+    <div className='w-[90%] md:w-2/3 xl:w-max flex items-center my-8  text-center overflow-x-auto pb-4'>
       {serviceList.map((service) => {
         return (
           <Service

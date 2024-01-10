@@ -8,7 +8,7 @@ export default function Service({ serviceName = "Branding" }) {
   return (
     <motion.div
       whileHover={{ scale: 0.96 }}
-      className='px-4 py-2  mx-2 bg-neutral-100 rounded-2xl text-tb-black hover:text-tb-body duration-300 '
+      className='px-4 py-2 mx-2 bg-neutral-100 rounded-2xl text-tb-black hover:text-tb-body duration-300 '
     >
       <Link
         className='font-poppins font-medium'

@@ -2,12 +2,13 @@ import Title from "@/components/Title";
 import Service from "@/components/Service";
 import CaseCard from "@/components/CaseCard";
 import Jumbotron from "@/components/Jumbotron";
-import serviceList from "@/data/services";
 import Button from "@/components/Button";
 import caseList from "@/data/caseList";
 import Image from "next/image";
 import { FAQ } from "../components/FAQ";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import serviceList from "@/data/services";
+import clientList from "@/data/clients";
 
 export function ServiceCarousel() {
   return (
@@ -70,9 +71,37 @@ export function OurWork() {
   );
 }
 
+export function ClientsSection() {
+  return (
+    <div className='my-14 flex flex-col items-center'>
+      <Title
+        heading='Building Bridges Since 2009'
+        subheading='Over a decade of forging partnerships, our agency has proudly collaborated with an array of esteemed clients, fostering lasting connections and delivering impactful results.'
+      />
+      <div className='w-5/6 md:w-2/3 xl:w-max flex items-center my-8 sm:mt-14 text-center overflow-x-auto pb-4'>
+        {clientList
+          .filter((c) => c.favourite === true)
+          .map((client) => {
+            return (
+              <Image
+                src={client.logo}
+                key={client.id}
+                width={80}
+                height={64}
+                alt={client.name}
+                className='mx-4'
+              />
+            );
+          })}
+      </div>
+      <CTA />
+    </div>
+  );
+}
+
 export function CTA({ title, img }) {
   return (
-    <div className='h-96 w-5/6 bg-gradient-to-r from-sky-300 to-tb-blue flex p-14 border-2 rounded-4xl justify-between items-center'>
+    <div className='h-96 w-5/6 lg:w-2/3 bg-gradient-to-r from-sky-300 to-tb-blue flex p-14 border-2 rounded-4xl justify-between items-center'>
       <div className='flex flex-col'>
         <p className='text-4xl w-2/3 leading-normal font-poppins text-white font-semibold'>Unlock Your Brand&apos;s Potential Today</p>
         <Button
@@ -109,8 +138,7 @@ export default function Home() {
       </div>
 
       <OurWork />
-      {/* <CTA /> */}
-
+      <ClientsSection />
       <FAQ />
     </div>
   );

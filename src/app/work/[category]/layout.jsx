@@ -1,10 +1,8 @@
-"use client";
 import Title from "@/components/Title";
 import { TitleBold } from "@/components/Title";
 import serviceList from "@/data/services";
 import CategoryNavigation from "./CategoryNavigation";
 import { JumboCase } from "@/components/Jumbotron";
-import { motion } from "framer-motion";
 
 export default function CategoryLayout({ children }) {
   const banner = {
@@ -17,7 +15,7 @@ export default function CategoryLayout({ children }) {
   };
   return (
     <>
-      <motion.div
+      <div
         id='top'
         className='mb-14 mt-2 mx-4 md:mx-14'
       >
@@ -30,10 +28,9 @@ export default function CategoryLayout({ children }) {
 
         <div className='flex flex-col items-center'>
           <CategoryNavigation services={serviceList} />
-
           {children}
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }

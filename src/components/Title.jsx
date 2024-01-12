@@ -16,7 +16,7 @@ export function TitleBold({ sectionName, heading, subheading }) {
       <span className='w-full px-4 sm:w-5/6 lg:w-[720px]'>
         <p className='font-caveat lowercase text-tb-blue ps-3 pb-2 font-bold text-2xl sm:text-3xl'>{sectionName}</p>
         <p className='me-2 font-inter font-bold uppercase text-tb-black text-3xl xl:text-7xl '>{heading}</p>
-        <p className='leading-6 font-inter text-tb-black mt-2 '>{subheading}</p>
+        <p className='leading-6 font-inter text-tb-black mt-4 '>{subheading}</p>
       </span>
     </div>
   );

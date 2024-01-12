@@ -1,3 +1,6 @@
+"use client";
+import { motion } from "framer-motion";
+
 const Title = ({ sectionName, heading, subheading }) => {
   return (
     <div className='flex flex-col items-center text-center'>
@@ -9,5 +12,17 @@ const Title = ({ sectionName, heading, subheading }) => {
     </div>
   );
 };
+
+export function TitleBold({ sectionName, heading, subheading }) {
+  return (
+    <motion.div
+      initial={{ y: 100 }}
+      animate={{ y: 0, transition: { ease: [0.6, 0.01, -0.05, 0.95], duration: 0.2 } }}
+    >
+      <p className='me-2 font-inter font-bold uppercase text-tb-black text-5xl xl:text-7xl'>{heading}</p>
+      <p className='max-w-[600px] font-inter text-tb-black mt-2 text-xl xl:text-2xl'>{subheading}</p>
+    </motion.div>
+  );
+}
 
 export default Title;

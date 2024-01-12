@@ -8,9 +8,9 @@ export default function CategoryLayout({ children }) {
     <>
       <div
         id='top'
-        className='mb-14'
+        className='my-14'
       >
-        <JumboCase img='/assets/caseVert.jpg' />
+        {/* <JumboCase img='/assets/caseVert.jpg' /> */}
         <Title
           heading='Case Studies'
           subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'

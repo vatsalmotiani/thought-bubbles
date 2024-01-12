@@ -7,6 +7,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Autoplay from "embla-carousel-autoplay";
 import { slugify } from "@/lib/utils";
+import CaseLarge from "./CaseLarge";
 
 export default function Jumbotron({ img, heading, subheading, body }) {
   return (
@@ -39,16 +40,17 @@ export default function Jumbotron({ img, heading, subheading, body }) {
 export function JumboCase() {
   return (
     <Carousel
-      className='w-full'
+      className='w-full pt-14 mb-14'
       plugins={[
         Autoplay({
-          delay: 2000,
+          delay: 4000,
         }),
       ]}
       opts={{
         loop: true,
       }}
     >
+      {/* <p className='font-bebas uppercase text-tb-black text-8xl text-center'>Our Work</p> */}
       <CarouselContent>
         {caseList
           .filter((item) => item.favourite === true) // only favoutites
@@ -56,23 +58,23 @@ export function JumboCase() {
             return (
               <CarouselItem
                 key={filteredCase.id}
-                className='basis-full flex justify-center py-14'
+                className='basis-full flex justify-center '
               >
                 <motion.div
                   initial={{ scale: 1 }}
-                  whileHover={{ scale: 0.97, transition: { duration: 0.15, type: "spring", bounce: 0.4 } }}
+                  // whileHover={{ scale: 0.97, transition: { duration: 0.15, type: "spring", bounce: 0.4 } }}
                 >
                   <Link
                     href={`/work/cases/${slugify(filteredCase.name)}`}
                     className='z-10 flex w-fit justify-center items-center '
                   >
-                    <Image
+                    <CaseLarge caseStudy={filteredCase} />
+                    {/* <Image
                       src='/assets/caseVert.jpg'
                       alt='hello'
                       width='300'
                       height='400'
                     />
-
                     <div className='flex flex-col ms-14'>
                       <p className='max-w-[720px] truncate text-5xl leading-tight font-bold text-tb-black font-bebas  hover:text-tb-body duration-300'>{filteredCase.name}</p>
                       <p className='text-lg  text-tb-body mt-4'>{filteredCase.category.join(", ")}</p>
@@ -87,7 +89,7 @@ export function JumboCase() {
                         />
                         <p className=' mt-4 text-tb-body text-base'>{filteredCase.client.name}</p>
                       </div>
-                    </div>
+                    </div> */}
                   </Link>
                 </motion.div>
               </CarouselItem>

@@ -1,47 +1,59 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "./Button";
+import { motion } from "framer-motion";
 import { slugify } from "@/lib/utils";
+import { ArrowRight } from "react-feather";
 
 export default function CaseLarge({ caseStudy }) {
   return (
-    <div className='w-fit flex justify-center items-center m-8'>
-      <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
-        <Image
-          src={caseStudy.img}
-          height='0'
-          width='0'
-          alt={caseStudy.name}
-          sizes='100vw'
-          className='h-[430px] w-[500px] border-b-8 duration-300 rounded-3xl border-sky-200 drop-shadow-sm hover:border-tb-blue  hover:drop-shadow-lg'
-        />
-      </Link>
-
-      <div className='ms-12 flex flex-col'>
-        <p className='font-poppins  text-tb-black text-2xl'>{caseStudy.name}</p>
-        {/* <p className=' text-tb-body pb-2'>{category.join(", ")}</p> */}
-        <p className='py-6 text-base  text-tb-body w-96'>{caseStudy.shortDescription}</p>
-
-        <div className='flex pb-4'>
-          {caseStudy.metrics
-            ? caseStudy.metrics.map((m) => {
-                return (
-                  <div
-                    key={m.metric}
-                    className='flex flex-col me-8'
-                  >
-                    <p className=' text-tb-black  font-medium'>{m.metric}</p>
-                    <p className=' text-tb-body'>{m.value}</p>
-                  </div>
-                );
-              })
-            : null}
-        </div>
-        <Button
-          type='white'
-          link={`/work/cases/${slugify(caseStudy.name)}`}
-        />
-      </div>
+    <div className='max-w-max max-h-max relative  overflow-visible'>
+      <Image
+        src={caseStudy.img}
+        height='360'
+        width='480'
+        alt={caseStudy.name}
+        className='rounded-3xl duration-300'
+      />
+      <p className='absolute z-10 -top-20 font-poppins text-tb-black text-2xl'>{caseStudy.name}</p>
     </div>
+    // <div className='w-fit flex justify-center items-center m-8'>
+    //   <Link href={`/work/cases/${slugify(caseStudy.name)}`}>
+    //     <Image
+    //       src={caseStudy.img}
+    //       height='0'
+    //       width='0'
+    //       alt={caseStudy.name}
+    //       sizes='100vw'
+    //       className='h-[430px] w-[500px] border-b-8 duration-300 rounded-3xl border-sky-200 drop-shadow-sm hover:border-tb-blue  hover:drop-shadow-lg'
+    //     />
+    //   </Link>
+
+    //   <div className='ms-12 flex flex-col'>
+    //     <p className='font-poppins  text-tb-black text-2xl'>{caseStudy.name}</p>
+    //     {/* <p className=' text-tb-body pb-2'>{category.join(", ")}</p> */}
+    //     <p className='py-6 text-base  text-tb-body w-96'>{caseStudy.shortDescription}</p>
+
+    //     <div className='flex pb-4'>
+    //       {caseStudy.metrics
+    //         ? caseStudy.metrics.map((m) => {
+    //             return (
+    //               <div
+    //                 key={m.metric}
+    //                 className='flex flex-col me-8'
+    //               >
+    //                 <p className=' text-tb-black  font-medium'>{m.metric}</p>
+    //                 <p className=' text-tb-body'>{m.value}</p>
+    //               </div>
+    //             );
+    //           })
+    //         : null}
+    //     </div>
+    //     <Button
+    //       type='white'
+    //       link={`/work/cases/${slugify(caseStudy.name)}`}
+    //     />
+    //   </div>
+    // </div>
   );
 }

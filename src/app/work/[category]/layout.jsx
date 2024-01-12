@@ -6,7 +6,10 @@ import { JumboCase } from "@/components/Jumbotron";
 export default function CategoryLayout({ children }) {
   return (
     <>
-      <div className='my-14'>
+      <div
+        id='top'
+        className='mb-14'
+      >
         <JumboCase img='/assets/caseVert.jpg' />
         <Title
           heading='Case Studies'

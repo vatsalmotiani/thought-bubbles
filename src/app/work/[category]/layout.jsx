@@ -23,16 +23,16 @@ export default function CategoryLayout({ children }) {
       >
         {/* <JumboCase img='/assets/caseVert.jpg' /> */}
         <TitleBold
+          sectionName='Our Work'
           heading='Case Studies'
           subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
         />
-        {children}
 
-        {/* <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center'>
           <CategoryNavigation services={serviceList} />
 
           {children}
-        </div> */}
+        </div>
       </motion.div>
     </>
   );

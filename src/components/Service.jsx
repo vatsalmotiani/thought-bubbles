@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function Service({ serviceName = "Branding" }) {
   return (
     <Link
-      className='font-poppins font-medium'
+      className='font-medium'
       href={`/work/${slugify(serviceName)}`}
     >
       <motion.div

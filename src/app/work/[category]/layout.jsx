@@ -21,7 +21,7 @@ export default function CategoryLayout({ children }) {
       >
         {/* <JumboCase img='/assets/caseVert.jpg' /> */}
         <TitleBold
-          sectionName='Our Work'
+          // sectionName='Our Work'
           heading='Case Studies'
           subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
         />

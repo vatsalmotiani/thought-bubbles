@@ -18,10 +18,10 @@ export default function CaseCard({ caseStudy }) {
           className=' rounded-lg  hover:drop-shadow-xl duration-300'
         />
 
-        <div className='w-5/6'>
+        <div className=' w-5/6'>
           <p className='mt-3 text-tb-black font-medium '>{caseStudy.name}</p>
           <div className='flex text-neutral-400 mt-2 hover:text-neutral-500 duration-300'>
-            <span className='text-sm me-2'>View Case Study</span>
+            <span className='text-sm me-2 font-inter'>View Case Study</span>
             <ArrowRight size={18} />
           </div>
           {/* <p className='text-neutral-400'>{caseStudy.category.join(", ")}</p> */}

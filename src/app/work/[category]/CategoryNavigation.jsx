@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight } from "react-feather";
 
 export default function CategoryNavigation({ services }) {
   {
-    const serviceClass = "px-4 py-2 mx-2 text-tb-black font-poppins font-medium xl:mx-2 duration-300 whitespace-nowrap";
+    const serviceClass = "px-4 py-2 mx-2 text-tb-black  font-medium xl:mx-2 duration-300 whitespace-nowrap";
     const activeServiceClass = "bg-neutral-100 rounded-2xl  border-2 border-neutral-100 ";
     const pathname = usePathname();
 

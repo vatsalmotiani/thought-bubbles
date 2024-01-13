@@ -1,16 +1,17 @@
-"use client";
-import { usePathname } from "next/navigation";
-import { findCase } from "@/data/caseList";
-import { BackButton } from "./BackButton";
+// "use client";
+// import { motion } from "framer-motion";
+// import { usePathname } from "next/navigation";
+// import { findCase } from "@/data/caseList";
 // import { Banner } from "./Banner";
 // import { Navigation } from "./Navigation";
 // import { NextCase, RelatedCases } from "./RelatedCases";
 import { MotionWrap2 } from "@/app/MotionWrap";
+import { BackButton } from "./BackButton";
 
 export default function CaseLayout({ children, params }) {
-  const slug = params.case;
-  const { id, img, name, category, client, body, metrics, objective } = findCase(slug);
-  const pathname = usePathname();
+  // const slug = params.case;
+  // const { id, img, name, category, client, body, metrics, objective } = findCase(slug);
+  // const pathname = usePathname();
 
   return (
     <MotionWrap2>
@@ -19,24 +20,7 @@ export default function CaseLayout({ children, params }) {
           <div className='pt-4 md:pt-12 md:pb-8'>
             <BackButton />
           </div>
-          <div className='flex flex-col items-center'>
-            {children}
-            {/* <Banner
-              name={name}
-              category={category}
-              img={img}
-              client={client}
-            /> */}
-            {/* <div className='flex flex-col m6-14 '>
-              <Navigation
-                name={name}
-                pathname={pathname}
-              />
-              <hr className='my-8 border-1 w-full border-neutral-200' />
-            </div> */}
-
-            {/* <hr className='my-8 border-1  border-neutral-200' /> */}
-          </div>
+          <div className='flex flex-col items-center'>{children}</div>
         </div>
       </div>
     </MotionWrap2>

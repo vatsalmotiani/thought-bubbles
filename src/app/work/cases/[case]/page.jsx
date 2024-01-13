@@ -1,3 +1,5 @@
+// "use client";
+// import { motion } from "framer-motion";
 import Image from "next/image";
 import { NextCase } from "./NextCase";
 import { findCase } from "@/data/caseList";
@@ -60,7 +62,6 @@ export default function CasePage({ params }) {
   return (
     <div className='max-w-[1080px]'>
       <div className='flex flex-col'>
-        {/* <p className='text-lg'>{caseFound.category.join(", ")}</p> */}
         <p className='font-inter text-tb-black text-4xl md:text-6xl font-semibold mt-4'>{caseFound.name}</p>
         <p className='text-lg md:text-2xl mt-4 leading-normal'>{caseFound.objective}</p>
       </div>
@@ -74,72 +75,32 @@ export default function CasePage({ params }) {
       />
 
       <Paragraph body={caseFound.body} />
-      {/* <div className='border-y-2 border-neutral-200 flex flex-col md:flex-row md:justify-between py-8'>
-        <p className='text-tb-black font-medium mb-2 md:mb-0'>Services</p>
-        <p className=''>{caseFound.category.join(", ")}</p>
-      </div> */}
+
       <Info
         title='Services'
-        border='y'
+        border='t'
         body={caseFound.category.join(", ")}
       />
       <Info
         title='Client'
-        border='b'
+        border='y'
         body={caseFound.client.name}
       />
-      <Image
-        src={caseFound.img}
-        alt={caseFound.name}
-        height={900}
-        width={1200}
-        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
-      />
-      <Image
-        src={caseFound.img}
-        alt={caseFound.name}
-        height={900}
-        width={1200}
-        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
-      />
-      <Image
-        src={caseFound.img}
-        alt={caseFound.name}
-        height={900}
-        width={1200}
-        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
-      />
-      <Image
-        src={caseFound.img}
-        alt={caseFound.name}
-        height={900}
-        width={1200}
-        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
-      />
+      {caseFound.gallery.map((img) => {
+        return (
+          <Image
+            src={img}
+            key={img}
+            alt={img}
+            height={900}
+            width={1200}
+            className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
+          />
+        );
+      })}
+
       <hr />
       <NextCase name={caseFound.name} />
-
-      {/* <div className='flex flex-wrap mt-14'>
-        <Paragraph
-          heading='Objective'
-          body={caseFound.objective}
-        />
-        <Paragraph
-          heading='Description'
-          body={caseFound.body}
-        />
-
-        </div>
-
-        <div className='flex flex-col w-1/2'>
-          <div className='flex py-8'>{caseFound.metrics && <Metrics metrics={caseFound.metrics} />}</div>
-        </div>
-
-        <GallerySec
-          img={img}
-          name={name}
-        />
-      </div> */}
     </div>
   );
 }

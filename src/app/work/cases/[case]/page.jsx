@@ -88,6 +88,35 @@ export default function CasePage({ params }) {
         border='b'
         body={caseFound.client.name}
       />
+      <Image
+        src={caseFound.img}
+        alt={caseFound.name}
+        height={900}
+        width={1200}
+        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
+      />
+      <Image
+        src={caseFound.img}
+        alt={caseFound.name}
+        height={900}
+        width={1200}
+        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
+      />
+      <Image
+        src={caseFound.img}
+        alt={caseFound.name}
+        height={900}
+        width={1200}
+        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
+      />
+      <Image
+        src={caseFound.img}
+        alt={caseFound.name}
+        height={900}
+        width={1200}
+        className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
+      />
+      <hr />
       <NextCase name={caseFound.name} />
 
       {/* <div className='flex flex-wrap mt-14'>

@@ -17,11 +17,11 @@ export default function CategoryLayout({ children }) {
     <>
       <div
         id='top'
-        className='mb-14 mt-2 mx-4 md:mx-14'
+        className='mb-14 mt-8 mx-4 md:mx-14'
       >
         {/* <JumboCase img='/assets/caseVert.jpg' /> */}
         <TitleBold
-          // sectionName='Our Work'
+          sectionName='Our Work'
           heading='Case Studies'
           subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
         />

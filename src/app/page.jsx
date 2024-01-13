@@ -140,7 +140,7 @@ export default function Home() {
       <OurWork />
       <ClientsSection />
       <CTA />
-      <FAQ />
+      {/* <FAQ /> */}
     </div>
   );
 }

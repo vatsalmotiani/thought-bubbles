@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "react-feather";
-import { motion } from "framer-motion";
+// ... (previous imports)
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -19,7 +20,6 @@ export default function Navbar() {
       name: "About",
       url: "/about",
     },
-
     {
       name: "Work",
       url: "/work/all",
@@ -86,33 +86,48 @@ export default function Navbar() {
         </div>
       </div>
       {/* MOBILE VERSION WHEN OPEN*/}
-      {navOpen && (
-        <div className='md:hidden bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-50'>
-          <div className='md:hidden flex justify-end p-4'>
-            <button
-              className='inline-flex items-center mt-3 p-2 rounded-md'
-              onClick={handleNav}
-            >
-              {navOpen ? <X /> : <Menu />}
-            </button>
-          </div>
-          <div className='-mt-9 flex flex-col h-full items-center justify-center'>
-            {navLinks.map(({ name, url, parent }) => {
-              const isActive = pathname == url || pathname.startsWith(`${parent}`);
-              return (
-                <Link
-                  key={url}
-                  className={`pb-14 text-4xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
-                  href={url}
-                  onClick={handleNav}
-                >
-                  {name}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {navOpen && (
+          <motion.div
+            className='md:hidden bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-50'
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 1, scale: 1 }}
+          >
+            <div className='md:hidden flex justify-end p-4'>
+              <motion.button
+                className='inline-flex items-center mt-3 p-2 rounded-md'
+                onClick={handleNav}
+                whileHover={{ scale: 0.96 }}
+              >
+                {navOpen ? <X /> : <Menu />}
+              </motion.button>
+            </div>
+            <div className='-mt-9 flex flex-col h-full items-center justify-center'>
+              {navLinks.map(({ name, url, parent }, index) => {
+                const isActive = pathname == url || pathname.startsWith(`${parent}`);
+                return (
+                  <motion.div
+                    key={url}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 10, opacity: 0 }}
+                    transition={{ duration: 0.2, delay: index * 0.1 }}
+                  >
+                    <Link
+                      className={`pb-14 text-4xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
+                      href={url}
+                      onClick={handleNav}
+                    >
+                      {name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

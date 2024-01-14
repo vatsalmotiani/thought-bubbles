@@ -2,9 +2,7 @@
 import { motion } from "framer-motion";
 import { slugifyList } from "@/lib/utils";
 import caseList from "@/data/caseList";
-import { Carousel, CarouselContent, CarouselPrevious, CarouselItem, CarouselNext } from "@/components/ui/carousel";
 import CaseCard from "@/components/CaseCard";
-import CaseLarge from "@/components/CaseLarge";
 
 export default function WorkCase({ params }) {
   const cat = params.category;

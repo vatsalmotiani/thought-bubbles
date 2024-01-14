@@ -1,4 +1,5 @@
-// "use client";
+"use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export function Banner({ name, category, img, client }) {

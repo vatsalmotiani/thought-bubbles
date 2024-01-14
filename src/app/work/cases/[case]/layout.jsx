@@ -1,4 +1,3 @@
-// "use client";
 // import { motion } from "framer-motion";
 // import { usePathname } from "next/navigation";
 // import { findCase } from "@/data/caseList";
@@ -14,15 +13,15 @@ export default function CaseLayout({ children, params }) {
   // const pathname = usePathname();
 
   return (
-    <MotionWrap2>
-      <div className='flex flex-col items-center pb-14'>
-        <div className='flex flex-col w-5/6 '>
-          <div className='pt-4 md:pt-12 md:pb-8'>
-            <BackButton />
-          </div>
-          <div className='flex flex-col items-center'>{children}</div>
+    // <MotionWrap2>
+    <div className='flex flex-col items-center pb-14'>
+      <div className='flex flex-col w-5/6 '>
+        <div className='pt-4 md:pt-12 md:pb-8'>
+          <BackButton />
         </div>
+        <div className='flex flex-col items-center'>{children}</div>
       </div>
-    </MotionWrap2>
+    </div>
+    // </MotionWrap2>
   );
 }

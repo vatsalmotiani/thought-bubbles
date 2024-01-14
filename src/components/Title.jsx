@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 const Title = ({ sectionName, heading, subheading }) => {
   return (
     <div className='flex flex-col items-center text-center'>

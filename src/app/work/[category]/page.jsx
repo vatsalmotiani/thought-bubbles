@@ -11,12 +11,12 @@ export default function WorkCase({ params }) {
       {cat !== "all"
         ? caseList
             .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))
-            .map((filteredCase) => {
+            .map((filteredCase, i) => {
               return (
                 <motion.div
                   key={filteredCase.id}
-                  initial={{ opacity: 0, y: 100 }}
-                  whileInView={{ opacity: 1, y: 0, transition: { delay: 0.2, bounce: 0.4, duration: 0.8, type: "spring" } }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0, transition: { delay: 0.2 + i * 0.2, bounce: 0.2, duration: 0.5, type: "spring" } }}
                   viewport={{ once: true }}
                   className='mx-4 mb-8 md:mb-2'
                 >

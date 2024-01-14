@@ -15,18 +15,29 @@ export default function CasePage({ params }) {
     <div className='max-w-[1080px]'>
       <div className='flex flex-col'>
         <Reveal>
-          <p className='font-inter text-tb-black text-4xl md:text-6xl font-semibold mt-4'>{caseFound.name}</p>
-          <p className='text-lg md:text-2xl mt-4 leading-normal'>{caseFound.objective}</p>
+          <p className='font-inter text-tb-black text-4xl md:text-6xl font-semibold mt-4 pb-2 '>{caseFound.name}</p>
         </Reveal>
+        <motion.p
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
+          }}
+          initial='hidden'
+          animate='visible'
+          transition={{ duration: 0.3, delay: 0.8 }}
+          className='text-lg md:text-2xl mt-2 leading-normal'
+        >
+          {caseFound.objective}
+        </motion.p>
       </div>
       <motion.div
         variants={{
-          hidden: { opacity: 0, y: 75 },
+          hidden: { opacity: 0, y: 60 },
           visible: { opacity: 1, y: 0 },
         }}
         initial='hidden'
         animate='visible'
-        transition={{ duration: 0.3, delay: 1 }}
+        transition={{ duration: 0.2, delay: 1.1 }}
       >
         <Image
           src={caseFound.img}
@@ -35,20 +46,21 @@ export default function CasePage({ params }) {
           width={1200}
           className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
         />
+
+        <Paragraph body={caseFound.body} />
+
+        <Info
+          title='Services'
+          border='t'
+          body={caseFound.category.join(", ")}
+        />
+        <Info
+          title='Client'
+          border='y'
+          body={caseFound.client.name}
+        />
       </motion.div>
 
-      <Paragraph body={caseFound.body} />
-
-      <Info
-        title='Services'
-        border='t'
-        body={caseFound.category.join(", ")}
-      />
-      <Info
-        title='Client'
-        border='y'
-        body={caseFound.client.name}
-      />
       {caseFound.gallery.map((img) => {
         return (
           <motion.div

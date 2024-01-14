@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "react-feather";
-// ... (previous imports)
+import Reveal from "./Reveal";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='bg-white md:bg-transparent w-full font-medium  md:pb-4 border-neutral-100 '>
+    <nav className='bg-white md:bg-transparent w-full font-medium md:pb-4 border-neutral-100 '>
       <div className=' mx-auto pb-4 md:pb-0 pt-4 px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center '>
@@ -58,7 +58,7 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
-          <div className='hidden md:block'>
+          {/* <div className='hidden md:block'>
             <div className='ml-4 flex items-center space-x-4 '>
               {navLinks.map(({ name, url, parent }) => {
                 const isActive = pathname == url || pathname.startsWith(`${parent}`);
@@ -74,10 +74,11 @@ export default function Navbar() {
                 );
               })}
             </div>
-          </div>
-          <div className='md:hidden flex items-center'>
+          </div> */}
+          {/* <div className='md:hidden flex items-center'> */}
+          <div className='flex items-center z-50'>
             <button
-              className='inline-flex items-center justify-center p-2 rounded-md'
+              className='inline-flex items-center justify-center z-100 p-2 rounded-md cursor-pointer text-neutral-400 hover:text-tb-body'
               onClick={handleNav}
             >
               {navOpen ? <X /> : <Menu />}
@@ -85,37 +86,38 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      {/* MOBILE VERSION WHEN OPEN*/}
+      {/* FULL OPEN Navbar*/}
       <AnimatePresence>
         {navOpen && (
           <motion.div
-            className='md:hidden bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-50'
-            initial={{ opacity: 1, scale: 1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 1, scale: 1 }}
+            className='bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-20 '
+            initial={{ translateX: "calc(100vw)" }}
+            animate={{ translateX: 0, transition: { duration: 0.4 } }}
+            exit={{ translateX: "calc(100vw)", transition: { duration: 0.6 } }}
           >
-            <div className='md:hidden flex justify-end p-4'>
-              <motion.button
-                className='inline-flex items-center mt-3 p-2 rounded-md'
+            {/* <div className='flex justify-end pt-4 pe-7'>
+              <motion.div
+                className='inline-flex items-center mt-3 p-2 rounded-md cursor-pointer text-neutral-400 hover:text-tb-body'
                 onClick={handleNav}
-                whileHover={{ scale: 0.96 }}
+                whileHover={{ scale: 0.9 }}
               >
                 {navOpen ? <X /> : <Menu />}
-              </motion.button>
-            </div>
-            <div className='-mt-9 flex flex-col h-full items-center justify-center'>
+              </motion.div>
+            </div> */}
+
+            <div className='flex flex-col h-full items-center justify-center'>
               {navLinks.map(({ name, url, parent }, index) => {
                 const isActive = pathname == url || pathname.startsWith(`${parent}`);
                 return (
                   <motion.div
                     key={url}
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 10, opacity: 0 }}
-                    transition={{ duration: 0.2, delay: index * 0.1 }}
+                    transition={{ duration: 0.2, delay: 0.4 + index * 0.2 }}
                   >
                     <Link
-                      className={`pb-14 text-4xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
+                      className={`mb-14 text-4xl md:text-6xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                       href={url}
                       onClick={handleNav}
                     >
@@ -125,6 +127,28 @@ export default function Navbar() {
                 );
               })}
             </div>
+            {/* <div className='flex flex-col h-full items-center justify-center'>
+              {navLinks.map(({ name, url, parent }, index) => {
+                const isActive = pathname == url || pathname.startsWith(`${parent}`);
+                return (
+                  <motion.div
+                    key={url}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ y: 10, opacity: 0 }}
+                    transition={{ duration: 0.2, delay: 0.4 + index * 0.2 }}
+                  >
+                    <Link
+                      className={`mb-14 text-4xl md:text-6xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
+                      href={url}
+                      onClick={handleNav}
+                    >
+                      {name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div> */}
           </motion.div>
         )}
       </AnimatePresence>

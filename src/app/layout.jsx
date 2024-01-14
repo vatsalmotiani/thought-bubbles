@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Footer, { FooterCTA } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import MotionWrap from "./MotionWrap";
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           {children}
           {/* <MotionWrap>{children}</MotionWrap> */}
         </div>
-        <Footer />
+        <FooterCTA />
         <Toaster />
       </body>
     </html>

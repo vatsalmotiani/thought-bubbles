@@ -49,16 +49,24 @@ export default function CasePage({ params }) {
 
         <Paragraph body={caseFound.body} />
 
-        <Info
+        {/* <Info
           title='Services'
           border='t'
           body={caseFound.category.join(", ")}
-        />
-        <Info
+        /> */}
+        {/* <Info
           title='Client'
           border='y'
           body={caseFound.client.name}
-        />
+        /> */}
+        <div className={`border-y-2 border-neutral-200 flex flex-col md:flex-row md:justify-between py-6 md:py-8`}>
+          <p className='text-tb-black font-medium mb-2 md:mb-0'>Services</p>
+          <p className=''>{caseFound.category.join(", ")}</p>
+        </div>
+        <div className={`border-b-2 border-neutral-200 flex flex-col md:flex-row md:justify-between py-6 md:py-8`}>
+          <p className='text-tb-black font-medium mb-2 md:mb-0'>Client</p>
+          <p className=''>{caseFound.client.name}</p>
+        </div>
 
         {caseFound.gallery.map((img) => {
           return (

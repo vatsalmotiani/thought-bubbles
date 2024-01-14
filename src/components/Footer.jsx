@@ -1,6 +1,9 @@
+// TODO: FOOTER CTA Design
+
 import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Linkedin, Facebook, Mail, MapPin } from "react-feather"; // ICONS
+import Button from "./Button";
 
 export default function Footer() {
   const navLinks = [
@@ -86,6 +89,48 @@ export default function Footer() {
           </Link>
         </div>
       </div>
+    </footer>
+  );
+}
+export function FooterCTA() {
+  return (
+    <footer className='border-t-2 border-neutral-100 h-auto bg-white flex flex-col justify-center px-8 md:px-20 py-8 items-center'>
+      <Button
+        type='blue'
+        content="Let's Get in Touch"
+      />
+      <div className='flex flex-col items-center py-8 w-full'>
+        <Image
+          width='200'
+          height='100'
+          // sizes='100vw'
+          // className='w-[140px] h-auto'
+          src='/tb-logo.svg'
+          alt='Thought Bubbles Logo'
+        />
+      </div>
+      {/* <div className='w-full border-t-2 border-neutral-100'> */}
+      <div className='flex pt-8 justify-center'>
+        <Link href='https://www.instagram.com/thoughtbubbles_/'>
+          <Instagram
+            color='gray'
+            className='me-8'
+          />
+        </Link>
+        <Link href='https://in.linkedin.com/in/thought-bubbles-advertising-0aa385290?original_referer=https%3A%2F%2Fwww.google.com%2F'>
+          <Linkedin
+            color='gray'
+            className='me-8'
+          />
+        </Link>
+        <Link href='/'>
+          <Facebook
+            color='gray'
+            className='me-8 '
+          />
+        </Link>
+      </div>
+      {/* </div> */}
     </footer>
   );
 }

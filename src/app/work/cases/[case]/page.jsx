@@ -59,28 +59,29 @@ export default function CasePage({ params }) {
           border='y'
           body={caseFound.client.name}
         />
+
+        {caseFound.gallery.map((img) => {
+          return (
+            <motion.div
+              key={img}
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0, transition: { delay: 0.2, bounce: 0.4, duration: 0.8, type: "spring" } }}
+              viewport={{ once: true }}
+              className='max-w-[1080px]'
+            >
+              <Image
+                src={img}
+                alt={img}
+                height={900}
+                width={1200}
+                className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
+              />
+            </motion.div>
+          );
+        })}
+        <hr />
       </motion.div>
 
-      {caseFound.gallery.map((img) => {
-        return (
-          <motion.div
-            key={img}
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0, transition: { delay: 0.2, bounce: 0.4, duration: 0.8, type: "spring" } }}
-            viewport={{ once: true }}
-            className='max-w-[1080px]'
-          >
-            <Image
-              src={img}
-              alt={img}
-              height={900}
-              width={1200}
-              className='rounded-xl md:rounded-3xl z-10  col-start-1 row-start-1 my-8'
-            />
-          </motion.div>
-        );
-      })}
-      <hr />
       {/* <NextCase name={caseFound.name} /> */}
     </div>
   );

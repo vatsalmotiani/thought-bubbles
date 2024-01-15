@@ -15,6 +15,16 @@ export function slugify(item) {
   // to slugify a string. Example: 'John Smith' -> 'john-smith'
   return item.replace(/\s+/g, "-").toLowerCase();
 }
+export function unslugify(item) {
+  // To unslugify a string. Example: '/Work/Digital Marketing' -> 'Digital Marketing'
+  const lastSlashIndex = item.lastIndexOf("/");
+
+  if (lastSlashIndex !== -1) {
+    item = item.substring(lastSlashIndex + 1); // Remove everything before the last /
+  }
+
+  return item.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+}
 
 export function getRandom(list) {
   return list[Math.floor(Math.random() * list.length)];

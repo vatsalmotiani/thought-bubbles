@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { slugifyList } from "@/lib/utils";
+import { slugifyList, unslugify } from "@/lib/utils";
 import caseList from "@/data/caseList";
 import CaseCard from "@/components/CaseCard";
 
@@ -8,6 +8,10 @@ export default function WorkCase({ params }) {
   const cat = params.category;
   return (
     <div className='flex flex-wrap justify-center xl:w-full mt-8'>
+      {/* <div className='flex w-full'>
+        <p className='sm:hidden ps-6 pb-4 text-tb-black font-medium '>{unslugify(cat)} Cases:</p>
+      </div> */}
+
       {cat !== "all"
         ? caseList
             .filter((caseStudy) => slugifyList(caseStudy.category).includes(cat))

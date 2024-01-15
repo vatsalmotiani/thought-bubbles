@@ -77,12 +77,13 @@ export default function Navbar() {
           </div> */}
           {/* <div className='md:hidden flex items-center'> */}
           <div className='flex items-center z-50'>
-            <button
+            <motion.button
+              whileHover={{ scale: 0.9 }}
               className='inline-flex items-center justify-center z-100 p-2 rounded-md cursor-pointer text-neutral-400 hover:text-tb-body'
               onClick={handleNav}
             >
               {navOpen ? <X /> : <Menu />}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

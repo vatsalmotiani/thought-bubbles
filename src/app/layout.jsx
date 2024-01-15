@@ -2,7 +2,8 @@ import Navbar from "@/components/Navbar";
 import Footer, { FooterCTA } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-import MotionWrap from "./MotionWrap";
+// import MotionWrap from "./MotionWrap";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata = {
   title: {
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
           <Navbar />
         </div>
         <div className='flex-grow'>
-          {children}
+          <SmoothScroll>{children}</SmoothScroll>
           {/* <MotionWrap>{children}</MotionWrap> */}
         </div>
         {/* <FooterCTA /> */}

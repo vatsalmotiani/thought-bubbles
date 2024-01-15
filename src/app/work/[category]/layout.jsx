@@ -3,6 +3,7 @@ import { TitleBold } from "@/components/Title";
 import serviceList from "@/data/services";
 import CategoryNavigation from "./CategoryNavigation";
 import { JumboCase } from "@/components/Jumbotron";
+import DropDownServices from "./DropDownServices";
 
 export default function CategoryLayout({ children }) {
   const banner = {
@@ -26,8 +27,12 @@ export default function CategoryLayout({ children }) {
           subheading='Exploring Diverse Case Studies: Discover our Multifaceted Advertising Campaigns'
         />
 
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-start md:items-center'>
+          <DropDownServices services={serviceList} />
           <CategoryNavigation services={serviceList} />
+
+          {/* <CategoryNavigation services={serviceList} /> */}
+
           {children}
         </div>
       </div>

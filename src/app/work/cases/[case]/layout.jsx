@@ -1,17 +1,6 @@
-// import { motion } from "framer-motion";
-// import { usePathname } from "next/navigation";
-// import { findCase } from "@/data/caseList";
-// import { Banner } from "./Banner";
-// import { Navigation } from "./Navigation";
-// import { NextCase, RelatedCases } from "./RelatedCases";
-import { MotionWrap2 } from "@/app/MotionWrap";
 import { BackButton } from "./BackButton";
 
-export default function CaseLayout({ children, params }) {
-  // const slug = params.case;
-  // const { id, img, name, category, client, body, metrics, objective } = findCase(slug);
-  // const pathname = usePathname();
-
+export default function CaseLayout({ children }) {
   return (
     // <MotionWrap2>
     <div className='flex flex-col items-center pb-14'>

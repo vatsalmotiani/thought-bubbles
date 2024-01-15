@@ -15,7 +15,7 @@ export default function CasePage({ params }) {
     <div className='max-w-[1080px]'>
       <div className='flex flex-col'>
         <Reveal>
-          <p className='font-inter text-tb-black text-4xl md:text-6xl font-semibold mt-4 pb-2 '>{caseFound.name}</p>
+          <p className='font-oswald uppercase text-tb-black text-4xl md:text-8xl font-semibold mt-4 pb-2 '>{caseFound.name}</p>
         </Reveal>
         <motion.p
           variants={{

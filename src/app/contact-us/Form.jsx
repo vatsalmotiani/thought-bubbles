@@ -1,7 +1,10 @@
+// TODO: SHOW SUMBITTING STATE
+
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { sendEmail } from "@/lib/utils";
+import Reveal from "@/components/Reveal";
 import { AlertCircle } from "react-feather";
 
 export default function Form() {
@@ -21,7 +24,7 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mt-7 w-full'
+      className='mt-7 mx-6 text-tb-black md:text-xl'
     >
       <div className='flex flex-col mb-7'>
         <label
@@ -32,11 +35,11 @@ export default function Form() {
         </label>
         <input
           type='name'
-          placeholder='Your Name'
-          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
+          className='text-tb-body bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
           {...register("name")}
         />
       </div>
+
       <div className='flex flex-col mb-7'>
         <label
           className='font-medium ms-2'
@@ -46,8 +49,7 @@ export default function Form() {
         </label>
         <input
           type='email'
-          placeholder='your@email.com'
-          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
+          className='text-tb-body bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
           {...register("email", { required: "Email Address is required" })}
           aria-invalid={errors.mail ? "true" : "false"}
         />
@@ -69,15 +71,13 @@ export default function Form() {
         </label>
         <select
           {...register("purpose")}
-          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
+          className='text-tb-body bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
         >
           <option
             disabled
             selected
             value='Other'
-          >
-            Select Answer
-          </option>
+          ></option>
           <option value='Potential Client'>To Work Together</option>
           <option value='Job Application'>A Job Oppurtunity</option>
           <option value='Other'>Other</option>
@@ -101,8 +101,7 @@ export default function Form() {
         </label>
         <textarea
           rows={4}
-          placeholder='Your message...'
-          className='w-full resize-none bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
+          className='w-full resize-none bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
           {...register("message", {
             required: "Message is required",
             maxLength: {

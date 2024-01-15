@@ -26,7 +26,7 @@ export default function Navbar() {
       parent: "/work",
     },
     {
-      name: "Contact Us",
+      name: "Contact",
       url: "/contact-us",
     },
   ];
@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='bg-white md:bg-transparent w-full font-medium md:pb-4 border-neutral-100 '>
+    <nav className='bg-white md:bg-transparent w-full md:pb-4 border-neutral-100 '>
       <div className=' mx-auto pb-4 md:pb-0 pt-4 px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center '>
@@ -91,9 +91,9 @@ export default function Navbar() {
         {navOpen && (
           <motion.div
             className='bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-20 '
-            initial={{ translateX: "calc(100vw)" }}
-            animate={{ translateX: 0, transition: { duration: 0.4 } }}
-            exit={{ translateX: "calc(100vw)", transition: { duration: 0.6 } }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.2 } }}
+            // exit={{ opacity: 0, transition: { duration: 0.6 } }}
           >
             {/* <div className='flex justify-end pt-4 pe-7'>
               <motion.div
@@ -105,7 +105,7 @@ export default function Navbar() {
               </motion.div>
             </div> */}
 
-            <div className='flex flex-col h-full items-center justify-center'>
+            <div className='flex flex-col h-full justify-center items-center'>
               {navLinks.map(({ name, url, parent }, index) => {
                 const isActive = pathname == url || pathname.startsWith(`${parent}`);
                 return (
@@ -114,14 +114,14 @@ export default function Navbar() {
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 10, opacity: 0 }}
-                    transition={{ duration: 0.2, delay: 0.4 + index * 0.2 }}
+                    transition={{ duration: 0.2, delay: 0.2 + index * 0.1 }}
                   >
                     <Link
-                      className={`mb-14 text-4xl md:text-6xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
+                      className={`mb-8 md:mb-14 font-oswald uppercase font-medium text-6xl sm:text-7xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                       href={url}
                       onClick={handleNav}
                     >
-                      {name}
+                      <motion.div whileHover={{ scale: 0.97, bounce: 0.4, duration: 0.2, delay: 0 }}>{name}</motion.div>
                     </Link>
                   </motion.div>
                 );

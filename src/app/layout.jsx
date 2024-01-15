@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           {children}
           {/* <MotionWrap>{children}</MotionWrap> */}
         </div>
-        <FooterCTA />
+        {/* <FooterCTA /> */}
         <Toaster />
       </body>
     </html>

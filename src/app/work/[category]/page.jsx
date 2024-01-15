@@ -2,10 +2,17 @@
 import { motion } from "framer-motion";
 import { slugifyList, unslugify } from "@/lib/utils";
 import caseList from "@/data/caseList";
+import serviceList from "@/data/services";
 import CaseCard from "@/components/CaseCard";
+import { notFound } from "next/navigation";
 
 export default function WorkCase({ params }) {
   const cat = params.category;
+
+  if (unslugify(cat) !== "All" && !serviceList.includes(unslugify(cat))) {
+    notFound();
+  }
+
   return (
     <div className='flex flex-wrap justify-center xl:w-full mt-8'>
       {/* <div className='flex w-full'>

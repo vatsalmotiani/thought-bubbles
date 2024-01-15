@@ -8,7 +8,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 export const metadata = {
   title: {
     absolute: "Thought Bubbles Advertising",
-    template: "%s | Thought Bubbles Advertising",
+    template: "%s - Thought Bubbles Advertising",
   },
   description: "Thought Bubbles Advertising",
   icons: {

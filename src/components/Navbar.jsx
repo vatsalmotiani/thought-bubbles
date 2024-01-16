@@ -26,6 +26,10 @@ export default function Navbar() {
       parent: "/work",
     },
     {
+      name: "Gallery",
+      url: "/gallery",
+    },
+    {
       name: "Contact",
       url: "/contact-us",
     },

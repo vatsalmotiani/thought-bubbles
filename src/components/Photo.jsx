@@ -8,10 +8,10 @@ export default function Photo({ img, name, about }) {
         height='450'
         width='600'
         alt={name}
-        className=' rounded-lg  hover:drop-shadow-xl duration-300 md:mx-4'
+        className=' rounded-lg '
       />
 
-      <div className=' w-5/6'>
+      <div className='w-5/6'>
         <p className='mt-3 text-tb-black font-medium '>{name}</p>
         <p className='text-neutral-400'>{about}</p>
       </div>

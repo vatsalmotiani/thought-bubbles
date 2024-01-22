@@ -125,7 +125,7 @@ export default function Navbar() {
                     transition={{ duration: 0.2, delay: 0.2 + index * 0.1 }}
                   >
                     <Link
-                      className={`mb-8 md:mb-14 font-oswald uppercase font-medium text-6xl sm:text-7xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
+                      className={`mb-8 md:mb-14 font-medium text-4xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                       href={url}
                       onClick={handleNav}
                     >

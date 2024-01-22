@@ -123,14 +123,14 @@ export function CTA({ title, img }) {
 
 export default function Home() {
   return (
-    <div className='h-auto flex justify-center'>
+    <div className='h-auto flex flex-col justify-center'>
       {/* <p className='mt-14'>Homepage Development Pending*</p> */}
-      <Jumbotron
+      {/* <Jumbotron
         img={{ src: "/assets/JumboDes.svg", width: 764, height: 443, alt: "Think Different - Thought Bubbles" }}
         heading='Think Different'
         subheading='Take the next step and try different'
         body='Est sint laboris ut nisi amet velit cillum fugiat deserunt. Labore id quis irure irure consectetur esse. Occaecat Lorem do labore minim dolor qui occaecat laborum Lorem labore veniam reprehenderit ex cupidatat mollit. Qui est ipsum ullamco ullamco voluptate non. Consequat ea anim ea velit qeo'
-      />
+      /> */}
 
       <div className='mt-16 flex flex-col items-center'>
         <Title

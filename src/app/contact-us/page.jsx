@@ -1,5 +1,6 @@
 import Form from "./Form";
 import Title, { TitleBold } from "@/components/Title";
+import Map from "./Map";
 
 export default function page() {
   return (
@@ -10,8 +11,13 @@ export default function page() {
         heading='Get In Touch'
         // subheading={`Drop a message. We'd love to hear from you`}
       />
-      <div className='w-full md:w-5/6'>
-        <Form />
+      <div className='w-full md:w-5/6 mx-auto flex flex-col md:flex-row'>
+        <div className='w-full md:w-1/2'>
+          <Map />
+        </div>
+        <div className='w-full md:w-1/2'>
+          <Form />
+        </div>
       </div>
     </div>
   );

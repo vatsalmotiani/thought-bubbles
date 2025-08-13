@@ -25,10 +25,10 @@ export default function Navbar() {
       url: "/work/all",
       parent: "/work",
     },
-    {
-      name: "Gallery",
-      url: "/gallery",
-    },
+    // {
+    //   name: "Gallery",
+    //   url: "/gallery",
+    // },
     {
       name: "Contact",
       url: "/contact-us",
@@ -98,22 +98,26 @@ export default function Navbar() {
       <AnimatePresence>
         {navOpen && (
           <motion.div
-            className='bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-20 '
+            className='bg-white h-full fixed top-0 bottom-0 left-0 right-0 z-20'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.2 } }}
-            // exit={{ opacity: 0, transition: { duration: 0.6 } }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
-            {/* <div className='flex justify-end pt-4 pe-7'>
-              <motion.div
+            <div className='flex justify-end pt-4 pe-4 sm:pe-7'>
+              <motion.button
                 className='inline-flex items-center mt-3 p-2 rounded-md cursor-pointer text-neutral-400 hover:text-tb-body'
                 onClick={handleNav}
                 whileHover={{ scale: 0.9 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {navOpen ? <X /> : <Menu />}
-              </motion.div>
-            </div> */}
+                <X
+                  size={24}
+                  className='sm:w-6 sm:h-6'
+                />
+              </motion.button>
+            </div>
 
-            <div className='flex flex-col h-full justify-center items-center'>
+            <div className='flex flex-col h-full justify-center items-center px-4'>
               {navLinks.map(({ name, url, parent }, index) => {
                 const isActive = pathname == url || pathname.startsWith(`${parent}`);
                 return (
@@ -122,41 +126,24 @@ export default function Navbar() {
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 10, opacity: 0 }}
-                    transition={{ duration: 0.2, delay: 0.2 + index * 0.1 }}
+                    transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
                   >
                     <Link
-                      className={`mb-8 md:mb-14 font-medium text-4xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
+                      className={`mb-6 sm:mb-8 md:mb-10 lg:mb-14 font-medium text-2xl sm:text-3xl md:text-4xl block text-center ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
                       href={url}
                       onClick={handleNav}
                     >
-                      <motion.div whileHover={{ scale: 0.97, bounce: 0.4, duration: 0.2, delay: 0 }}>{name}</motion.div>
+                      <motion.div
+                        whileHover={{ scale: 0.97, bounce: 0.4, duration: 0.2 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {name}
+                      </motion.div>
                     </Link>
                   </motion.div>
                 );
               })}
             </div>
-            {/* <div className='flex flex-col h-full items-center justify-center'>
-              {navLinks.map(({ name, url, parent }, index) => {
-                const isActive = pathname == url || pathname.startsWith(`${parent}`);
-                return (
-                  <motion.div
-                    key={url}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ y: 10, opacity: 0 }}
-                    transition={{ duration: 0.2, delay: 0.4 + index * 0.2 }}
-                  >
-                    <Link
-                      className={`mb-14 text-4xl md:text-6xl block ${isActive ? "text-tb-black " : "text-neutral-400 hover:text-tb-body duration-300"}`}
-                      href={url}
-                      onClick={handleNav}
-                    >
-                      {name}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div> */}
           </motion.div>
         )}
       </AnimatePresence>

@@ -58,55 +58,55 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mt-7 mx-6 text-tb-black md:text-xl'
+      className='mt-4 sm:mt-6 md:mt-7 mx-2 sm:mx-4 md:mx-6 text-tb-black text-base sm:text-lg md:text-xl'
     >
-      <div className='flex flex-col mb-7'>
+      <div className='flex flex-col mb-5 sm:mb-6 md:mb-7'>
         <label
-          className='font-medium ms-2'
+          className='font-medium ms-2 mb-1'
           htmlFor='name'
         >
           Name
         </label>
         <input
           type='text'
-          className='text-tb-body bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
+          className='text-tb-body bg-neutral-100 rounded-lg sm:rounded-xl border-neutral-200 px-3 sm:px-4 py-2 sm:py-3 mt-1 sm:mt-2 focus:outline-tb-blue focus:ring-2 focus:ring-tb-blue/20 transition-all'
           {...register("name")}
         />
       </div>
 
-      <div className='flex flex-col mb-7'>
+      <div className='flex flex-col mb-5 sm:mb-6 md:mb-7'>
         <label
-          className='font-medium ms-2'
+          className='font-medium ms-2 mb-1'
           htmlFor='email'
         >
           Email Address<span className='text-red-600'> *</span>
         </label>
         <input
           type='email'
-          className='text-tb-body bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
+          className='text-tb-body bg-neutral-100 rounded-lg sm:rounded-xl border-neutral-200 px-3 sm:px-4 py-2 sm:py-3 mt-1 sm:mt-2 focus:outline-tb-blue focus:ring-2 focus:ring-tb-blue/20 transition-all'
           {...register("email", { required: "Email Address is required" })}
           aria-invalid={errors.email ? "true" : "false"}
         />
         {errors.email && (
-          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
+          <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm flex items-center'>
             <span className='me-2'>
-              <AlertCircle size={20} />
+              <AlertCircle size={16} className='sm:w-5 sm:h-5' />
             </span>
             {errors.email?.message}
           </p>
         )}
       </div>
 
-      <div className='flex flex-col mb-7'>
+      <div className='flex flex-col mb-5 sm:mb-6 md:mb-7'>
         <label
-          className='font-medium ms-2'
+          className='font-medium ms-2 mb-1'
           htmlFor='purpose'
         >
           What are you looking for?
         </label>
         <select
           {...register("purpose")}
-          className='text-tb-body bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
+          className='text-tb-body bg-neutral-100 rounded-lg sm:rounded-xl border-neutral-200 px-3 sm:px-4 py-2 sm:py-3 mt-1 sm:mt-2 focus:outline-tb-blue focus:ring-2 focus:ring-tb-blue/20 transition-all'
         >
           <option
             value=''
@@ -119,9 +119,9 @@ export default function Form() {
           <option value='Other'>Other</option>
         </select>
         {errors.purpose && (
-          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
+          <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm flex items-center'>
             <span className='me-2'>
-              <AlertCircle size={20} />
+              <AlertCircle size={16} className='sm:w-5 sm:h-5' />
             </span>
             {errors.purpose?.message}
           </p>
@@ -129,13 +129,13 @@ export default function Form() {
       </div>
 
       {selectedPurpose === "Job Application" && (
-        <div className='flex flex-col mb-7'>
+        <div className='flex flex-col mb-5 sm:mb-6 md:mb-7'>
           <label
-            className='font-medium ms-2'
+            className='font-medium ms-2 mb-1'
             htmlFor='cv'
           >
             CV (PDF Only) <span className='text-red-600'>*</span>
-            <span className='text-sm text-tb-body'>(Max: 2 MB)</span>
+            <span className='text-xs sm:text-sm text-tb-body'>(Max: 2 MB)</span>
           </label>
           <input
             type='file'
@@ -151,24 +151,24 @@ export default function Form() {
           />
           <label
             htmlFor='cv'
-            className={`flex items-center justify-center border-2 border-dashed rounded-xl p-4 mt-2 
+            className={`flex items-center justify-center border-2 border-dashed rounded-lg sm:rounded-xl p-3 sm:p-4 mt-1 sm:mt-2 
                   ${file ? "border-green-500 bg-green-50" : "border-gray-400 bg-neutral-100"} 
                   cursor-pointer hover:border-blue-400 transition-all`}
           >
-            {file ? <span className='text-green-600'>{file.name}</span> : <span className='text-gray-500'>Choose a PDF file...</span>}
+            {file ? <span className='text-green-600 text-sm sm:text-base'>{file.name}</span> : <span className='text-gray-500 text-sm sm:text-base'>Choose a PDF file...</span>}
           </label>
-          {file && file.size > 2 * 1024 * 1024 && <p className='text-red-400 ps-2 pt-4 text-sm'>File size exceeds 2 MB</p>}
-          {!file && <p className='text-gray-500 ps-2 pt-4 text-sm'>Only PDF files allowed</p>}
+          {file && file.size > 2 * 1024 * 1024 && <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm'>File size exceeds 2 MB</p>}
+          {!file && <p className='text-gray-500 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm'>Only PDF files allowed</p>}
         </div>
       )}
 
-      <div className='flex flex-col'>
+      <div className='flex flex-col mb-5 sm:mb-6 md:mb-7'>
         <label
-          className='font-medium ms-2'
+          className='font-medium ms-2 mb-1'
           htmlFor='message'
         >
           Message<span className='text-red-600'> *</span>
-          <span className='text-sm text-tb-body'>(Max Characters: 500)</span>
+          <span className='text-xs sm:text-sm text-tb-body'>(Max Characters: 500)</span>
         </label>
         <textarea
           rows={4}
@@ -180,25 +180,25 @@ export default function Form() {
             },
           })}
           onChange={(e) => setMessage(e.target.value)} // Update message state
-          className='w-full resize-none bg-neutral-100 rounded-xl border-neutral-200 px-4 py-3 mt-2 focus:outline-tb-blue'
+          className='w-full resize-none bg-neutral-100 rounded-lg sm:rounded-xl border-neutral-200 px-3 sm:px-4 py-2 sm:py-3 mt-1 sm:mt-2 focus:outline-tb-blue focus:ring-2 focus:ring-tb-blue/20 transition-all'
         />
-        <p className={`text-sm text-right mt-1 ${message.length > 500 ? "text-red-500" : "text-gray-500"}`}>{message.length > 500 ? `${message.length - 500} character${message.length - 501 === 0 ? "" : "s"} over limit` : `${500 - message.length} character${500 - message.length === 1 ? "" : "s"} remaining`}</p>
+        <p className={`text-xs sm:text-sm text-right mt-1 ${message.length > 500 ? "text-red-500" : "text-gray-500"}`}>{message.length > 500 ? `${message.length - 500} character${message.length - 501 === 0 ? "" : "s"} over limit` : `${500 - message.length} character${500 - message.length === 1 ? "" : "s"} remaining`}</p>
         {errors.message && (
-          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
+          <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm flex items-center'>
             <span className='me-2'>
-              <AlertCircle size={20} />
+              <AlertCircle size={16} className='sm:w-5 sm:h-5' />
             </span>
             {errors.message?.message}
           </p>
         )}
       </div>
 
-      {submissionMessage && <p className='text-green-500 text-center mt-4'>{submissionMessage}</p>}
+      {submissionMessage && <p className='text-green-500 text-center mt-4 text-sm sm:text-base'>{submissionMessage}</p>}
 
       <button
         type='submit'
         disabled={isLoading || !watch("email")}
-        className='w-full disabled:bg-sky-200 disabled:border-sky-200 disabled:drop-shadow-none bg-sky-400 border-2 border-sky-500 rounded-xl drop-shadow-sm px-6 py-3 mt-4 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg'
+        className='w-full disabled:bg-sky-200 disabled:border-sky-200 disabled:drop-shadow-none bg-sky-400 border-2 border-sky-500 rounded-lg sm:rounded-xl drop-shadow-sm px-4 sm:px-6 py-3 mt-4 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg text-sm sm:text-base font-medium transition-all'
       >
         {isLoading ? <span>Submitting...</span> : <span>Submit</span>}
       </button>

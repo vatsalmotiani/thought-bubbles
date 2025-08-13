@@ -12,7 +12,8 @@ export default function Service({ serviceName = "Branding" }) {
     >
       <motion.div
         whileHover={{ scale: 0.97 }}
-        className='px-4 py-2 mx-2 bg-neutral-100 rounded-2xl text-tb-black hover:bg-neutral-200 duration-300 whitespace-nowrap'
+        whileTap={{ scale: 0.95 }}
+        className='px-3 sm:px-4 py-2 sm:py-3 mx-1 sm:mx-2 bg-neutral-100 rounded-xl sm:rounded-2xl text-tb-black hover:bg-neutral-200 duration-300 whitespace-nowrap text-sm sm:text-base font-medium'
       >
         {serviceName}
       </motion.div>

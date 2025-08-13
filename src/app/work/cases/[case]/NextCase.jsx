@@ -9,9 +9,11 @@ export function NextCase({ name }) {
 
   return (
     filteredList.length > 0 && (
-      <div className='flex flex-col mt-8'>
-        <p className='font-poppins font-medium text-tb-black text-2xl  pb-4'>Next Case</p>
-        <CaseCard caseStudy={randomCase} />
+      <div className='flex flex-col mt-6 sm:mt-8 px-4 sm:px-6'>
+        <p className='font-poppins font-medium text-tb-black text-xl sm:text-2xl pb-4 sm:pb-6 text-center sm:text-left'>Next Case</p>
+        <div className='flex justify-center sm:justify-start'>
+          <CaseCard caseStudy={randomCase} />
+        </div>
       </div>
     )
   );

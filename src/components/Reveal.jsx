@@ -14,8 +14,12 @@ export default function Reveal({ children }) {
           }}
           initial='hidden'
           animate='visible'
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 + index * 0.25, ease: [0.2, 0.4, 0.3, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ 
+            duration: 0.6, 
+            delay: 0.3 + index * 0.15, 
+            ease: [0.2, 0.4, 0.3, 1] 
+          }}
         >
           {child}
         </motion.div>

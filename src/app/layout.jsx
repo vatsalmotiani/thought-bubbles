@@ -19,10 +19,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-white'>
-        <div className='justify-center flex'>
+        <div className='justify-center flex w-full'>
           <Navbar />
         </div>
-        <div className='flex-grow'>
+        <div className='flex-grow w-full'>
           <SmoothScroll>{children}</SmoothScroll>
         </div>
         {/* <FooterCTA /> */}

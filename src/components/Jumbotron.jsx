@@ -25,13 +25,13 @@ export default function Jumbotron({ img, heading, subheading, body }) {
     //     <p className={`  text-tb-body text-lg `}>{body}</p>
     //   </div>
     // </div>
-    <div className={`flex flex-col my-20 justify-center items-center`}>
+    <div className={`flex flex-col my-8 sm:my-12 md:my-16 lg:my-20 justify-center items-center px-4 sm:px-6`}>
       <Image
         src={img.src}
         alt={img.alt}
         height={img.height}
         width={img.width}
-        className='mx-20 mb-20'
+        className='mx-4 sm:mx-8 md:mx-16 lg:mx-20 mb-8 sm:mb-12 md:mb-16 lg:mb-20 w-full max-w-[600px] h-auto'
       />
     </div>
   );
@@ -40,7 +40,7 @@ export default function Jumbotron({ img, heading, subheading, body }) {
 export function JumboCase() {
   return (
     <Carousel
-      className='w-full pt-14 mb-14'
+      className='w-full pt-8 sm:pt-10 md:pt-12 lg:pt-14 mb-8 sm:mb-10 md:mb-12 lg:mb-14 px-4 sm:px-6'
       plugins={[
         Autoplay({
           delay: 4000,
@@ -58,15 +58,16 @@ export function JumboCase() {
             return (
               <CarouselItem
                 key={filteredCase.id}
-                className='basis-full flex justify-center '
+                className='basis-full flex justify-center'
               >
                 <motion.div
                   initial={{ scale: 1 }}
-                  // whileHover={{ scale: 0.97, transition: { duration: 0.15, type: "spring", bounce: 0.4 } }}
+                  whileHover={{ scale: 0.98, transition: { duration: 0.2, type: "spring", bounce: 0.4 } }}
+                  whileTap={{ scale: 0.96 }}
                 >
                   <Link
                     href={`/work/cases/${slugify(filteredCase.name)}`}
-                    className='z-10 flex w-fit justify-center items-center '
+                    className='z-10 flex w-fit justify-center items-center'
                   >
                     <CaseLarge caseStudy={filteredCase} />
                     {/* <Image

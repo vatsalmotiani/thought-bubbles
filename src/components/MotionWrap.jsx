@@ -8,7 +8,13 @@ export default function MotionWrap({ children }) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 15 }}
-        transition={{ delay: 0.25, type: "spring", stiffness: 260, damping: 20 }}
+        transition={{ 
+          delay: 0.15, 
+          type: "spring", 
+          stiffness: 260, 
+          damping: 20,
+          duration: 0.4
+        }}
       >
         {children}
       </motion.div>
@@ -22,7 +28,11 @@ export function MotionWrap2({ children }) {
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ 
+          delay: 0.05,
+          duration: 0.3,
+          ease: "easeOut"
+        }}
       >
         {children}
       </motion.div>

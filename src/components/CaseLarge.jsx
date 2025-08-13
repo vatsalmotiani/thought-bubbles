@@ -7,15 +7,17 @@ import { ArrowRight } from "react-feather";
 
 export default function CaseLarge({ caseStudy }) {
   return (
-    <div className='max-w-max max-h-max relative overflow-visible'>
-      <Image
-        src={caseStudy.img}
-        height='360'
-        width='480'
-        alt={caseStudy.name}
-        className='rounded-xl duration-300'
-      />
-      <p className='font-inter text-tb-black text-xl ms-2 mt-2'>{caseStudy.name}</p>
+    <div className='w-full sm:max-w-max max-h-max relative overflow-visible'>
+      <div className='relative overflow-hidden rounded-lg sm:rounded-xl'>
+        <Image
+          src={caseStudy.img}
+          height='360'
+          width='480'
+          alt={caseStudy.name}
+          className='w-full h-auto object-cover duration-300 hover:scale-105 transition-transform'
+        />
+      </div>
+      <p className='font-inter text-tb-black text-base sm:text-lg md:text-xl ms-1 sm:ms-2 mt-2 sm:mt-3 leading-tight'>{caseStudy.name}</p>
     </div>
     // <div className='w-fit flex justify-center items-center m-8'>
     //   <Link href={`/work/cases/${slugify(caseStudy.name)}`}>

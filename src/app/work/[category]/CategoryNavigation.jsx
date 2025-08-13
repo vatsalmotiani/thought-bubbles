@@ -7,17 +7,18 @@ import { usePathname } from "next/navigation";
 
 export default function CategoryNavigation({ services }) {
   {
-    const serviceClass = "px-4 py-2 mx-2 text-tb-black  font-medium xl:mx-2 duration-300 whitespace-nowrap";
-    const activeServiceClass = "bg-tb-blue text-white rounded-2xl  border-2 border-neutral-100 ";
+    const serviceClass = "px-3 sm:px-4 py-2 mx-1 sm:mx-2 text-tb-black font-medium xl:mx-2 duration-300 whitespace-nowrap text-sm sm:text-base";
+    const activeServiceClass = "bg-tb-blue text-white rounded-xl sm:rounded-2xl border-2 border-neutral-100";
     // const activeServiceClass = "bg-neutral-100 rounded-2xl  border-2 border-neutral-100 ";
     const pathname = usePathname();
 
     return (
-      <div className='w-5/6 md:w-2/3 xl:w-max hidden md:flex items-center mt-8 sm:mt-14 text-center overflow-x-auto pb-4'>
+      <div className='w-full md:w-2/3 xl:w-max flex items-center mt-4 sm:mt-6 md:mt-8 text-center overflow-x-auto pb-4 px-2 sm:px-4'>
         <Link href='/work/all'>
           <motion.div
             className={`${serviceClass} ${pathname === "/work/all" ? `${activeServiceClass}` : "hover:text-tb-body"}`}
             whileHover={{ scale: 0.96 }}
+            whileTap={{ scale: 0.94 }}
           >
             All
           </motion.div>
@@ -31,6 +32,7 @@ export default function CategoryNavigation({ services }) {
               <motion.div
                 className={`${serviceClass} ${pathname === `/work/${slugify(service)}` ? `${activeServiceClass}` : "hover:text-tb-body"}`}
                 whileHover={{ scale: 0.96 }}
+                whileTap={{ scale: 0.94 }}
               >
                 {service}
               </motion.div>

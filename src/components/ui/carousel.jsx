@@ -150,7 +150,13 @@ const CarouselPrevious = React.forwardRef(({ className, variant = "outline", siz
       ref={ref}
       variant={variant}
       size={size}
-      className={cn("bg-transparent hover:bg-white border-none absolute h-8 w-8 rounded-full", orientation === "horizontal" ? "-left-12 top-1/2 -translate-y-1/2" : "-top-12 left-1/2 -translate-x-1/2 rotate-90", className)}
+      className={cn(
+        "bg-transparent hover:bg-white border-none absolute h-8 w-8 rounded-full shadow-lg",
+        orientation === "horizontal" 
+          ? "-left-2 sm:-left-8 md:-left-12 top-1/2 -translate-y-1/2" 
+          : "-top-2 sm:-top-8 md:-top-12 left-1/2 -translate-x-1/2 rotate-90", 
+        className
+      )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
@@ -170,7 +176,13 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
       ref={ref}
       variant={variant}
       size={size}
-      className={cn("bg-transparent hover:bg-white border-none absolute h-8 w-8 rounded-full", orientation === "horizontal" ? "-right-12 top-1/2 -translate-y-1/2" : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90", className)}
+      className={cn(
+        "bg-transparent hover:bg-white border-none absolute h-8 w-8 rounded-full shadow-lg",
+        orientation === "horizontal" 
+          ? "-right-2 sm:-right-8 md:-right-12 top-1/2 -translate-y-1/2" 
+          : "-bottom-2 sm:-bottom-8 md:-bottom-12 left-1/2 -translate-x-1/2 rotate-90", 
+        className
+      )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}

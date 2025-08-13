@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Footer, { FooterCTA } from "@/components/Footer";
+import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -19,13 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-white'>
-        <div className='justify-center flex w-full'>
-          <Navbar />
-        </div>
-        <div className='flex-grow w-full'>
+        <Navbar />
+        <div className='flex-grow w-full pt-20'>
           <SmoothScroll>{children}</SmoothScroll>
         </div>
-        {/* <FooterCTA /> */}
+        <Footer />
         <Toaster />
       </body>
     </html>

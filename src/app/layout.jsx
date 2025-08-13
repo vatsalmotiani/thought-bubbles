@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-white'>
         <Navbar />
-        <div className='flex-grow w-full pt-20'>
+        <div className='flex-grow w-full mt-20'>
           <SmoothScroll>{children}</SmoothScroll>
         </div>
         <Footer />

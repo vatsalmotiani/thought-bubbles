@@ -10,7 +10,7 @@ export default function Home() {
       <HeroSection />
       <ServicesShowcase />
       <WorkShowcase />
-      <ClientsSection />
+      {/* <ClientsSection /> */}
       <CTASection />
     </div>
   );

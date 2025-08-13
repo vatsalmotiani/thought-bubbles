@@ -16,11 +16,12 @@ export default function CategoryLayout({ children }) {
   };
   return (
     <>
-      <div
+      {children}
+      {/* <div
         id='top'
         className='mb-8 sm:mb-10 md:mb-14 mt-4 sm:mt-6 md:mt-8 mx-2 sm:mx-4 md:mx-8 lg:mx-14'
       >
-        {/* <JumboCase img='/assets/caseVert.jpg' /> */}
+        <JumboCase img='/assets/caseVert.jpg' />
         <TitleBold
           sectionName='Our Work'
           heading='Case Studies'
@@ -31,11 +32,11 @@ export default function CategoryLayout({ children }) {
           <DropDownServices services={serviceList} />
           <CategoryNavigation services={serviceList} />
 
-          {/* <CategoryNavigation services={serviceList} /> */}
+          <CategoryNavigation services={serviceList} />
 
           {children}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

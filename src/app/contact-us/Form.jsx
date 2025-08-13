@@ -90,7 +90,10 @@ export default function Form() {
         {errors.email && (
           <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm flex items-center'>
             <span className='me-2'>
-              <AlertCircle size={16} className='sm:w-5 sm:h-5' />
+              <AlertCircle
+                size={16}
+                className='sm:w-5 sm:h-5'
+              />
             </span>
             {errors.email?.message}
           </p>
@@ -121,7 +124,10 @@ export default function Form() {
         {errors.purpose && (
           <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm flex items-center'>
             <span className='me-2'>
-              <AlertCircle size={16} className='sm:w-5 sm:h-5' />
+              <AlertCircle
+                size={16}
+                className='sm:w-5 sm:h-5'
+              />
             </span>
             {errors.purpose?.message}
           </p>
@@ -186,7 +192,10 @@ export default function Form() {
         {errors.message && (
           <p className='text-red-400 ps-2 pt-2 sm:pt-4 text-xs sm:text-sm flex items-center'>
             <span className='me-2'>
-              <AlertCircle size={16} className='sm:w-5 sm:h-5' />
+              <AlertCircle
+                size={16}
+                className='sm:w-5 sm:h-5'
+              />
             </span>
             {errors.message?.message}
           </p>

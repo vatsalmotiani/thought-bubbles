@@ -52,7 +52,10 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.3, ease: "easeInOut" },
+            }}
             className='fixed inset-0 bg-black/20 backdrop-blur-sm z-30'
             onClick={handleNav}
           />
@@ -182,9 +185,18 @@ export default function Navbar() {
           <motion.div
             className='fixed top-0 bottom-0 left-0 right-0 z-40 overflow-hidden'
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: 0.3,
+                ease: "easeIn",
+                when: "afterChildren", // Wait for children to animate out first
+              },
+            }}
             style={{
               backgroundColor: "#F2F2F2",
             }}
@@ -196,14 +208,29 @@ export default function Navbar() {
                   <motion.div
                     key={url}
                     initial={{ y: 50, opacity: 0, scale: 0.8, rotate: -5 }}
-                    animate={{ y: 0, opacity: 1, scale: 1, rotate: 0 }}
-                    exit={{ y: 20, opacity: 0, scale: 0.9, rotate: 5 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.1 + index * 0.1,
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 25,
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      scale: 1,
+                      rotate: 0,
+                      transition: {
+                        duration: 0.6,
+                        delay: 0.1 + index * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 25,
+                      },
+                    }}
+                    exit={{
+                      y: 30,
+                      opacity: 0,
+                      scale: 0.9,
+                      rotate: 5,
+                      transition: {
+                        duration: 0.3,
+                        delay: index * 0.05, // Stagger the exit animations
+                        ease: "easeIn",
+                      },
                     }}
                     className='mb-8 sm:mb-10 md:mb-12 lg:mb-16'
                   >
@@ -222,7 +249,7 @@ export default function Navbar() {
                           scale: 0.95,
                           rotate: 0,
                         }}
-                        className={`relative font-oswald font-black text-4xl sm:text-5xl md:text-6xl text-center transition-all duration-300 ${isActive ? "text-blue-600" : "text-gray-800 hover:text-blue-600"}`}
+                        className={`relative font-noto font-black text-4xl sm:text-5xl md:text-6xl text-center transition-all duration-300 ${isActive ? "text-blue-600" : "text-gray-800 hover:text-blue-600"}`}
                         style={{
                           color: isActive ? "#00B6E7" : "#1E1E1E",
                           textShadow: isActive ? "3px 3px 0px rgba(0, 182, 231, 0.2)" : "2px 2px 0px rgba(30, 30, 30, 0.1)",
@@ -236,28 +263,6 @@ export default function Navbar() {
                             className='absolute -bottom-6 left-1/2 transform -translate-x-1/2'
                             initial={false}
                           >
-                            {/* Hand-drawn underline */}
-                            <svg
-                              width='120'
-                              height='20'
-                              viewBox='0 0 120 20'
-                            >
-                              <motion.path
-                                d='M10,15 Q30,5 60,15 T110,15'
-                                stroke='#00B6E7'
-                                strokeWidth='4'
-                                fill='none'
-                                strokeLinecap='round'
-                                animate={{
-                                  pathLength: [0, 1],
-                                }}
-                                transition={{
-                                  duration: 0.8,
-                                  ease: "easeOut",
-                                }}
-                              />
-                            </svg>
-
                             {/* Sparkle dots */}
                             <motion.div
                               className='absolute -top-2 left-8 w-2 h-2 rounded-full'

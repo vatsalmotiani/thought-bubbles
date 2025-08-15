@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackgroundElements from "@/components/BackgroundElements";
+import HomepageLoaderWrapper from "@/components/HomepageLoaderWrapper";
 
 export const metadata = {
   title: {
@@ -12,7 +13,7 @@ export const metadata = {
   },
   description: "Thought Bubbles Advertising",
   icons: {
-    icon: "/favicon.svg", // /public path
+    icon: "/favicon.svg",
   },
 };
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
         <Navbar />
+        <HomepageLoaderWrapper />
         <div className='flex-grow w-full mt-20'>
           <SmoothScroll>{children}</SmoothScroll>
         </div>

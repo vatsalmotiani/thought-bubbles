@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageCircle, Zap } from "lucide-react";
-import Form from "./Form";
+import AnimatedForm from "./Form";
 import Map from "./Map";
 
 // Mock Map component (replace with your actual Map component)
@@ -468,28 +468,7 @@ export default function ContactPage() {
               </motion.div>
 
               {/* Contact Form Section */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <motion.h2
-                  className='text-4xl md:text-5xl font-black mb-8'
-                  style={{ color: "#1E1E1E", fontFamily: "Oswald, sans-serif" }}
-                  animate={{
-                    rotate: [0, -1, 1, 0],
-                  }}
-                  transition={{
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  Let's <span style={{ color: "#00B6E7" }}>Talk</span>
-                </motion.h2>
-                <Form />
-              </motion.div>
+              <AnimatedForm />
             </div>
           </div>
         </section>

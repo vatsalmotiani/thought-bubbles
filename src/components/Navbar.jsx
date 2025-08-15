@@ -63,108 +63,6 @@ export default function Navbar() {
         id='top'
         className='fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out'
       >
-        {/* Cartoon-style background with doodles */}
-        <motion.div
-          className={`absolute inset-0 transition-all duration-500 ${scrolled ? "opacity-100" : "opacity-95"}`}
-          style={{
-            backgroundColor: scrolled ? "#F2F2F2" : "rgba(242, 242, 242, 0.8)",
-            backdropFilter: scrolled ? "blur(20px)" : "blur(10px)",
-          }}
-        >
-          {/* Doodle pattern overlay */}
-          <svg
-            className='absolute inset-0 w-full h-full pointer-events-none'
-            viewBox='0 0 400 80'
-            preserveAspectRatio='xMidYMid slice'
-          >
-            <defs>
-              <pattern
-                id='navDots'
-                x='0'
-                y='0'
-                width='30'
-                height='30'
-                patternUnits='userSpaceOnUse'
-              >
-                <circle
-                  cx='15'
-                  cy='15'
-                  r='1'
-                  fill='#00B6E7'
-                  opacity='0.15'
-                />
-              </pattern>
-            </defs>
-            <rect
-              width='100%'
-              height='100%'
-              fill='url(#navDots)'
-            />
-
-            {/* Floating doodle elements */}
-            <motion.circle
-              cx='50'
-              cy='40'
-              r='3'
-              fill='#00B6E7'
-              opacity='0.3'
-              animate={{
-                scale: [1, 1.3, 1],
-                y: [0, -2, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.circle
-              cx='350'
-              cy='30'
-              r='2'
-              fill='#00B6E7'
-              opacity='0.4'
-              animate={{
-                scale: [1, 1.5, 1],
-                y: [0, 3, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-            />
-
-            {/* Wavy doodle line */}
-            <motion.path
-              d='M0,60 Q50,50 100,60 T200,60 Q250,50 300,60 T400,60'
-              stroke='#00B6E7'
-              strokeWidth='1'
-              fill='none'
-              opacity='0.2'
-              strokeDasharray='3,2'
-              animate={{
-                pathLength: [0, 1, 0],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </svg>
-
-          {/* Comic-style border */}
-          {/* <div
-            className='absolute bottom-0 left-0 right-0 h-1'
-            style={{
-              backgroundColor: "#00B6E7",
-              opacity: scrolled ? 0.6 : 0.3,
-            }}
-          /> */}
-        </motion.div>
-
         <div className='relative mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex items-center justify-between h-20'>
             <div className='flex items-center'>
@@ -278,7 +176,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* FULL OPEN Navbar with Cartoon Theme */}
+      {/* FULL OPEN Navbar */}
       <AnimatePresence>
         {navOpen && (
           <motion.div
@@ -291,115 +189,6 @@ export default function Navbar() {
               backgroundColor: "#F2F2F2",
             }}
           >
-            {/* Cartoon background with floating doodles */}
-            <svg
-              className='absolute inset-0 w-full h-full pointer-events-none'
-              viewBox='0 0 800 600'
-              preserveAspectRatio='xMidYMid slice'
-            >
-              <defs>
-                <pattern
-                  id='fullNavDots'
-                  x='0'
-                  y='0'
-                  width='40'
-                  height='40'
-                  patternUnits='userSpaceOnUse'
-                >
-                  <circle
-                    cx='20'
-                    cy='20'
-                    r='1.5'
-                    fill='#00B6E7'
-                    opacity='0.1'
-                  />
-                </pattern>
-              </defs>
-              <rect
-                width='100%'
-                height='100%'
-                fill='url(#fullNavDots)'
-              />
-
-              {/* Animated doodle paths */}
-              <motion.path
-                d='M100,100 Q200,50 300,100 T500,100'
-                stroke='#00B6E7'
-                strokeWidth='2'
-                fill='none'
-                strokeLinecap='round'
-                strokeDasharray='8,4'
-                opacity='0.3'
-                animate={{
-                  pathLength: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              <motion.path
-                d='M600,400 C650,350 750,450 800,400'
-                stroke='#00B6E7'
-                strokeWidth='2'
-                fill='none'
-                strokeLinecap='round'
-                strokeDasharray='6,3'
-                opacity='0.2'
-                animate={{
-                  pathLength: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 2,
-                }}
-              />
-
-              {/* Floating cartoon bubbles */}
-              <motion.circle
-                cx='150'
-                cy='450'
-                r='25'
-                stroke='#00B6E7'
-                strokeWidth='2'
-                fill='rgba(0, 182, 231, 0.1)'
-                opacity='0.4'
-                animate={{
-                  scale: [1, 1.2, 1],
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              <motion.circle
-                cx='650'
-                cy='150'
-                r='35'
-                stroke='#00B6E7'
-                strokeWidth='2'
-                fill='none'
-                strokeDasharray='10,5'
-                opacity='0.3'
-                animate={{
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 12,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            </svg>
-
             <div className='flex flex-col h-full justify-center items-center px-4 relative z-10'>
               {navLinks.map(({ name, url, parent }, index) => {
                 const isActive = pathname == url || pathname.startsWith(`${parent}`);
@@ -516,32 +305,6 @@ export default function Navbar() {
                   </motion.div>
                 );
               })}
-            </div>
-
-            {/* Cartoon-style footer doodle */}
-            <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2'>
-              <svg
-                width='100'
-                height='30'
-                viewBox='0 0 100 30'
-              >
-                <motion.path
-                  d='M10,20 Q25,10 50,20 T90,20'
-                  stroke='#00B6E7'
-                  strokeWidth='2'
-                  fill='none'
-                  strokeLinecap='round'
-                  strokeDasharray='4,2'
-                  animate={{
-                    pathLength: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </svg>
             </div>
           </motion.div>
         )}

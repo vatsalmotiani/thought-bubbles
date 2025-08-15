@@ -24,139 +24,7 @@ export default function Footer() {
   };
 
   return (
-    <footer
-      className='relative overflow-hidden'
-      style={{ backgroundColor: "#F2F2F2" }}
-    >
-      {/* Cartoon Background with Doodles */}
-      <div className='absolute inset-0'>
-        <svg
-          className='absolute inset-0 w-full h-full pointer-events-none'
-          viewBox='0 0 1200 600'
-          preserveAspectRatio='xMidYMid slice'
-        >
-          <defs>
-            <pattern
-              id='footerDots'
-              x='0'
-              y='0'
-              width='50'
-              height='50'
-              patternUnits='userSpaceOnUse'
-            >
-              <circle
-                cx='25'
-                cy='25'
-                r='1.5'
-                fill='#00B6E7'
-                opacity='0.15'
-              />
-            </pattern>
-          </defs>
-          <rect
-            width='100%'
-            height='100%'
-            fill='url(#footerDots)'
-          />
-
-          {/* Animated doodle paths */}
-          <motion.path
-            d='M200,100 Q400,50 600,100 T1000,100'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='none'
-            strokeLinecap='round'
-            strokeDasharray='10,5'
-            opacity='0.3'
-            animate={{
-              pathLength: [0, 1, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          <motion.path
-            d='M100,400 C200,350 300,450 400,400 S600,350 700,400'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='none'
-            strokeLinecap='round'
-            strokeDasharray='8,4'
-            opacity='0.2'
-            animate={{
-              pathLength: [0, 1, 0],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-
-          {/* Floating cartoon elements */}
-          <motion.circle
-            cx='200'
-            cy='500'
-            r='30'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='rgba(0, 182, 231, 0.1)'
-            opacity='0.4'
-            animate={{
-              scale: [1, 1.2, 1],
-              y: [0, -15, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          <motion.circle
-            cx='1000'
-            cy='200'
-            r='40'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='none'
-            strokeDasharray='12,6'
-            opacity='0.3'
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-
-          {/* Small floating doodles */}
-          <motion.polygon
-            points='800,150 820,170 810,190 790,190 780,170'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='rgba(0, 182, 231, 0.1)'
-            opacity='0.3'
-            animate={{
-              rotate: [0, 360],
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </svg>
-      </div>
-
+    <footer className='relative overflow-hidden bg-transparent'>
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
         {/* Main Footer Content */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16'>
@@ -464,7 +332,7 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* Bottom Section with Cartoon Style */}
+        {/* Bottom Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -525,116 +393,13 @@ export default function Footer() {
           </div>
         </motion.div>
       </div>
-
-      {/* Bottom cartoon doodle */}
-      <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2'>
-        <svg
-          width='150'
-          height='30'
-          viewBox='0 0 150 30'
-        >
-          <motion.path
-            d='M20,20 Q40,10 75,20 T130,20'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='none'
-            strokeLinecap='round'
-            strokeDasharray='6,3'
-            opacity='0.4'
-            animate={{
-              pathLength: [0, 1, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </svg>
-      </div>
     </footer>
   );
 }
 
 export function FooterCTA() {
   return (
-    <footer
-      className='relative overflow-hidden'
-      style={{ backgroundColor: "#F2F2F2" }}
-    >
-      {/* Cartoon Background */}
-      <div className='absolute inset-0'>
-        <svg
-          className='absolute inset-0 w-full h-full pointer-events-none'
-          viewBox='0 0 800 400'
-          preserveAspectRatio='xMidYMid slice'
-        >
-          <defs>
-            <pattern
-              id='ctaDots'
-              x='0'
-              y='0'
-              width='40'
-              height='40'
-              patternUnits='userSpaceOnUse'
-            >
-              <circle
-                cx='20'
-                cy='20'
-                r='1.5'
-                fill='#00B6E7'
-                opacity='0.1'
-              />
-            </pattern>
-          </defs>
-          <rect
-            width='100%'
-            height='100%'
-            fill='url(#ctaDots)'
-          />
-
-          {/* Floating cartoon bubbles */}
-          <motion.circle
-            cx='150'
-            cy='100'
-            r='25'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='rgba(0, 182, 231, 0.1)'
-            opacity='0.4'
-            animate={{
-              scale: [1, 1.3, 1],
-              y: [0, -10, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          <motion.circle
-            cx='650'
-            cy='300'
-            r='30'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='none'
-            strokeDasharray='8,4'
-            opacity='0.3'
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        </svg>
-      </div>
-
+    <footer className='relative overflow-hidden bg-transparent'>
       <div className='relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center'>
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.9 }}

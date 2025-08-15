@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import BackgroundElements from "@/components/BackgroundElements";
 
 export const metadata = {
   title: {
@@ -18,7 +19,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-white'>
+      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
+        <BackgroundElements />
         <Navbar />
         <div className='flex-grow w-full mt-20'>
           <SmoothScroll>{children}</SmoothScroll>

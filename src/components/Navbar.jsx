@@ -22,7 +22,7 @@ export default function Navbar() {
     },
     {
       name: "Work",
-      url: "/work/all",
+      url: "/work",
       parent: "/work",
     },
     {

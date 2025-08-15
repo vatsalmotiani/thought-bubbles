@@ -5,6 +5,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackgroundElements from "@/components/BackgroundElements";
 import HomepageLoaderWrapper from "@/components/HomepageLoaderWrapper";
+import SpaceshipHunter from "@/components/SpaceshipHunter";
 
 export const metadata = {
   title: {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
+        <SpaceshipHunter />
         <Navbar />
         <HomepageLoaderWrapper />
         <div className='flex-grow w-full mt-20'>

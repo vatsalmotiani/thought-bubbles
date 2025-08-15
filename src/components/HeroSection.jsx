@@ -1,79 +1,55 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { PenTool, Camera, Globe, Smartphone, Monitor, Megaphone, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { servicesWithIcons } from "@/data/services"; // Import your service list
+import { slugify } from "@/lib/utils"; // Import your slugify function
+
+// Icon imports
+import { PenTool, Camera, Globe, Smartphone, Monitor, Megaphone, MessageCircle } from "lucide-react";
+
+// Icon mapping - match your service names to icons
+const iconMap = {
+  Branding: PenTool,
+  Photography: Camera,
+  "Web Design": Globe,
+  "Mobile Apps": Smartphone,
+  "UI/UX": Monitor,
+  Marketing: Megaphone,
+  "Social Media": MessageCircle,
+};
 
 export default function RedesignedHeroSection() {
   const containerRef = useRef(null);
   const [hoveredService, setHoveredService] = useState(null);
+  const router = useRouter();
 
-  // Services data for the solar system
-  const services = [
-    {
-      id: 1,
-      name: "Branding",
-      icon: PenTool,
-      color: "#FF6B6B",
-      distance: 120,
-      speed: 20,
-      size: 50,
-      url: "/work/branding",
-    },
-    {
-      id: 2,
-      name: "Photography",
-      icon: Camera,
-      color: "#4ECDC4",
-      distance: 160,
-      speed: 25,
-      size: 45,
-      url: "/work/photography",
-    },
-    {
-      id: 3,
-      name: "Web Design",
-      icon: Globe,
-      color: "#45B7D1",
-      distance: 200,
-      speed: 30,
-      size: 55,
-      url: "/work/web-design",
-    },
-    {
-      id: 4,
-      name: "Mobile Apps",
-      icon: Smartphone,
-      color: "#F7DC6F",
-      distance: 140,
-      speed: 22,
-      size: 48,
-      url: "/work/mobile-apps",
-    },
-    {
-      id: 5,
-      name: "UI/UX",
-      icon: Monitor,
-      color: "#BB8FCE",
-      distance: 180,
-      speed: 28,
-      size: 52,
-      url: "/work/ui-ux",
-    },
-    {
-      id: 6,
-      name: "Marketing",
-      icon: Megaphone,
-      color: "#F8C471",
-      distance: 220,
-      speed: 35,
-      size: 46,
-      url: "/work/marketing",
-    },
-  ];
+  // Create services data from your servicesWithIcons
+  const services = servicesWithIcons.map((service, index) => {
+    const baseDistance = 120;
+    const distanceIncrement = 40;
+
+    return {
+      id: index + 1,
+      name: service.name,
+      icon: service.icon,
+      color: service.color,
+      distance: baseDistance + index * distanceIncrement,
+      speed: 20 + index * 3,
+      size: 45 + index * 2,
+      url: `/work?category=${slugify(service.name)}`,
+    };
+  });
+
+  // Helper function to generate colors
+  function getServiceColor(index) {
+    const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#F7DC6F", "#BB8FCE", "#F8C471", "#A2D9CE"];
+    return colors[index % colors.length];
+  }
 
   const handleServiceClick = (url) => {
-    console.log(`Navigating to: ${url}`);
+    router.push(url);
   };
 
   return (
@@ -81,7 +57,7 @@ export default function RedesignedHeroSection() {
       ref={containerRef}
       className='relative min-h-screen flex items-center overflow-hidden bg-transparent'
     >
-      {/* Background Service Text - Top 1/3 of screen, 100% width */}
+      {/* Background Service Text */}
       <motion.div
         className='absolute top-0 left-0 w-full h-1/3 flex items-center justify-center pointer-events-none z-5 overflow-hidden'
         initial={{ opacity: 0 }}
@@ -189,8 +165,8 @@ export default function RedesignedHeroSection() {
             {/* Service Planets */}
             {services.map((service, index) => {
               const Icon = service.icon;
-              const orbitalRadius = 140 + (index % 4) * 60;
-              const orbitDuration = 15 + index * 3;
+              const orbitalRadius = service.distance;
+              const orbitDuration = service.speed;
 
               return (
                 <motion.div
@@ -237,38 +213,11 @@ export default function RedesignedHeroSection() {
                     <div
                       className='w-10 h-10 rounded-full border-3 flex items-center justify-center relative overflow-hidden'
                       style={{
-                        backgroundColor: "#00B6E7",
-                        borderColor: "#0084C7",
-                        boxShadow: hoveredService === service.id ? "0 0 15px rgba(0, 182, 231, 0.7)" : "2px 2px 0px rgba(0,0,0,0.2)",
+                        backgroundColor: service.color,
+                        borderColor: darkenColor(service.color, 20),
+                        boxShadow: hoveredService === service.id ? `0 0 15px ${service.color}` : "2px 2px 0px rgba(0,0,0,0.2)",
                       }}
                     >
-                      {/* Planet surface patterns */}
-                      {index === 0 && (
-                        <div className='absolute inset-0 opacity-40'>
-                          <div className='w-2 h-2 bg-blue-800 rounded-full absolute top-1 left-2'></div>
-                          <div className='w-1 h-1 bg-blue-800 rounded-full absolute top-3 right-2'></div>
-                          <div className='w-1.5 h-1.5 bg-blue-800 rounded-full absolute bottom-2 left-1'></div>
-                        </div>
-                      )}
-
-                      {index === 1 && (
-                        <div className='absolute inset-0 opacity-30'>
-                          <div className='w-full h-0.5 bg-blue-800 absolute top-2'></div>
-                          <div className='w-full h-0.5 bg-blue-800 absolute bottom-3'></div>
-                        </div>
-                      )}
-
-                      {index === 2 && service.id === 3 && (
-                        <div className='absolute -inset-1'>
-                          <div
-                            className='w-12 h-1 border border-blue-800 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50'
-                            style={{
-                              transform: "translateX(-50%) translateY(-50%) rotateX(75deg)",
-                            }}
-                          ></div>
-                        </div>
-                      )}
-
                       <Icon
                         size={16}
                         style={{ color: "white" }}
@@ -287,7 +236,7 @@ export default function RedesignedHeroSection() {
                         <div
                           className='px-3 py-1 rounded-full text-xs font-bold'
                           style={{
-                            backgroundColor: "#00B6E7",
+                            backgroundColor: service.color,
                             color: "white",
                             boxShadow: "2px 2px 0px rgba(0,0,0,0.2)",
                           }}
@@ -295,106 +244,24 @@ export default function RedesignedHeroSection() {
                           {service.name}
                         </div>
                       </motion.div>
-
-                      {/* Hover glow effect */}
-                      {hoveredService === service.id && (
-                        <motion.div
-                          className='absolute -inset-1 rounded-full'
-                          style={{
-                            background: "radial-gradient(circle, rgba(0, 182, 231, 0.3) 0%, transparent 70%)",
-                          }}
-                          animate={{
-                            scale: [1, 1.2, 1],
-                          }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            repeatType: "loop",
-                          }}
-                        />
-                      )}
                     </div>
                   </motion.div>
                 </motion.div>
               );
             })}
-
-            {/* Rocket/Comet */}
-            <motion.div
-              className='absolute top-1/2 left-1/2 z-10'
-              style={{ transformOrigin: "0 0" }}
-              animate={{
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear",
-                repeatType: "loop",
-              }}
-            >
-              <motion.div
-                className='absolute'
-                style={{
-                  left: "320px",
-                  top: "-15px",
-                }}
-                animate={{
-                  rotate: [0, -360],
-                }}
-                transition={{
-                  duration: 25,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatType: "loop",
-                }}
-              >
-                <svg
-                  width='30'
-                  height='30'
-                  viewBox='0 0 30 30'
-                >
-                  <path
-                    d='M15 5 L20 15 L15 25 L10 15 Z'
-                    fill='#00B6E7'
-                    stroke='#0084C7'
-                    strokeWidth='2'
-                  />
-                  <circle
-                    cx='15'
-                    cy='12'
-                    r='3'
-                    fill='white'
-                    stroke='#00B6E7'
-                    strokeWidth='1'
-                  />
-                  <path
-                    d='M10 15 L5 20 L10 20 Z'
-                    fill='#0084C7'
-                  />
-                  <path
-                    d='M20 15 L25 20 L20 20 Z'
-                    fill='#0084C7'
-                  />
-                  <motion.path
-                    d='M15 25 L12 30 L15 28 L18 30 Z'
-                    fill='#00B6E7'
-                    opacity='0.7'
-                    animate={{
-                      d: ["M15 25 L12 30 L15 28 L18 30 Z", "M15 25 L11 32 L15 29 L19 32 Z", "M15 25 L12 30 L15 28 L18 30 Z"],
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                    }}
-                  />
-                </svg>
-              </motion.div>
-            </motion.div>
           </div>
         </motion.div>
       </div>
     </section>
   );
+}
+
+// Helper function to darken colors
+function darkenColor(color, percent) {
+  const num = parseInt(color.replace("#", ""), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = (num >> 16) - amt;
+  const G = ((num >> 8) & 0x00ff) - amt;
+  const B = (num & 0x0000ff) - amt;
+  return `#${(0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 + (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 + (B < 255 ? (B < 1 ? 0 : B) : 255)).toString(16).slice(1)}`;
 }

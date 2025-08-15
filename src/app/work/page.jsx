@@ -1,11 +1,12 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { ChevronDown, Filter, Grid } from "lucide-react";
 import { slugify, unslugify, slugifyList } from "@/lib/utils";
 import caseList from "@/data/caseList";
 import serviceList from "@/data/services";
-import { notFound } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 // Floating bubble component
 const FloatingBubble = ({ size, x, y, delay, duration }) => (
@@ -36,133 +37,176 @@ const FloatingBubble = ({ size, x, y, delay, duration }) => (
 );
 
 // Case Card Component
-const CaseCard = ({ caseStudy, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30, rotate: -2 }}
-    whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-    transition={{
-      delay: 0.1 + index * 0.1,
-      duration: 0.6,
-      type: "spring",
-      stiffness: 100,
-    }}
-    viewport={{ once: true, margin: "-50px" }}
-    whileHover={{
-      scale: 1.02,
-      rotate: index % 2 === 0 ? 1 : -1,
-      y: -8,
-    }}
-    className='relative group cursor-pointer'
-  >
-    <div
-      className='relative rounded-3xl border-4 overflow-hidden transform'
-      style={{
-        backgroundColor: "white",
-        borderColor: "#00B6E7",
-        boxShadow: "8px 8px 0px #00B6E7",
-      }}
-    >
-      <div className='aspect-video overflow-hidden'>
-        <img
-          src={caseStudy.image || caseStudy.mainImage}
-          alt={caseStudy.title}
-          className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
-        />
-      </div>
+const CaseCard = ({ caseStudy, index }) => {
+  // Determine image source with fallbacks
+  const imageSrc = caseStudy.image || caseStudy.mainImage || caseStudy.img;
+  const imageAlt = caseStudy.title || caseStudy.name || "Case study image";
+  const description = caseStudy.shortDescription || "";
 
-      <div className='p-6'>
-        <h3
-          className='text-xl font-black mb-2'
-          style={{ color: "#1E1E1E" }}
-        >
-          {caseStudy.title}
-        </h3>
-        <p
-          className='text-sm font-medium mb-3'
-          style={{ color: "#828282" }}
-        >
-          {caseStudy.description || caseStudy.shortDesc}
-        </p>
-        <div className='flex flex-wrap gap-2'>
-          {caseStudy.category.map((cat, i) => (
-            <span
-              key={i}
-              className='px-3 py-1 rounded-full text-xs font-bold border-2'
-              style={{
-                backgroundColor: "rgba(0, 182, 231, 0.1)",
-                borderColor: "#00B6E7",
-                color: "#00B6E7",
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, rotate: -2 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      transition={{
+        delay: 0.1 + index * 0.1,
+        duration: 0.6,
+        type: "spring",
+        stiffness: 100,
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{
+        scale: 1.02,
+        rotate: index % 2 === 0 ? 1 : -1,
+        y: -8,
+      }}
+      className='relative group cursor-pointer'
+    >
+      <div
+        className='relative rounded-3xl border-4 overflow-hidden transform'
+        style={{
+          backgroundColor: "white",
+          borderColor: "#00B6E7",
+          boxShadow: "8px 8px 0px #00B6E7",
+        }}
+      >
+        <div className='aspect-video overflow-hidden relative'>
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              className='object-cover transition-transform duration-500 group-hover:scale-105'
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              onError={(e) => {
+                // Fallback to a default image if the original fails to load
+                e.target.src = "/default-case-image.jpg";
               }}
-            >
-              {cat}
-            </span>
-          ))}
+            />
+          ) : (
+            <div className='w-full h-full bg-gray-200 flex items-center justify-center'>
+              <span className='text-gray-500'>No image available</span>
+            </div>
+          )}
+        </div>
+
+        <div className='p-6'>
+          <h3
+            className='text-xl font-black mb-2'
+            style={{ color: "#1E1E1E" }}
+          >
+            {caseStudy.title || caseStudy.name}
+          </h3>
+          <p
+            className='text-sm font-medium mb-3'
+            style={{ color: "#828282" }}
+          >
+            {description}
+          </p>
+          {/* {caseStudy.category && (
+            <div className='flex flex-wrap gap-2'>
+              {caseStudy.category.map((cat, i) => (
+                <span
+                  key={i}
+                  className='px-3 py-1 rounded-full text-xs font-bold border-2'
+                  style={{
+                    backgroundColor: "rgba(0, 182, 231, 0.1)",
+                    borderColor: "#00B6E7",
+                    color: "#00B6E7",
+                  }}
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+          )} */}
         </div>
       </div>
-    </div>
 
-    {/* Floating sparkle */}
-    <motion.div
-      className='absolute -top-2 -right-2 w-6 h-6 rounded-full'
-      style={{ backgroundColor: "#00B6E7" }}
-      animate={{
-        scale: [0, 1, 0],
-        rotate: [0, 180, 360],
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        delay: index * 0.3,
-      }}
-    />
-  </motion.div>
-);
-
-// Category Navigation
-const CategoryNavigation = ({ services, activeCategory, onCategoryChange }) => (
-  <div className='hidden md:flex w-full justify-center mt-8 mb-12'>
-    <div
-      className='flex items-center gap-3 p-2 rounded-3xl border-4'
-      style={{
-        backgroundColor: "white",
-        borderColor: "#00B6E7",
-        boxShadow: "4px 4px 0px #00B6E7",
-      }}
-    >
-      <motion.button
-        onClick={() => onCategoryChange("All")}
-        className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 ${activeCategory === "All" ? "text-white" : "hover:bg-blue-50"}`}
-        style={{
-          backgroundColor: activeCategory === "All" ? "#00B6E7" : "transparent",
-          color: activeCategory === "All" ? "white" : "#1E1E1E",
+      {/* Floating sparkle */}
+      <motion.div
+        className='absolute -top-2 -right-2 w-6 h-6 rounded-full'
+        style={{ backgroundColor: "#00B6E7" }}
+        animate={{
+          scale: [0, 1, 0],
+          rotate: [0, 180, 360],
         }}
-        whileHover={{ scale: 0.96 }}
-        whileTap={{ scale: 0.94 }}
-      >
-        All
-      </motion.button>
-      {services.map((service, i) => (
-        <motion.button
-          key={i}
-          onClick={() => onCategoryChange(service)}
-          className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 ${activeCategory === service ? "text-white" : "hover:bg-blue-50"}`}
-          style={{
-            backgroundColor: activeCategory === service ? "#00B6E7" : "transparent",
-            color: activeCategory === service ? "white" : "#1E1E1E",
-          }}
-          whileHover={{ scale: 0.96 }}
-          whileTap={{ scale: 0.94 }}
-        >
-          {service}
-        </motion.button>
-      ))}
-    </div>
-  </div>
-);
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          delay: index * 0.3,
+        }}
+      />
+    </motion.div>
+  );
+};
 
-// Mobile Dropdown
-const MobileDropdown = ({ services, activeCategory, onCategoryChange }) => {
+const CategoryNavigation = ({ services, activeCategory, setActiveCategory }) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const serviceClass = "px-3 sm:px-4 py-2 mx-1 sm:mx-2 font-medium xl:mx-2 duration-300 whitespace-nowrap text-sm sm:text-base";
+  const activeServiceClass = "bg-[#00B6E7] text-white rounded-xl sm:rounded-2xl border-2 border-neutral-100";
+
+  const handleCategoryChange = (category) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", slugify(category));
+    window.history.pushState({}, "", `${pathname}?${params.toString()}`);
+    setActiveCategory(category);
+  };
+
+  return (
+    <div className='hidden md:flex w-full justify-center mt-8 mb-12'>
+      <div
+        className='flex items-center gap-3 p-2 rounded-3xl border-4'
+        style={{
+          backgroundColor: "white",
+          borderColor: "#00B6E7",
+          boxShadow: "4px 4px 0px #00B6E7",
+        }}
+      >
+        <button
+          onClick={() => handleCategoryChange("All")}
+          className={`${serviceClass} ${activeCategory === "All" ? `${activeServiceClass}` : "text-[#1E1E1E] hover:text-[#00B6E7]"}`}
+        >
+          <motion.div
+            whileHover={{ scale: 0.96 }}
+            whileTap={{ scale: 0.94 }}
+          >
+            All
+          </motion.div>
+        </button>
+        {services.map((service, i) => (
+          <button
+            key={i}
+            onClick={() => handleCategoryChange(service)}
+            className={`${serviceClass} ${activeCategory === service ? `${activeServiceClass}` : "text-[#1E1E1E] hover:text-[#00B6E7]"}`}
+          >
+            <motion.div
+              whileHover={{ scale: 0.96 }}
+              whileTap={{ scale: 0.94 }}
+            >
+              {service}
+            </motion.div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Updated Mobile Dropdown
+const MobileDropdown = ({ services, activeCategory, setActiveCategory }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const handleCategoryChange = (category) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", slugify(category));
+    window.history.pushState({}, "", `${pathname}?${params.toString()}`);
+    setActiveCategory(category);
+    setIsOpen(false);
+  };
 
   return (
     <div className='md:hidden relative mb-8'>
@@ -201,30 +245,22 @@ const MobileDropdown = ({ services, activeCategory, onCategoryChange }) => {
             boxShadow: "4px 4px 0px #00B6E7",
           }}
         >
-          <motion.button
-            onClick={() => {
-              onCategoryChange("All");
-              setIsOpen(false);
-            }}
+          <button
+            onClick={() => handleCategoryChange("All")}
             className='w-full px-6 py-3 text-left font-medium hover:bg-blue-50 transition-colors'
             style={{ color: "#1E1E1E" }}
-            whileHover={{ x: 4 }}
           >
-            All
-          </motion.button>
+            <motion.div whileHover={{ x: 4 }}>All</motion.div>
+          </button>
           {services.map((service, i) => (
-            <motion.button
+            <button
               key={i}
-              onClick={() => {
-                onCategoryChange(service);
-                setIsOpen(false);
-              }}
+              onClick={() => handleCategoryChange(service)}
               className='w-full px-6 py-3 text-left font-medium hover:bg-blue-50 transition-colors'
               style={{ color: "#1E1E1E" }}
-              whileHover={{ x: 4 }}
             >
-              {service}
-            </motion.button>
+              <motion.div whileHover={{ x: 4 }}>{service}</motion.div>
+            </button>
           ))}
         </motion.div>
       )}
@@ -232,21 +268,30 @@ const MobileDropdown = ({ services, activeCategory, onCategoryChange }) => {
   );
 };
 
-// Main Component
+// Updated Main Component
 export default function WorkShowcase() {
-  const containerRef = useRef(null);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [viewMode, setViewMode] = useState("grid");
+  const [filteredCases, setFilteredCases] = useState(caseList);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  // Initialize category from URL on first load
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) {
+      const categoryFromUrl = unslugify(categoryParam);
+      if (serviceList.includes(categoryFromUrl)) {
+        setActiveCategory(categoryFromUrl);
+        setFilteredCases(caseList.filter((caseStudy) => caseStudy.category.includes(categoryFromUrl)));
+      }
+    }
+  }, [searchParams]);
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-  // Filter cases based on active category
-  const filteredCases = activeCategory === "All" ? caseList : caseList.filter((caseStudy) => caseStudy.category.includes(activeCategory));
+  // Filter cases whenever activeCategory changes
+  useEffect(() => {
+    const newFilteredCases = activeCategory === "All" ? caseList : caseList.filter((caseStudy) => caseStudy.category.includes(activeCategory));
+    setFilteredCases(newFilteredCases);
+  }, [activeCategory]);
 
   // Generate floating bubbles
   const bubbles = Array.from({ length: 8 }, (_, i) => ({
@@ -259,69 +304,9 @@ export default function WorkShowcase() {
   }));
 
   return (
-    <section
-      ref={containerRef}
-      className='relative min-h-screen py-16 overflow-hidden'
-      style={{ backgroundColor: "#F2F2F2" }}
-    >
-      {/* Animated Background */}
-      <div className='absolute inset-0'>
-        <svg
-          className='absolute inset-0 w-full h-full'
-          viewBox='0 0 1200 800'
-          preserveAspectRatio='xMidYMid slice'
-        >
-          <defs>
-            <pattern
-              id='work-dots'
-              x='0'
-              y='0'
-              width='60'
-              height='60'
-              patternUnits='userSpaceOnUse'
-            >
-              <circle
-                cx='30'
-                cy='30'
-                r='2'
-                fill='#00B6E7'
-                opacity='0.1'
-              />
-            </pattern>
-          </defs>
-
-          <rect
-            width='100%'
-            height='100%'
-            fill='url(#work-dots)'
-          />
-
-          {/* Animated doodle paths */}
-          <motion.path
-            d='M100,300 Q300,200 500,300 T900,300'
-            stroke='#00B6E7'
-            strokeWidth='2'
-            fill='none'
-            strokeLinecap='round'
-            strokeDasharray='12,6'
-            opacity='0.2'
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-          />
-        </svg>
-
-        {/* Floating bubbles */}
-        {bubbles.map((bubble) => (
-          <FloatingBubble
-            key={bubble.id}
-            {...bubble}
-          />
-        ))}
-      </div>
-
+    <section className='relative min-h-screen py-16 overflow-hidden bg-[#F2F2F2]'>
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* Header Section */}
+        {/* Header Section (unchanged) */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -410,18 +395,17 @@ export default function WorkShowcase() {
             />
           </svg>
         </motion.div>
-
-        {/* Filter Navigation */}
+        {/* Updated Filter Navigation */}
         <CategoryNavigation
           services={serviceList}
           activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
+          setActiveCategory={setActiveCategory}
         />
 
         <MobileDropdown
           services={serviceList}
           activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
+          setActiveCategory={setActiveCategory}
         />
 
         {/* Cases Grid */}
@@ -468,57 +452,15 @@ export default function WorkShowcase() {
             </div>
           </motion.div>
         )}
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-center mt-20'
-        >
-          <div className='relative inline-block'>
-            <motion.div
-              className='relative px-8 py-4 rounded-3xl border-4'
-              style={{
-                backgroundColor: "white",
-                borderColor: "#00B6E7",
-                boxShadow: "6px 6px 0px #00B6E7",
-              }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-            >
-              <p
-                className='font-medium'
-                style={{ color: "#1E1E1E" }}
-              >
-                Love what you see? <span style={{ color: "#00B6E7", fontWeight: "600" }}>Let's create your story!</span>
-              </p>
-            </motion.div>
-
-            {/* Floating sparkles */}
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className='absolute w-3 h-3 rounded-full'
-                style={{
-                  backgroundColor: "#00B6E7",
-                  left: `${20 + i * 30}%`,
-                  top: `${-5 + (i % 2) * 10}%`,
-                }}
-                animate={{
-                  scale: [0, 1, 0],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                }}
-              />
-            ))}
-          </div>
-        </motion.div>
       </div>
+
+      {/* Floating bubbles */}
+      {bubbles.map((bubble) => (
+        <FloatingBubble
+          key={bubble.id}
+          {...bubble}
+        />
+      ))}
     </section>
   );
 }

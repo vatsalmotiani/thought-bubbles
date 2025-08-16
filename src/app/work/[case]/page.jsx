@@ -7,6 +7,7 @@ import { findCase } from "@/data/caseList";
 import { Paragraph } from "./Info";
 import Reveal from "@/components/Reveal";
 import { notFound } from "next/navigation";
+import { NextCase } from "./NextCase";
 
 export default function CasePage({ params }) {
   const unwrappedParams = use(params);
@@ -97,7 +98,7 @@ export default function CasePage({ params }) {
         </motion.div>
       </>
 
-      {/* <NextCase name={caseFound.name} /> */}
+      <NextCase name={caseFound.name} />
     </div>
   );
 }

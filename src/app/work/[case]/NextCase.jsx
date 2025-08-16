@@ -1,6 +1,6 @@
 // TODO: Random Case Logic
 
-import CaseCard from "@/components/CaseCard";
+import { CaseCard } from "@/components/CaseCard";
 import caseList from "@/data/caseList";
 
 export function NextCase({ name }) {

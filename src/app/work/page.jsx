@@ -8,6 +8,7 @@ import serviceList from "@/data/services";
 import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import CaseStudyDisplay from "@/components/CaseCard";
 
 // Floating bubble component
 const FloatingBubble = ({ size, x, y, delay, duration }) => (
@@ -36,93 +37,6 @@ const FloatingBubble = ({ size, x, y, delay, duration }) => (
     }}
   />
 );
-
-// Case Card Component
-const CaseCard = ({ caseStudy, index }) => {
-  // Determine image source with fallbacks
-  const imageSrc = caseStudy.image || caseStudy.mainImage || caseStudy.img;
-  const imageAlt = caseStudy.title || caseStudy.name || "Case study image";
-  const description = caseStudy.shortDescription || "";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30, rotate: -2 }}
-      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-      transition={{
-        delay: 0.1 + index * 0.1,
-        duration: 0.6,
-        type: "spring",
-        stiffness: 100,
-      }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{
-        scale: 1.02,
-        rotate: index % 2 === 0 ? 1 : -1,
-        y: -8,
-      }}
-      className='relative group cursor-pointer'
-    >
-      <div
-        className='relative rounded-3xl border-4 overflow-hidden transform'
-        style={{
-          backgroundColor: "white",
-          borderColor: "#00B6E7",
-          boxShadow: "8px 8px 0px #00B6E7",
-        }}
-      >
-        <div className='aspect-video overflow-hidden relative'>
-          {imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              className='object-cover transition-transform duration-500 group-hover:scale-105'
-              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-              onError={(e) => {
-                // Fallback to a default image if the original fails to load
-                e.target.src = "/default-case-image.jpg";
-              }}
-            />
-          ) : (
-            <div className='w-full h-full bg-gray-200 flex items-center justify-center'>
-              <span className='text-gray-500'>No image available</span>
-            </div>
-          )}
-        </div>
-
-        <div className='p-6'>
-          <h3
-            className='text-xl font-black mb-2'
-            style={{ color: "#1E1E1E" }}
-          >
-            {caseStudy.title || caseStudy.name}
-          </h3>
-          <p
-            className='text-sm font-medium mb-3'
-            style={{ color: "#828282" }}
-          >
-            {description}
-          </p>
-        </div>
-      </div>
-
-      {/* Floating sparkle */}
-      <motion.div
-        className='absolute -top-2 -right-2 w-6 h-6 rounded-full'
-        style={{ backgroundColor: "#00B6E7" }}
-        animate={{
-          scale: [0, 1, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          delay: index * 0.3,
-        }}
-      />
-    </motion.div>
-  );
-};
 
 const CategoryNavigation = ({ services, activeCategory, setActiveCategory }) => {
   const searchParams = useSearchParams();
@@ -324,7 +238,7 @@ export default function WorkShowcase() {
 
           {/* Main heading */}
           <motion.h1
-            className='text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-6'
+            className='text-5xl md:text-6xl lg:text-7xl font-oswald uppercase font-black leading-tight mb-6'
             style={{
               color: "#1E1E1E",
               fontFamily: "Oswald, sans-serif",
@@ -394,22 +308,10 @@ export default function WorkShowcase() {
         />
 
         {/* Cases Grid */}
-        <motion.div
-          className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10'
-          layout
-        >
-          {filteredCases.map((caseStudy, index) => (
-            <Link
-              key={caseStudy.id}
-              href={`/work/${slugify(caseStudy.name)}`}
-            >
-              <CaseCard
-                caseStudy={caseStudy}
-                index={index}
-              />
-            </Link>
-          ))}
-        </motion.div>
+        <CaseStudyDisplay
+          caseStudies={filteredCases}
+          withAnimation={true}
+        />
 
         {/* Empty state */}
         {filteredCases.length === 0 && (

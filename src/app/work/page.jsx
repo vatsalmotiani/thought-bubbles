@@ -7,6 +7,7 @@ import caseList from "@/data/caseList";
 import serviceList from "@/data/services";
 import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 // Floating bubble component
 const FloatingBubble = ({ size, x, y, delay, duration }) => (
@@ -414,11 +415,15 @@ export default function WorkShowcase() {
           layout
         >
           {filteredCases.map((caseStudy, index) => (
-            <CaseCard
+            <Link
               key={caseStudy.id}
-              caseStudy={caseStudy}
-              index={index}
-            />
+              href={`/work/${slugify(caseStudy.name)}`}
+            >
+              <CaseCard
+                caseStudy={caseStudy}
+                index={index}
+              />
+            </Link>
           ))}
         </motion.div>
 

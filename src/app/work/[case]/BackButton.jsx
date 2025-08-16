@@ -5,7 +5,7 @@ import Link from "next/link";
 export function BackButton() {
   return (
     <Link
-      href='/work/all'
+      href='/work'
       className='text-neutral-400 hover:text-neutral-500 duration-300 flex'
     >
       <ArrowLeft className='pe-2' />

@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Award, Users, Target, Zap, Star, TrendingUp, Heart, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutPage() {
   const containerRef = useRef(null);
@@ -309,10 +310,13 @@ export default function AboutPage() {
                   boxShadow: "6px 6px 0px #00B6E7",
                 }}
               >
-                <span className='flex items-center gap-3'>
+                <Link
+                  href={"/work"}
+                  className='flex items-center gap-3'
+                >
                   View Our Work
                   <ArrowRight size={24} />
-                </span>
+                </Link>
               </button>
             </div>
           </div>

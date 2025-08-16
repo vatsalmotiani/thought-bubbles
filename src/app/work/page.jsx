@@ -103,23 +103,6 @@ const CaseCard = ({ caseStudy, index }) => {
           >
             {description}
           </p>
-          {/* {caseStudy.category && (
-            <div className='flex flex-wrap gap-2'>
-              {caseStudy.category.map((cat, i) => (
-                <span
-                  key={i}
-                  className='px-3 py-1 rounded-full text-xs font-bold border-2'
-                  style={{
-                    backgroundColor: "rgba(0, 182, 231, 0.1)",
-                    borderColor: "#00B6E7",
-                    color: "#00B6E7",
-                  }}
-                >
-                  {cat}
-                </span>
-              ))}
-            </div>
-          )} */}
         </div>
       </div>
 
@@ -305,9 +288,10 @@ export default function WorkShowcase() {
   }));
 
   return (
-    <section className='relative min-h-screen py-16 overflow-hidden bg-[#F2F2F2]'>
+    <section className='relative min-h-screen py-16 overflow-hidden'>
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* Header Section (unchanged) */}
+        {/* Header Section */}
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

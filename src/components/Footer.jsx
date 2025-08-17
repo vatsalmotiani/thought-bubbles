@@ -27,7 +27,7 @@ export default function Footer() {
     <footer className='relative overflow-hidden bg-transparent'>
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
         {/* Main Footer Content */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16'>
           {/* Logo and Description */}
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: -2 }}
@@ -165,59 +165,6 @@ export default function Footer() {
                       onMouseLeave={(e) => (e.target.style.color = "#828282")}
                     >
                       {link.name}
-                    </span>
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, rotate: -1 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
-            viewport={{ once: true }}
-          >
-            <h3
-              className='text-2xl font-oswald font-black mb-6'
-              style={{
-                color: "#1E1E1E",
-                textShadow: "2px 2px 0px rgba(0, 182, 231, 0.2)",
-              }}
-            >
-              Our Services
-            </h3>
-            <ul className='space-y-4'>
-              {services.map((service, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20, rotate: 2 }}
-                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1 + index * 0.1,
-                    type: "spring",
-                    stiffness: 200,
-                  }}
-                  viewport={{ once: true }}
-                >
-                  <Link
-                    href={service.url}
-                    className='flex items-center group'
-                  >
-                    <motion.span
-                      className='w-3 h-3 rounded-full mr-3 transition-all duration-300'
-                      style={{ backgroundColor: "#00B6E7" }}
-                      whileHover={{ scale: 1.5, rotate: 180 }}
-                    />
-                    <span
-                      className='font-poppins transition-colors duration-300 group-hover:font-semibold'
-                      style={{ color: "#828282" }}
-                      onMouseEnter={(e) => (e.target.style.color = "#00B6E7")}
-                      onMouseLeave={(e) => (e.target.style.color = "#828282")}
-                    >
-                      {service.name}
                     </span>
                   </Link>
                 </motion.li>

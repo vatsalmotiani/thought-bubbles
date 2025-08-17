@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -23,33 +23,132 @@ const iconMap = {
 export default function RedesignedHeroSection() {
   const containerRef = useRef(null);
   const [hoveredService, setHoveredService] = useState(null);
+  const [autoHighlightedService, setAutoHighlightedService] = useState(null);
+  const [isUserHovering, setIsUserHovering] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const autoHighlightIntervalRef = useRef(null);
   const router = useRouter();
 
-  // Create services data from your servicesWithIcons
-  const services = servicesWithIcons.map((service, index) => {
-    const baseDistance = 120;
-    const distanceIncrement = 40;
+  // Desktop orbits - bigger and more spaced out like Figma
+  const desktopOrbits = [
+    { rx: 160, ry: 100 }, // First orbit - only 1 service
+    { rx: 220, ry: 140 }, // Second orbit
+    { rx: 280, ry: 180 }, // Third orbit
+    { rx: 340, ry: 220 }, // Fourth orbit
+  ];
 
-    return {
-      id: index + 1,
-      name: service.name,
-      icon: service.icon,
-      color: service.color,
-      distance: baseDistance + index * distanceIncrement,
-      speed: 20 + index * 3,
-      size: 45 + index * 2,
-      url: `/work?category=${slugify(service.name)}`,
+  // Mobile orbits - vertical ellipses for better space usage
+  const mobileOrbits = [
+    { rx: 80, ry: 120 }, // Vertical ellipse
+    { rx: 110, ry: 160 }, // Vertical ellipse
+    { rx: 140, ry: 200 }, // Vertical ellipse
+    { rx: 170, ry: 240 }, // Vertical ellipse
+  ];
+
+  // Distribute services across orbits with first orbit having only 1 service
+  const distributeServices = () => {
+    const distributed = [];
+    let serviceIndex = 0;
+
+    // First orbit: 1 service
+    if (serviceIndex < servicesWithIcons.length) {
+      distributed.push({
+        ...servicesWithIcons[serviceIndex],
+        id: serviceIndex + 1,
+        orbitIndex: 0,
+        startAngle: 0,
+      });
+      serviceIndex++;
+    }
+
+    // Remaining orbits: distribute evenly
+    const remainingServices = servicesWithIcons.length - 1;
+    const servicesPerOrbit = Math.ceil(remainingServices / 3);
+
+    for (let orbit = 1; orbit <= 3; orbit++) {
+      for (let i = 0; i < servicesPerOrbit && serviceIndex < servicesWithIcons.length; i++) {
+        const service = servicesWithIcons[serviceIndex];
+        const servicesInThisOrbit = Math.min(servicesPerOrbit, servicesWithIcons.length - serviceIndex);
+        const angleStep = 360 / servicesInThisOrbit;
+
+        distributed.push({
+          ...service,
+          id: serviceIndex + 1,
+          orbitIndex: orbit,
+          startAngle: i * angleStep,
+        });
+        serviceIndex++;
+      }
+    }
+
+    return distributed;
+  };
+
+  const services = distributeServices().map((service) => ({
+    ...service,
+    speed: 30 + service.orbitIndex * 8, // Different speeds for each orbit
+    url: `/work?category=${slugify(service.name)}`,
+  }));
+
+  // Auto-highlight effect
+  useEffect(() => {
+    setMounted(true);
+
+    const startAutoHighlight = () => {
+      if (services.length === 0) return;
+
+      let currentIndex = 0;
+      setAutoHighlightedService(services[currentIndex].id);
+
+      autoHighlightIntervalRef.current = setInterval(() => {
+        if (!isUserHovering) {
+          currentIndex = (currentIndex + 1) % services.length;
+          setAutoHighlightedService(services[currentIndex].id);
+        }
+      }, 3000);
     };
-  });
 
-  // Helper function to generate colors
-  function getServiceColor(index) {
-    const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#F7DC6F", "#BB8FCE", "#F8C471", "#A2D9CE"];
-    return colors[index % colors.length];
-  }
+    const timeoutId = setTimeout(startAutoHighlight, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (autoHighlightIntervalRef.current) {
+        clearInterval(autoHighlightIntervalRef.current);
+      }
+    };
+  }, [services.length]);
+
+  // Stop auto-highlight when user hovers
+  useEffect(() => {
+    if (isUserHovering) {
+      if (autoHighlightIntervalRef.current) {
+        clearInterval(autoHighlightIntervalRef.current);
+      }
+    } else {
+      if (mounted && services.length > 0) {
+        const currentIndex = services.findIndex((s) => s.id === autoHighlightedService);
+        let nextIndex = currentIndex >= 0 ? (currentIndex + 1) % services.length : 0;
+
+        autoHighlightIntervalRef.current = setInterval(() => {
+          setAutoHighlightedService(services[nextIndex].id);
+          nextIndex = (nextIndex + 1) % services.length;
+        }, 3000);
+      }
+    }
+  }, [isUserHovering, mounted, services.length, autoHighlightedService]);
 
   const handleServiceClick = (url) => {
     router.push(url);
+  };
+
+  const handleMouseEnter = (serviceId) => {
+    setIsUserHovering(true);
+    setHoveredService(serviceId);
+  };
+
+  const handleMouseLeave = () => {
+    setIsUserHovering(false);
+    setHoveredService(null);
   };
 
   return (
@@ -57,45 +156,50 @@ export default function RedesignedHeroSection() {
       ref={containerRef}
       className='relative min-h-screen flex items-center overflow-hidden bg-transparent'
     >
-      {/* Background Service Text */}
+      {/* Background Service Text - Positioned in upper third */}
       <motion.div
         className='absolute top-0 left-0 w-full h-1/3 flex items-center justify-center pointer-events-none z-5 overflow-hidden'
         initial={{ opacity: 0 }}
         animate={{
-          opacity: hoveredService ? 0.1 : 0,
+          opacity: hoveredService || autoHighlightedService ? 0.1 : 0,
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        {hoveredService && (
+        {(hoveredService || autoHighlightedService) && (
           <motion.div
-            key={hoveredService}
-            className='text-tb-black text-3xl sm:text-4xl md:text-[6rem] lg:text-[6rem] xl:text-[12rem] font-black select-none whitespace-nowrap'
+            key={hoveredService || autoHighlightedService}
+            className='text-tb-black text-[6vw] sm:text-[7vw] md:text-[8vw] lg:text-[6rem] xl:text-[8rem] font-black select-none whitespace-nowrap text-center'
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
+            style={{
+              maxWidth: "90vw",
+              wordBreak: "keep-all",
+              overflow: "hidden",
+            }}
           >
-            {services.find((s) => s.id === hoveredService)?.name.toUpperCase()}
+            {services.find((s) => s.id === (hoveredService || autoHighlightedService))?.name.toUpperCase()}
           </motion.div>
         )}
       </motion.div>
 
-      {/* Desktop Layout */}
-      <div className='hidden lg:flex relative z-10 w-full h-full'>
+      {/* Desktop Layout - Bigger and More Spaced */}
+      <div className='hidden md:flex relative z-10 w-full h-full'>
         <motion.div
-          className='w-[100%] flex items-center justify-center relative'
+          className='w-full flex items-center justify-center relative'
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <div className='relative w-[500px] h-[500px]'>
-            {/* Background Stars */}
+          <div className='relative w-[800px] h-[600px] lg:w-[900px] lg:h-[700px] xl:w-[1000px] xl:h-[800px]'>
+            {/* Background Stars - Repositioned for bigger layout */}
             {[
-              { x: 50, y: 80, size: 16, delay: 0 },
-              { x: 400, y: 120, size: 12, delay: 1 },
-              { x: 100, y: 400, size: 14, delay: 2 },
-              { x: 450, y: 350, size: 10, delay: 0.5 },
-              { x: 300, y: 50, size: 18, delay: 1.5 },
+              { x: 80, y: 100, size: 16, delay: 0 },
+              { x: 720, y: 120, size: 12, delay: 1 },
+              { x: 100, y: 500, size: 14, delay: 2 },
+              { x: 750, y: 480, size: 10, delay: 0.5 },
+              { x: 450, y: 60, size: 18, delay: 1.5 },
             ].map((star, index) => (
               <motion.div
                 key={`star-${index}`}
@@ -127,9 +231,9 @@ export default function RedesignedHeroSection() {
               </motion.div>
             ))}
 
-            {/* Central Company Logo */}
+            {/* Central Company Logo - Perfectly Centered like the Sun */}
             <motion.div
-              className='absolute top-[35%] left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20'
+              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20'
               animate={{
                 scale: [1, 1.05, 1],
               }}
@@ -144,112 +248,386 @@ export default function RedesignedHeroSection() {
                 src='/tb-logo.svg'
                 width={200}
                 height={200}
-                className='h-auto'
+                className='w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] xl:w-[240px] xl:h-[240px]'
                 alt='Thought Bubbles Logo'
               />
             </motion.div>
 
-            {/* Orbital Rings */}
-            {[150, 225, 300, 375].map((radius, index) => (
+            {/* Desktop Elliptical Orbital Rings */}
+            {desktopOrbits.map((orbit, index) => (
               <motion.div
                 key={`ring-${index}`}
-                className='absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed rounded-full opacity-30'
+                className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-30'
                 style={{
-                  width: `${radius * 2}px`,
-                  height: `${radius * 2}px`,
+                  width: `${orbit.rx * 2}px`,
+                  height: `${orbit.ry * 2}px`,
                   borderColor: "#1E1E1E",
+                  borderRadius: "50%",
                 }}
               />
             ))}
 
-            {/* Service Planets */}
+            {/* Desktop Service Planets - Dead on the dotted paths */}
             {services.map((service, index) => {
               const Icon = service.icon;
-              const orbitalRadius = service.distance;
-              const orbitDuration = service.speed;
+              const isAutoHighlighted = autoHighlightedService === service.id && !hoveredService;
+              const orbit = desktopOrbits[service.orbitIndex];
+
+              // Create precise elliptical keyframes
+              const createEllipticalKeyframes = () => {
+                const keyframes = [];
+                for (let i = 0; i <= 360; i += 10) {
+                  const angle = ((i + service.startAngle) * Math.PI) / 180;
+                  const x = orbit.rx * Math.cos(angle);
+                  const y = orbit.ry * Math.sin(angle);
+                  keyframes.push({ x, y });
+                }
+                return keyframes;
+              };
 
               return (
                 <motion.div
                   key={service.id}
                   className='absolute top-1/2 left-1/2 cursor-pointer z-10'
                   style={{
-                    transformOrigin: "0 0",
+                    width: "44px",
+                    height: "44px",
+                    transform: "translate(-22px, -22px)",
                   }}
                   animate={{
-                    rotate: [0, 360],
+                    x: createEllipticalKeyframes().map((k) => k.x),
+                    y: createEllipticalKeyframes().map((k) => k.y),
                   }}
                   transition={{
-                    duration: orbitDuration,
+                    duration: service.speed,
                     repeat: Infinity,
                     ease: "linear",
                     repeatType: "loop",
                   }}
-                  onHoverStart={() => setHoveredService(service.id)}
-                  onHoverEnd={() => setHoveredService(null)}
+                  onMouseEnter={() => handleMouseEnter(service.id)}
+                  onMouseLeave={handleMouseLeave}
                   onClick={() => handleServiceClick(service.url)}
                 >
                   <motion.div
-                    className='absolute'
-                    style={{
-                      left: `${orbitalRadius}px`,
-                      top: "-20px",
-                      width: "40px",
-                      height: "40px",
-                    }}
+                    className='flex items-center justify-center w-full h-full'
                     whileHover={{ scale: 1.3 }}
                     animate={{
-                      rotate: [0, -360],
+                      scale: isAutoHighlighted ? [1, 1.15, 1] : 1,
                     }}
                     transition={{
-                      rotate: {
-                        duration: orbitDuration,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop",
-                      },
-                      scale: { duration: 0.3 },
+                      scale: isAutoHighlighted
+                        ? {
+                            duration: 2,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "easeInOut",
+                          }
+                        : { duration: 0.3 },
                     }}
                   >
                     <div
-                      className='w-10 h-10 rounded-full border-3 flex items-center justify-center relative overflow-hidden'
+                      className='w-11 h-11 rounded-full border-3 flex items-center justify-center relative overflow-visible'
                       style={{
                         backgroundColor: service.color,
                         borderColor: darkenColor(service.color, 20),
-                        boxShadow: hoveredService === service.id ? `0 0 15px ${service.color}` : "2px 2px 0px rgba(0,0,0,0.2)",
+                        boxShadow: hoveredService === service.id ? `0 0 15px ${service.color}` : isAutoHighlighted ? `0 0 10px ${service.color}` : "2px 2px 0px rgba(0,0,0,0.2)",
                       }}
                     >
                       <Icon
-                        size={16}
+                        size={18}
                         style={{ color: "white" }}
                       />
 
-                      {/* Tooltip */}
-                      <motion.div
-                        className='absolute -bottom-10 left-1/2 transform -translate-x-1/2 whitespace-nowrap z-30'
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{
-                          opacity: hoveredService === service.id ? 1 : 0,
-                          y: hoveredService === service.id ? 0 : -10,
-                        }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div
-                          className='px-3 py-1 rounded-full text-xs font-bold'
+                      {/* Auto-highlight ring effect */}
+                      {isAutoHighlighted && !hoveredService && (
+                        <>
+                          <motion.div
+                            className='absolute inset-0 rounded-full pointer-events-none'
+                            style={{
+                              boxShadow: "0 0 20px #87CEEB, 0 0 30px #87CEEB, 0 0 40px #87CEEB",
+                            }}
+                            animate={{
+                              opacity: [0, 0.8, 0],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+                          <motion.div
+                            className='absolute inset-0 rounded-full border-2 pointer-events-none'
+                            style={{
+                              borderColor: "#87CEEB",
+                            }}
+                            animate={{
+                              scale: [1, 2],
+                              opacity: [0.8, 0],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeOut",
+                            }}
+                          />
+                        </>
+                      )}
+
+                      {/* Tooltip - Only show on manual hover */}
+                      {hoveredService === service.id && (
+                        <motion.div
+                          className='absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap z-50 pointer-events-none'
                           style={{
-                            backgroundColor: service.color,
-                            color: "white",
-                            boxShadow: "2px 2px 0px rgba(0,0,0,0.2)",
+                            bottom: service.orbitIndex >= 2 ? "50px" : "-40px",
+                            top: service.orbitIndex < 2 ? "50px" : "auto",
                           }}
+                          initial={{ opacity: 0, y: service.orbitIndex >= 2 ? 10 : -10 }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                          }}
+                          transition={{ duration: 0.2 }}
                         >
-                          {service.name}
-                        </div>
-                      </motion.div>
+                          <div
+                            className='px-3 py-1 rounded-full text-xs font-bold max-w-[120px] text-center'
+                            style={{
+                              backgroundColor: service.color,
+                              color: "white",
+                              boxShadow: "2px 2px 0px rgba(0,0,0,0.2)",
+                            }}
+                          >
+                            {service.name}
+                          </div>
+                        </motion.div>
+                      )}
                     </div>
                   </motion.div>
                 </motion.div>
               );
             })}
           </div>
+        </motion.div>
+      </div>
+
+      {/* Mobile Layout - Vertical Ellipses for Better Space Usage */}
+      <div className='flex md:hidden relative z-10 w-full h-full items-center justify-center px-4'>
+        <motion.div
+          className='relative w-[380px] h-[600px] sm:w-[420px] sm:h-[680px]'
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
+          {/* Mobile Background Stars */}
+          {[
+            { x: 50, y: 80, size: 12, delay: 0 },
+            { x: 320, y: 100, size: 10, delay: 1 },
+            { x: 60, y: 500, size: 11, delay: 2 },
+            { x: 330, y: 480, size: 9, delay: 0.5 },
+          ].map((star, index) => (
+            <motion.div
+              key={`mobile-star-${index}`}
+              className='absolute'
+              style={{ left: star.x, top: star.y }}
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 3 + star.delay,
+                repeat: Infinity,
+                delay: star.delay,
+                repeatType: "loop",
+              }}
+            >
+              <svg
+                width={star.size}
+                height={star.size}
+                viewBox='0 0 24 24'
+              >
+                <path
+                  d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'
+                  fill='#00B6E7'
+                  stroke='#0084C7'
+                  strokeWidth='1'
+                />
+              </svg>
+            </motion.div>
+          ))}
+
+          {/* Mobile Central Logo - Perfectly Centered */}
+          <motion.div
+            className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20'
+            animate={{
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              repeatType: "loop",
+            }}
+          >
+            <Image
+              src='/tb-logo.svg'
+              width={140}
+              height={140}
+              className='w-[140px] h-[140px] sm:w-[160px] sm:h-[160px]'
+              alt='Thought Bubbles Logo'
+            />
+          </motion.div>
+
+          {/* Mobile Orbital Rings - Vertical Ellipses */}
+          {mobileOrbits.map((orbit, index) => (
+            <motion.div
+              key={`mobile-ring-${index}`}
+              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-20'
+              style={{
+                width: `${orbit.rx * 2}px`,
+                height: `${orbit.ry * 2}px`,
+                borderColor: "#1E1E1E",
+                borderRadius: "50%",
+              }}
+            />
+          ))}
+
+          {/* Mobile Service Planets - Following Vertical Ellipses */}
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            const isAutoHighlighted = autoHighlightedService === service.id && !hoveredService;
+            const orbit = mobileOrbits[service.orbitIndex];
+
+            // Create mobile elliptical keyframes for vertical ellipses
+            const createMobileEllipticalKeyframes = () => {
+              const keyframes = [];
+              for (let i = 0; i <= 360; i += 10) {
+                const angle = ((i + service.startAngle) * Math.PI) / 180;
+                const x = orbit.rx * Math.cos(angle);
+                const y = orbit.ry * Math.sin(angle);
+                keyframes.push({ x, y });
+              }
+              return keyframes;
+            };
+
+            return (
+              <motion.div
+                key={`mobile-${service.id}`}
+                className='absolute top-1/2 left-1/2 cursor-pointer z-10'
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  transform: "translate(-18px, -18px)",
+                }}
+                animate={{
+                  x: createMobileEllipticalKeyframes().map((k) => k.x),
+                  y: createMobileEllipticalKeyframes().map((k) => k.y),
+                }}
+                transition={{
+                  duration: service.speed,
+                  repeat: Infinity,
+                  ease: "linear",
+                  repeatType: "loop",
+                }}
+                onTouchStart={() => handleMouseEnter(service.id)}
+                onTouchEnd={handleMouseLeave}
+                onClick={() => handleServiceClick(service.url)}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.div
+                  className='flex items-center justify-center w-full h-full relative'
+                  animate={{
+                    scale: isAutoHighlighted ? [1, 1.15, 1] : 1,
+                  }}
+                  transition={{
+                    scale: isAutoHighlighted
+                      ? {
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          ease: "easeInOut",
+                        }
+                      : { duration: 0.3 },
+                  }}
+                >
+                  <div
+                    className='w-9 h-9 rounded-full border-2 flex items-center justify-center relative overflow-visible'
+                    style={{
+                      backgroundColor: service.color,
+                      borderColor: darkenColor(service.color, 20),
+                      boxShadow: hoveredService === service.id ? `0 0 10px ${service.color}` : isAutoHighlighted ? `0 0 8px ${service.color}` : "1px 1px 0px rgba(0,0,0,0.2)",
+                    }}
+                  >
+                    <Icon
+                      size={14}
+                      style={{ color: "white" }}
+                    />
+
+                    {/* Mobile Auto-highlight effect */}
+                    {isAutoHighlighted && !hoveredService && (
+                      <>
+                        <motion.div
+                          className='absolute inset-0 rounded-full pointer-events-none'
+                          style={{
+                            boxShadow: "0 0 12px #87CEEB, 0 0 18px #87CEEB",
+                          }}
+                          animate={{
+                            opacity: [0, 0.8, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        />
+                        <motion.div
+                          className='absolute inset-0 rounded-full border-2 pointer-events-none'
+                          style={{
+                            borderColor: "#87CEEB",
+                          }}
+                          animate={{
+                            scale: [1, 1.6],
+                            opacity: [0.8, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeOut",
+                          }}
+                        />
+                      </>
+                    )}
+
+                    {/* Mobile Tooltip */}
+                    {hoveredService === service.id && (
+                      <motion.div
+                        className='absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap z-50 pointer-events-none'
+                        style={{
+                          bottom: service.orbitIndex >= 2 ? "40px" : "-32px",
+                          top: service.orbitIndex < 2 ? "40px" : "auto",
+                        }}
+                        initial={{ opacity: 0, y: service.orbitIndex >= 2 ? 8 : -8 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                        }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div
+                          className='px-2 py-1 rounded-full text-xs font-bold text-center'
+                          style={{
+                            backgroundColor: service.color,
+                            color: "white",
+                            boxShadow: "1px 1px 0px rgba(0,0,0,0.2)",
+                          }}
+                        >
+                          {service.name}
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

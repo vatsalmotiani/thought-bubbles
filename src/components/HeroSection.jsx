@@ -3,13 +3,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { servicesWithIcons } from "@/data/services"; // Import your service list
-import { slugify } from "@/lib/utils"; // Import your slugify function
+import { servicesWithIcons } from "@/data/services";
+import { slugify } from "@/lib/utils";
 
 // Icon imports
 import { PenTool, Camera, Globe, Smartphone, Monitor, Megaphone, MessageCircle } from "lucide-react";
 
-// Icon mapping - match your service names to icons
+// Icon mapping
 const iconMap = {
   Branding: PenTool,
   Photography: Camera,
@@ -29,23 +29,23 @@ export default function RedesignedHeroSection() {
   const autoHighlightIntervalRef = useRef(null);
   const router = useRouter();
 
-  // Desktop orbits - bigger and more spaced out like Figma
+  // Desktop orbits - larger and more spaced out
   const desktopOrbits = [
-    { rx: 160, ry: 100 }, // First orbit - only 1 service
-    { rx: 220, ry: 140 }, // Second orbit
-    { rx: 280, ry: 180 }, // Third orbit
-    { rx: 340, ry: 220 }, // Fourth orbit
+    { rx: 180, ry: 120 }, // First orbit
+    { rx: 280, ry: 180 }, // Second orbit
+    { rx: 380, ry: 240 }, // Third orbit
+    { rx: 480, ry: 300 }, // Fourth orbit
   ];
 
-  // Mobile orbits - vertical ellipses for better space usage
+  // Mobile orbits - vertical ellipses
   const mobileOrbits = [
-    { rx: 80, ry: 120 }, // Vertical ellipse
-    { rx: 110, ry: 160 }, // Vertical ellipse
-    { rx: 140, ry: 200 }, // Vertical ellipse
-    { rx: 170, ry: 240 }, // Vertical ellipse
+    { rx: 90, ry: 140 },
+    { rx: 130, ry: 180 },
+    { rx: 170, ry: 220 },
+    { rx: 210, ry: 260 },
   ];
 
-  // Distribute services across orbits with first orbit having only 1 service
+  // Distribute services across orbits
   const distributeServices = () => {
     const distributed = [];
     let serviceIndex = 0;
@@ -86,7 +86,7 @@ export default function RedesignedHeroSection() {
 
   const services = distributeServices().map((service) => ({
     ...service,
-    speed: 30 + service.orbitIndex * 8, // Different speeds for each orbit
+    speed: 30 + service.orbitIndex * 8,
     url: `/work?category=${slugify(service.name)}`,
   }));
 
@@ -105,7 +105,7 @@ export default function RedesignedHeroSection() {
           currentIndex = (currentIndex + 1) % services.length;
           setAutoHighlightedService(services[currentIndex].id);
         }
-      }, 3000);
+      }, 2500); // Slightly faster rotation
     };
 
     const timeoutId = setTimeout(startAutoHighlight, 500);
@@ -118,7 +118,6 @@ export default function RedesignedHeroSection() {
     };
   }, [services.length]);
 
-  // Stop auto-highlight when user hovers
   useEffect(() => {
     if (isUserHovering) {
       if (autoHighlightIntervalRef.current) {
@@ -132,7 +131,7 @@ export default function RedesignedHeroSection() {
         autoHighlightIntervalRef.current = setInterval(() => {
           setAutoHighlightedService(services[nextIndex].id);
           nextIndex = (nextIndex + 1) % services.length;
-        }, 3000);
+        }, 2500);
       }
     }
   }, [isUserHovering, mounted, services.length, autoHighlightedService]);
@@ -156,7 +155,7 @@ export default function RedesignedHeroSection() {
       ref={containerRef}
       className='relative min-h-screen flex items-center overflow-hidden bg-transparent'
     >
-      {/* Background Service Text - Positioned in upper third */}
+      {/* Background Service Text */}
       <motion.div
         className='absolute top-0 left-0 w-full h-1/3 flex items-center justify-center pointer-events-none z-5 overflow-hidden'
         initial={{ opacity: 0 }}
@@ -184,7 +183,7 @@ export default function RedesignedHeroSection() {
         )}
       </motion.div>
 
-      {/* Desktop Layout - Bigger and More Spaced */}
+      {/* Desktop Layout */}
       <div className='hidden md:flex relative z-10 w-full h-full'>
         <motion.div
           className='w-full flex items-center justify-center relative'
@@ -192,14 +191,14 @@ export default function RedesignedHeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <div className='relative w-[800px] h-[600px] lg:w-[900px] lg:h-[700px] xl:w-[1000px] xl:h-[800px]'>
-            {/* Background Stars - Repositioned for bigger layout */}
+          <div className='relative w-[1000px] h-[800px]'>
+            {/* Background Stars */}
             {[
               { x: 80, y: 100, size: 16, delay: 0 },
-              { x: 720, y: 120, size: 12, delay: 1 },
-              { x: 100, y: 500, size: 14, delay: 2 },
-              { x: 750, y: 480, size: 10, delay: 0.5 },
-              { x: 450, y: 60, size: 18, delay: 1.5 },
+              { x: 920, y: 120, size: 12, delay: 1 },
+              { x: 100, y: 700, size: 14, delay: 2 },
+              { x: 950, y: 680, size: 10, delay: 0.5 },
+              { x: 500, y: 60, size: 18, delay: 1.5 },
             ].map((star, index) => (
               <motion.div
                 key={`star-${index}`}
@@ -231,9 +230,9 @@ export default function RedesignedHeroSection() {
               </motion.div>
             ))}
 
-            {/* Central Company Logo - Perfectly Centered like the Sun */}
+            {/* Central Company Logo - Now properly centered */}
             <motion.div
-              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20'
+              className='absolute top-1/3 left-[40%] transform -translate-x-1/2 -translate-y-1/2 z-10'
               animate={{
                 scale: [1, 1.05, 1],
               }}
@@ -246,9 +245,9 @@ export default function RedesignedHeroSection() {
             >
               <Image
                 src='/tb-logo.svg'
-                width={200}
-                height={200}
-                className='w-[200px] h-[200px] lg:w-[220px] lg:h-[220px] xl:w-[240px] xl:h-[240px]'
+                width={240}
+                height={240}
+                className='w-[240px] h-[240px]'
                 alt='Thought Bubbles Logo'
               />
             </motion.div>
@@ -257,7 +256,7 @@ export default function RedesignedHeroSection() {
             {desktopOrbits.map((orbit, index) => (
               <motion.div
                 key={`ring-${index}`}
-                className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-30'
+                className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-30 z-0'
                 style={{
                   width: `${orbit.rx * 2}px`,
                   height: `${orbit.ry * 2}px`,
@@ -267,13 +266,12 @@ export default function RedesignedHeroSection() {
               />
             ))}
 
-            {/* Desktop Service Planets - Dead on the dotted paths */}
-            {services.map((service, index) => {
+            {/* Desktop Service Planets */}
+            {services.map((service) => {
               const Icon = service.icon;
               const isAutoHighlighted = autoHighlightedService === service.id && !hoveredService;
               const orbit = desktopOrbits[service.orbitIndex];
 
-              // Create precise elliptical keyframes
               const createEllipticalKeyframes = () => {
                 const keyframes = [];
                 for (let i = 0; i <= 360; i += 10) {
@@ -288,11 +286,11 @@ export default function RedesignedHeroSection() {
               return (
                 <motion.div
                   key={service.id}
-                  className='absolute top-1/2 left-1/2 cursor-pointer z-10'
+                  className='absolute top-1/2 left-1/2 cursor-pointer z-20' // Higher z-index than logo
                   style={{
-                    width: "44px",
-                    height: "44px",
-                    transform: "translate(-22px, -22px)",
+                    width: "50px",
+                    height: "50px",
+                    transform: "translate(-25px, -25px)",
                   }}
                   animate={{
                     x: createEllipticalKeyframes().map((k) => k.x),
@@ -312,7 +310,7 @@ export default function RedesignedHeroSection() {
                     className='flex items-center justify-center w-full h-full'
                     whileHover={{ scale: 1.3 }}
                     animate={{
-                      scale: isAutoHighlighted ? [1, 1.15, 1] : 1,
+                      scale: isAutoHighlighted ? [1, 1.2, 1] : 1,
                     }}
                     transition={{
                       scale: isAutoHighlighted
@@ -326,28 +324,28 @@ export default function RedesignedHeroSection() {
                     }}
                   >
                     <div
-                      className='w-11 h-11 rounded-full border-3 flex items-center justify-center relative overflow-visible'
+                      className='w-12 h-12 rounded-full border-3 flex items-center justify-center relative overflow-visible'
                       style={{
                         backgroundColor: service.color,
                         borderColor: darkenColor(service.color, 20),
-                        boxShadow: hoveredService === service.id ? `0 0 15px ${service.color}` : isAutoHighlighted ? `0 0 10px ${service.color}` : "2px 2px 0px rgba(0,0,0,0.2)",
+                        boxShadow: hoveredService === service.id ? `0 0 20px ${service.color}` : isAutoHighlighted ? `0 0 15px ${service.color}, 0 0 30px rgba(135, 206, 235, 0.5)` : "2px 2px 0px rgba(0,0,0,0.2)",
                       }}
                     >
                       <Icon
-                        size={18}
+                        size={20}
                         style={{ color: "white" }}
                       />
 
-                      {/* Auto-highlight ring effect */}
+                      {/* Enhanced auto-highlight effect */}
                       {isAutoHighlighted && !hoveredService && (
                         <>
                           <motion.div
                             className='absolute inset-0 rounded-full pointer-events-none'
                             style={{
-                              boxShadow: "0 0 20px #87CEEB, 0 0 30px #87CEEB, 0 0 40px #87CEEB",
+                              boxShadow: `0 0 25px ${service.color}, 0 0 50px rgba(135, 206, 235, 0.7)`,
                             }}
                             animate={{
-                              opacity: [0, 0.8, 0],
+                              opacity: [0, 0.9, 0],
                             }}
                             transition={{
                               duration: 2,
@@ -361,7 +359,7 @@ export default function RedesignedHeroSection() {
                               borderColor: "#87CEEB",
                             }}
                             animate={{
-                              scale: [1, 2],
+                              scale: [1, 2.5],
                               opacity: [0.8, 0],
                             }}
                             transition={{
@@ -373,13 +371,13 @@ export default function RedesignedHeroSection() {
                         </>
                       )}
 
-                      {/* Tooltip - Only show on manual hover */}
+                      {/* Tooltip with "Explore" text */}
                       {hoveredService === service.id && (
                         <motion.div
                           className='absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap z-50 pointer-events-none'
                           style={{
-                            bottom: service.orbitIndex >= 2 ? "50px" : "-40px",
-                            top: service.orbitIndex < 2 ? "50px" : "auto",
+                            bottom: service.orbitIndex >= 2 ? "60px" : "-50px",
+                            top: service.orbitIndex < 2 ? "60px" : "auto",
                           }}
                           initial={{ opacity: 0, y: service.orbitIndex >= 2 ? 10 : -10 }}
                           animate={{
@@ -389,14 +387,14 @@ export default function RedesignedHeroSection() {
                           transition={{ duration: 0.2 }}
                         >
                           <div
-                            className='px-3 py-1 rounded-full text-xs font-bold max-w-[120px] text-center'
+                            className='px-4 py-2 rounded-full text-sm font-bold max-w-[140px] text-center'
                             style={{
                               backgroundColor: service.color,
                               color: "white",
                               boxShadow: "2px 2px 0px rgba(0,0,0,0.2)",
                             }}
                           >
-                            {service.name}
+                            Explore
                           </div>
                         </motion.div>
                       )}
@@ -409,7 +407,7 @@ export default function RedesignedHeroSection() {
         </motion.div>
       </div>
 
-      {/* Mobile Layout - Vertical Ellipses for Better Space Usage */}
+      {/* Mobile Layout */}
       <div className='flex md:hidden relative z-10 w-full h-full items-center justify-center px-4'>
         <motion.div
           className='relative w-[380px] h-[600px] sm:w-[420px] sm:h-[680px]'
@@ -454,9 +452,9 @@ export default function RedesignedHeroSection() {
             </motion.div>
           ))}
 
-          {/* Mobile Central Logo - Perfectly Centered */}
+          {/* Mobile Central Logo */}
           <motion.div
-            className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20'
+            className='absolute top-[36%] left-[33%] transform -translate-x-1/2 -translate-y-1/2 z-10'
             animate={{
               scale: [1, 1.05, 1],
             }}
@@ -476,11 +474,11 @@ export default function RedesignedHeroSection() {
             />
           </motion.div>
 
-          {/* Mobile Orbital Rings - Vertical Ellipses */}
+          {/* Mobile Orbital Rings */}
           {mobileOrbits.map((orbit, index) => (
             <motion.div
               key={`mobile-ring-${index}`}
-              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-20'
+              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-20 z-0'
               style={{
                 width: `${orbit.rx * 2}px`,
                 height: `${orbit.ry * 2}px`,
@@ -490,13 +488,12 @@ export default function RedesignedHeroSection() {
             />
           ))}
 
-          {/* Mobile Service Planets - Following Vertical Ellipses */}
-          {services.map((service, index) => {
+          {/* Mobile Service Planets */}
+          {services.map((service) => {
             const Icon = service.icon;
             const isAutoHighlighted = autoHighlightedService === service.id && !hoveredService;
             const orbit = mobileOrbits[service.orbitIndex];
 
-            // Create mobile elliptical keyframes for vertical ellipses
             const createMobileEllipticalKeyframes = () => {
               const keyframes = [];
               for (let i = 0; i <= 360; i += 10) {
@@ -511,11 +508,11 @@ export default function RedesignedHeroSection() {
             return (
               <motion.div
                 key={`mobile-${service.id}`}
-                className='absolute top-1/2 left-1/2 cursor-pointer z-10'
+                className='absolute top-1/2 left-1/2 cursor-pointer z-20' // Higher z-index than logo
                 style={{
-                  width: "36px",
-                  height: "36px",
-                  transform: "translate(-18px, -18px)",
+                  width: "40px",
+                  height: "40px",
+                  transform: "translate(-20px, -20px)",
                 }}
                 animate={{
                   x: createMobileEllipticalKeyframes().map((k) => k.x),
@@ -535,7 +532,7 @@ export default function RedesignedHeroSection() {
                 <motion.div
                   className='flex items-center justify-center w-full h-full relative'
                   animate={{
-                    scale: isAutoHighlighted ? [1, 1.15, 1] : 1,
+                    scale: isAutoHighlighted ? [1, 1.2, 1] : 1,
                   }}
                   transition={{
                     scale: isAutoHighlighted
@@ -549,15 +546,14 @@ export default function RedesignedHeroSection() {
                   }}
                 >
                   <div
-                    className='w-9 h-9 rounded-full border-2 flex items-center justify-center relative overflow-visible'
+                    className='w-10 h-10 rounded-full border-2 flex items-center justify-center relative overflow-visible'
                     style={{
                       backgroundColor: service.color,
                       borderColor: darkenColor(service.color, 20),
-                      boxShadow: hoveredService === service.id ? `0 0 10px ${service.color}` : isAutoHighlighted ? `0 0 8px ${service.color}` : "1px 1px 0px rgba(0,0,0,0.2)",
                     }}
                   >
                     <Icon
-                      size={14}
+                      size={16}
                       style={{ color: "white" }}
                     />
 
@@ -567,10 +563,10 @@ export default function RedesignedHeroSection() {
                         <motion.div
                           className='absolute inset-0 rounded-full pointer-events-none'
                           style={{
-                            boxShadow: "0 0 12px #87CEEB, 0 0 18px #87CEEB",
+                            boxShadow: `0 0 15px ${service.color}, 0 0 30px rgba(135, 206, 235, 0.6)`,
                           }}
                           animate={{
-                            opacity: [0, 0.8, 0],
+                            opacity: [0, 0.9, 0],
                           }}
                           transition={{
                             duration: 2,
@@ -584,7 +580,7 @@ export default function RedesignedHeroSection() {
                             borderColor: "#87CEEB",
                           }}
                           animate={{
-                            scale: [1, 1.6],
+                            scale: [1, 2],
                             opacity: [0.8, 0],
                           }}
                           transition={{
@@ -601,8 +597,8 @@ export default function RedesignedHeroSection() {
                       <motion.div
                         className='absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap z-50 pointer-events-none'
                         style={{
-                          bottom: service.orbitIndex >= 2 ? "40px" : "-32px",
-                          top: service.orbitIndex < 2 ? "40px" : "auto",
+                          bottom: service.orbitIndex >= 2 ? "45px" : "-40px",
+                          top: service.orbitIndex < 2 ? "45px" : "auto",
                         }}
                         initial={{ opacity: 0, y: service.orbitIndex >= 2 ? 8 : -8 }}
                         animate={{
@@ -612,14 +608,14 @@ export default function RedesignedHeroSection() {
                         transition={{ duration: 0.2 }}
                       >
                         <div
-                          className='px-2 py-1 rounded-full text-xs font-bold text-center'
+                          className='px-3 py-1 rounded-full text-xs font-bold text-center'
                           style={{
                             backgroundColor: service.color,
                             color: "white",
                             boxShadow: "1px 1px 0px rgba(0,0,0,0.2)",
                           }}
                         >
-                          {service.name}
+                          Explore
                         </div>
                       </motion.div>
                     )}

@@ -8,15 +8,8 @@ export default function Footer() {
   const navLinks = [
     { name: "Home", url: "/" },
     { name: "About", url: "/about" },
-    { name: "Work", url: "/work/all" },
+    { name: "Work", url: "/work" },
     { name: "Contact", url: "/contact-us" },
-  ];
-
-  const services = [
-    { name: "Branding", url: "/work/branding" },
-    { name: "Digital Marketing", url: "/work/digital-marketing" },
-    { name: "Social Media", url: "/work/social-media" },
-    { name: "Production", url: "/work/production" },
   ];
 
   const scrollToTop = () => {
@@ -25,7 +18,7 @@ export default function Footer() {
 
   return (
     <footer className='relative overflow-hidden bg-transparent'>
-      <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
+      <div className='relative z-10 max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 py-16'>
         {/* Main Footer Content */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16'>
           {/* Logo and Description */}
@@ -124,15 +117,6 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.1, type: "spring" }}
             viewport={{ once: true }}
           >
-            <h3
-              className='text-2xl font-oswald font-black mb-6'
-              style={{
-                color: "#1E1E1E",
-                textShadow: "2px 2px 0px rgba(0, 182, 231, 0.2)",
-              }}
-            >
-              Quick Links
-            </h3>
             <ul className='space-y-4'>
               {navLinks.map((link, index) => (
                 <motion.li
@@ -179,15 +163,6 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
             viewport={{ once: true }}
           >
-            <h3
-              className='text-2xl font-oswald font-black mb-6'
-              style={{
-                color: "#1E1E1E",
-                textShadow: "2px 2px 0px rgba(0, 182, 231, 0.2)",
-              }}
-            >
-              Get In Touch
-            </h3>
             <div className='space-y-6'>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}

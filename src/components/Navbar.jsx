@@ -255,7 +255,7 @@ export default function Navbar() {
                           textShadow: isActive ? "3px 3px 0px rgba(0, 182, 231, 0.2)" : "2px 2px 0px rgba(30, 30, 30, 0.1)",
                         }}
                       >
-                        <span className='relative z-10'>{name}</span>
+                        <span className='relative z-10 uppercase'>{name}</span>
 
                         {/* Cartoon-style active indicator */}
                         {isActive && (

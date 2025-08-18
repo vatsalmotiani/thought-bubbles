@@ -215,7 +215,7 @@ export default function RedesignedHeroSection() {
           {autoHighlightedService && (
             <motion.div
               key={autoHighlightedService}
-              className='text-tb-black text-[5vw] whitespace-nowrap pointer-events-none'
+              className='text-tb-black text-[5vw] font-bold whitespace-nowrap pointer-events-none uppercase'
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 0.1, scale: 1 }}
               transition={{ duration: 0.4 }}

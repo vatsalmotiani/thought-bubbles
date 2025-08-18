@@ -46,6 +46,7 @@ const OrbitRings = ({ orbits }) => (
 
 const ServicePlanet = ({ service, orbit, isAutoHighlighted, hoveredService, isMobile, onEnter, onLeave, onClick }) => {
   const Icon = service.icon;
+  const shouldShowTooltip = hoveredService === service.id || isAutoHighlighted;
 
   return (
     <motion.div
@@ -85,7 +86,7 @@ const ServicePlanet = ({ service, orbit, isAutoHighlighted, hoveredService, isMo
             size={isMobile ? 16 : 20}
             color='white'
           />
-          {hoveredService === service.id && (
+          {shouldShowTooltip && (
             <motion.div
               className='absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap z-50 pointer-events-none'
               initial={{
@@ -107,7 +108,7 @@ const ServicePlanet = ({ service, orbit, isAutoHighlighted, hoveredService, isMo
                 }}
                 className='px-3 py-1 rounded-full text-xs font-bold text-center'
               >
-                Explore
+                {service.name}
               </div>
             </motion.div>
           )}
@@ -170,15 +171,19 @@ export default function RedesignedHeroSection() {
   useEffect(() => {
     if (!services.length) return;
 
-    intervalRef.current && clearInterval(intervalRef.current);
+    // set initial highlight instantly on mount
+    if (autoHighlightedService === null) {
+      setAutoHighlightedService(services[0].id);
+      currentIndexRef.current = 0;
+    }
 
-    // if user was hovering, resume from that
+    clearInterval(intervalRef.current);
+
     if (hoveredService) {
       const found = services.findIndex((s) => s.id === hoveredService);
       currentIndexRef.current = found >= 0 ? found : 0;
       setAutoHighlightedService(services[currentIndexRef.current].id);
     } else {
-      // otherwise resume from the last autoHighlightedService
       const found = services.findIndex((s) => s.id === autoHighlightedService);
       currentIndexRef.current = found >= 0 ? found : currentIndexRef.current;
     }
@@ -206,7 +211,7 @@ export default function RedesignedHeroSection() {
   return (
     <section className='h-screen flex flex-col overflow-hidden bg-transparent'>
       {/* Top 1/4 – Highlight text */}
-      <Link href={"/work"}>
+      {/* <Link href={"/work"}>
         <div
           className='flex-[1] flex items-center justify-center relative'
           onMouseEnter={() => setHoveredService("viewwork")}
@@ -235,10 +240,10 @@ export default function RedesignedHeroSection() {
             </motion.div>
           )}
         </div>
-      </Link>
+      </Link> */}
 
       {/* Bottom 3/4 – Orbits + logo */}
-      <div className='flex-[3] relative flex items-center justify-center'>
+      <div className='h-full relative flex items-center justify-center'>
         <motion.div
           className='absolute z-10'
           animate={{ scale: [1, 1.05, 1] }}

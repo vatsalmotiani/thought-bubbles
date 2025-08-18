@@ -22,18 +22,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
+      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg mb-80'>
         <BackgroundElements />
         <SpaceshipHunter />
         {/* <Navbar /> */}
         <DesktopDockNavbar />
         {/* <HomepageLoaderWrapper /> */}
-        <div className='flex-grow w-full mt-20'>
+        <div className='flex-grow w-full'>
           <SmoothScroll>{children}</SmoothScroll>
         </div>
         {/* <Footer /> */}
         <Toaster />
-        <div className='mt-20'></div>
       </body>
     </html>
   );

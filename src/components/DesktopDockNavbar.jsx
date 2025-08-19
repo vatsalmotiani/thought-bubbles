@@ -17,7 +17,7 @@ export default function DesktopDockNavbar() {
 
   useEffect(() => {
     setFooterProgress(0);
-    setIsShrunk(false);
+    setIsShrunk(true);
   }, [pathname]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function DesktopDockNavbar() {
       setFooterProgress(progress);
 
       if (progress === 0 && window.scrollY > 60) setIsShrunk(true);
-      if (progress === 0 && window.scrollY <= 60) setIsShrunk(false);
+      if (progress === 0 && window.scrollY <= 60) setIsShrunk(true);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -138,7 +138,7 @@ export default function DesktopDockNavbar() {
         <motion.div
           animate={{ height: smoothHeight }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className='w-full overflow-hidden px-6 sm:px-12'
+          className='w-full overflow-hidden px-6 sm:px-12 '
         >
           {showEmailAddress && (
             <motion.div
@@ -154,7 +154,7 @@ export default function DesktopDockNavbar() {
                 />
                 <a
                   href='mailto:manoj.motiani@thoughtbubbles.in'
-                  className='hover:underline'
+                  className='hover:underline text-tb-body'
                 >
                   manoj.motiani@thoughtbubbles.in
                 </a>
@@ -164,7 +164,7 @@ export default function DesktopDockNavbar() {
                   size={14}
                   className='text-[#00B6E7] mr-2'
                 />
-                A-6, 1st Floor, My Mother’s Society, RC Marg, Chembur, Mumbai 400071
+                <p className='text-tb-body'>A-6, 1st Floor, My Mother's Society, RC Marg, Chembur, Mumbai 400071</p>
               </div>
             </motion.div>
           )}
@@ -182,19 +182,28 @@ export default function DesktopDockNavbar() {
                     href='https://www.instagram.com/thoughtbubbles_/'
                     target='_blank'
                   >
-                    <Instagram size={16} />
+                    <Instagram
+                      color='#828282'
+                      size={16}
+                    />
                   </a>
                   <a
                     href='https://in.linkedin.com/in/thought-bubbles-advertising-0aa385290'
                     target='_blank'
                   >
-                    <Linkedin size={16} />
+                    <Linkedin
+                      color='#828282'
+                      size={16}
+                    />
                   </a>
                   <a
                     href='/'
                     target='_blank'
                   >
-                    <Facebook size={16} />
+                    <Facebook
+                      color='#828282'
+                      size={16}
+                    />
                   </a>
                 </div>
                 <motion.button
@@ -206,7 +215,7 @@ export default function DesktopDockNavbar() {
                   <ArrowUp size={14} />
                 </motion.button>
               </div>
-              <div className='pt-1 border-t border-[#00B6E7] text-center text-[10px]'>© 2025 Thought Bubbles Advertising. All rights reserved.</div>
+              <div className='pt-1 border-t border-[#00B6E7] text-tb-body text-center text-[10px]'>© 2025 Thought Bubbles Advertising. All rights reserved.</div>
             </motion.div>
           )}
         </motion.div>

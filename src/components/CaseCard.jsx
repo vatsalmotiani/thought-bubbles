@@ -20,6 +20,7 @@ const CaseCard = ({ caseStudy, index = 0, withAnimation = true }) => {
       y: -8,
     },
   };
+  const showRandomBubble = Math.random();
 
   return (
     <motion.div
@@ -82,9 +83,24 @@ const CaseCard = ({ caseStudy, index = 0, withAnimation = true }) => {
       </Link>
 
       {/* Floating sparkle */}
-      {withAnimation && (
+      {withAnimation && showRandomBubble < 0.5 && (
         <motion.div
           className='absolute -top-2 -right-2 w-6 h-6 rounded-full'
+          style={{ backgroundColor: "#00B6E7" }}
+          animate={{
+            scale: [0, 1, 0],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            delay: index * 0.3,
+          }}
+        />
+      )}
+      {withAnimation && showRandomBubble >= 0.5 && (
+        <motion.div
+          className='absolute -top-2 -left-2 w-6 h-6 rounded-full'
           style={{ backgroundColor: "#00B6E7" }}
           animate={{
             scale: [0, 1, 0],

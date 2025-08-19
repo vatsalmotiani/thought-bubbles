@@ -274,25 +274,6 @@ export default function WorkShowcase() {
           >
             Dive into our collection of <span style={{ color: "#00B6E7", fontWeight: "600" }}>creative campaigns</span> and see how we bring brands to life with that extra sprinkle of magic.
           </motion.p>
-
-          {/* Animated underline doodle */}
-          <svg
-            className='mx-auto mt-4'
-            width='200'
-            height='15'
-            viewBox='0 0 200 15'
-          >
-            <motion.path
-              d='M10,8 Q50,3 100,8 T190,8'
-              stroke='#00B6E7'
-              strokeWidth='3'
-              fill='none'
-              strokeLinecap='round'
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.6 }}
-              transition={{ duration: 2, delay: 1.2, ease: "easeOut" }}
-            />
-          </svg>
         </motion.div>
         {/* Updated Filter Navigation */}
         <CategoryNavigation

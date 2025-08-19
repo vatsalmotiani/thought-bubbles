@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg mb-80'>
+      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg pb-60'>
         <BackgroundElements />
         <SpaceshipHunter />
         {/* <Navbar /> */}

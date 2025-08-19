@@ -40,7 +40,7 @@ export default function DesktopDockNavbar() {
   // -------------------------------------------
 
   // height 0→140px based on delayed
-  const smoothHeight = delayed * 140;
+  const smoothHeight = delayed * 160;
 
   // micro-step width from delayed value
   const rawWidth = delayed;
@@ -138,14 +138,14 @@ export default function DesktopDockNavbar() {
         <motion.div
           animate={{ height: smoothHeight }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className='w-full overflow-hidden px-6 sm:px-12 '
+          className='w-3/4 overflow-hidden px-6 sm:px-12 '
         >
           {showEmailAddress && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
-              className='flex flex-col gap-2 text-[11px] text-[#1E1E1E] pb-2'
+              className='mt-8 flex flex-col gap-2 text-[11px] text-[#1E1E1E] pb-2'
             >
               <div className='flex items-start'>
                 <Mail

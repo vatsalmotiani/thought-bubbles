@@ -30,16 +30,25 @@ const darkenColor = (color, percent) => {
 const OrbitRings = ({ orbits }) => (
   <>
     {orbits.map((orbit, i) => (
-      <div
+      <svg
         key={i}
-        className='absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 border border-dashed opacity-30'
-        style={{
-          width: orbit.rx * 2,
-          height: orbit.ry * 2,
-          borderRadius: "50%",
-          borderColor: "#1E1E1E",
-        }}
-      />
+        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none overflow-visible'
+        width={orbit.rx * 2}
+        height={orbit.ry * 2}
+      >
+        <ellipse
+          cx={orbit.rx}
+          cy={orbit.ry}
+          rx={orbit.rx}
+          ry={orbit.ry}
+          stroke='#1E1E1E'
+          strokeWidth='1'
+          strokeDasharray='4 8'
+          strokeLinecap='round'
+          fill='none'
+          className='animate-dash opacity-30'
+        />
+      </svg>
     ))}
   </>
 );
@@ -246,8 +255,8 @@ export default function RedesignedHeroSection() {
       <div className='h-full relative flex items-center justify-center'>
         <motion.div
           className='absolute z-10'
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 3.5, ease: "easeInOut", repeat: Infinity }}
         >
           <Link href='/about'>
             <Image

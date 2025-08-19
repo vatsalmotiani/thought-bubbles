@@ -232,7 +232,7 @@ export default function WorkShowcase() {
               className='font-bold text-sm'
               style={{ color: "#1E1E1E" }}
             >
-              OUR WORK
+              Our Work
             </span>
           </motion.div>
 

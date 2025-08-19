@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Home, Info, Folder, MessageCircle } from "lucide-react";
+import { Home, Info, Grid, MessageCircle } from "lucide-react";
 import { Instagram, Linkedin, Facebook, Mail, MapPin, ArrowUp } from "react-feather";
 
 export default function DesktopDockNavbar() {
@@ -68,7 +68,7 @@ export default function DesktopDockNavbar() {
   const navLinks = [
     { name: "Home", url: "/", Icon: Home },
     { name: "About Us", url: "/about", Icon: Info },
-    { name: "Our Work", url: "/work", Icon: Folder },
+    { name: "Our Work", url: "/work", Icon: Grid },
     { name: "Let's Talk", url: "/contact-us", Icon: MessageCircle },
   ];
 
@@ -83,7 +83,7 @@ export default function DesktopDockNavbar() {
         animate={{ scale: containerScale, width, borderRadius }}
         transition={{ type: "spring", stiffness: 230, damping: 26 }}
         style={{ transformOrigin: "bottom center" }}
-        className='flex flex-col items-center bg-[rgba(255,255,255,0.18)] backdrop-blur-3xl border border-[rgba(255,255,255,0.3)] shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-6px_12px_rgba(0,0,0,0.04)] overflow-hidden'
+        className='flex flex-col items-center bg-white border-b-4 border-r-4 border-tb-blue shadow-lg overflow-hidden'
       >
         <div className='flex items-center gap-4 sm:gap-6 px-6 sm:px-12 py-3 sm:py-5'>
           <Link href='/'>

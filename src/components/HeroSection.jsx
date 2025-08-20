@@ -219,37 +219,7 @@ export default function RedesignedHeroSection() {
 
   return (
     <section className='h-screen flex flex-col overflow-hidden bg-transparent'>
-      {/* Top 1/4 – Highlight text */}
-      {/* <Link href={"/work"}>
-        <div
-          className='flex-[1] flex items-center justify-center relative'
-          onMouseEnter={() => setHoveredService("viewwork")}
-          onMouseLeave={() => setHoveredService(null)}
-        >
-          {autoHighlightedService && (
-            <motion.div
-              key={autoHighlightedService}
-              className='text-tb-black text-[5vw] font-bold whitespace-nowrap pointer-events-none uppercase'
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 0.1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-            >
-              {services.find((s) => s.id === autoHighlightedService)?.name}
-            </motion.div>
-          )}
-
-          {hoveredService === "viewwork" && (
-            <motion.div
-              className='absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none'
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className='bg-tb-blue text-white px-3 py-1 rounded-full text-xs font-bold'>View Work</div>
-            </motion.div>
-          )}
-        </div>
-      </Link> */}
+      <p className='font-caveat text-center pt-24 text-xl mb-[-3rem]'>A universe of brilliant thinking</p>
 
       {/* Bottom 3/4 – Orbits + logo */}
       <div className='h-full relative flex items-center justify-center'>

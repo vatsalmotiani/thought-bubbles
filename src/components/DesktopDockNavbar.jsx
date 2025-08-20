@@ -67,7 +67,6 @@ export default function DesktopDockNavbar() {
 
   const navLinks = [
     { name: "Home", url: "/", Icon: Home },
-    { name: "About Us", url: "/about", Icon: Info },
     { name: "Our Work", url: "/work", Icon: Grid },
     { name: "Let's Talk", url: "/contact-us", Icon: MessageCircle },
   ];
@@ -82,8 +81,8 @@ export default function DesktopDockNavbar() {
         initial={{ width: "auto", borderRadius: 30 }}
         animate={{ scale: containerScale, width, borderRadius }}
         transition={{ type: "spring", stiffness: 230, damping: 26 }}
-        style={{ transformOrigin: "bottom center" }}
-        className='flex flex-col items-center bg-white border-b-4 border-r-4 border-tb-blue shadow-lg overflow-hidden'
+        style={{ transformOrigin: "bottom center", backgroundColor: "white", borderColor: "#00B6E7", boxShadow: "4px 4px 0px #00B6E7" }}
+        className='flex flex-col items-center border-4 overflow-hidden'
       >
         <div className='flex items-center gap-4 sm:gap-6 px-6 sm:px-12 py-3 sm:py-5'>
           <Link href='/'>
@@ -113,7 +112,7 @@ export default function DesktopDockNavbar() {
                 >
                   <Icon
                     size={18}
-                    className={isActive ? "text-[#00B6E7]" : "text-[#1E1E1E]"}
+                    className={isActive ? "text-[#00B6E7]" : "text-[#828282]"}
                   />
                   <motion.span
                     initial={{ width: 0, opacity: 0, marginLeft: 0 }}
@@ -124,7 +123,7 @@ export default function DesktopDockNavbar() {
                     }}
                     transition={{ duration: 0.28, ease: "easeOut" }}
                     className='overflow-hidden text-[12px] sm:text-[13px] font-semibold whitespace-nowrap'
-                    style={{ color: isActive ? "#00B6E7" : "#1E1E1E" }}
+                    style={{ color: isActive ? "#00B6E7" : "#828282" }}
                   >
                     {name}
                   </motion.span>
@@ -145,7 +144,7 @@ export default function DesktopDockNavbar() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
-              className='mt-8 flex flex-col gap-2 text-[11px] text-[#1E1E1E] pb-2'
+              className='mt-8 flex flex-col gap-2 text-[11px] text-[#828282] pb-2'
             >
               <div className='flex items-start'>
                 <Mail
@@ -174,7 +173,7 @@ export default function DesktopDockNavbar() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
-              className='text-[11px] text-[#1E1E1E]'
+              className='text-[11px] text-[#828282]'
             >
               <div className='flex justify-between items-center pb-2'>
                 <div className='flex space-x-3'>

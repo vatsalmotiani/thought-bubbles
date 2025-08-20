@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
         <BackgroundElements />
         <SpaceshipHunter />
         {/* <Navbar /> */}
-        <DesktopDockNavbar />
+        {/* <DesktopDockNavbar /> */}
         {/* <HomepageLoaderWrapper /> */}
         <div className='flex-grow w-full'>
           <SmoothScroll>{children}</SmoothScroll>

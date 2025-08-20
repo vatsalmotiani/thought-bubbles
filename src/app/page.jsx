@@ -9,8 +9,7 @@ export default function Home() {
     <div className='h-auto flex flex-col'>
       <HeroSection />
       {/* <ServicesShowcase /> */}
-      {/* <WorkShowcase /> */}
-      {/* <ClientsSection /> */}
+      <ClientsSection />
       {/* <CTASection /> */}
     </div>
   );

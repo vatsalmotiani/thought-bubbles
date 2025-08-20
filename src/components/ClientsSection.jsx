@@ -58,7 +58,7 @@ export default function ClientsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className='mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center'
+          className='mt-20 gap-8 text-center flex flex-wrap items-center justify-center'
         >
           <div className='p-6'>
             <motion.div
@@ -84,19 +84,6 @@ export default function ClientsSection() {
             </motion.div>
             <h3 className='text-xl font-semibold text-tb-black mb-2'>Campaigns Delivered</h3>
             <p className='text-tb-body'>Successful projects across diverse industries</p>
-          </div>
-
-          <div className='p-6'>
-            <motion.div
-              className='text-5xl md:text-6xl font-bold text-tb-blue mb-4'
-              whileInView={{ scale: [0.8, 1.2, 1] }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              100%
-            </motion.div>
-            <h3 className='text-xl font-semibold text-tb-black mb-2'>Client Satisfaction</h3>
-            <p className='text-tb-body'>Building lasting partnerships through results</p>
           </div>
         </motion.div>
       </div>

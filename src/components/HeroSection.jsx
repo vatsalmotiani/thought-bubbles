@@ -74,7 +74,7 @@ const ServicePlanet = ({ service, orbit, isAutoHighlighted, hoveredService, isMo
       onMouseLeave={() => !isMobile && onLeave()}
       onTouchStart={() => isMobile && onEnter(service.id)}
       onTouchEnd={() => isMobile && onLeave()}
-      onClick={() => onClick(service.url)}
+      onClick={() => onClick(service)}
     >
       <motion.div
         className='flex w-full h-full items-center justify-center'
@@ -172,15 +172,13 @@ export default function RedesignedHeroSection() {
     return out.map((s) => ({
       ...s,
       speed: 30 + s.orbitIndex * 8,
-      url: `/work?category=${slugify(s.name)}`,
     }));
   })();
 
-  // auto highlight (start from last hovered / last highlighted)
+  // auto highlight rotation
   useEffect(() => {
     if (!services.length) return;
 
-    // set initial highlight instantly on mount
     if (autoHighlightedService === null) {
       setAutoHighlightedService(services[0].id);
       currentIndexRef.current = 0;
@@ -217,11 +215,20 @@ export default function RedesignedHeroSection() {
     setHoveredService(null);
   };
 
+  const handlePlanetClick = (service) => {
+    const url = `?category=${slugify(service.name)}#work-display`;
+    router.push(url);
+
+    setTimeout(() => {
+      const section = document.getElementById("work-display");
+      section?.scrollIntoView({ behavior: "smooth" });
+    }, 150);
+  };
+
   return (
     <section className='h-screen flex flex-col overflow-hidden bg-transparent'>
       <p className='font-caveat text-center pt-24 text-xl mb-[-3rem]'>A universe of brilliant thinking</p>
 
-      {/* Bottom 3/4 – Orbits + logo */}
       <div className='h-full relative flex items-center justify-center'>
         <motion.div
           className='absolute z-10'
@@ -251,7 +258,7 @@ export default function RedesignedHeroSection() {
               isMobile={false}
               onEnter={handleEnter}
               onLeave={handleLeave}
-              onClick={(url) => router.push(url)}
+              onClick={handlePlanetClick}
             />
           ))}
         </div>
@@ -269,7 +276,7 @@ export default function RedesignedHeroSection() {
               isMobile={true}
               onEnter={handleEnter}
               onLeave={handleLeave}
-              onClick={(url) => router.push(url)}
+              onClick={handlePlanetClick}
             />
           ))}
         </div>

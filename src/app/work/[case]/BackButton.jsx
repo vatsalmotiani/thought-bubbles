@@ -14,7 +14,7 @@ export function BackButton() {
       className='inline-block' // Add this to prevent full-width behavior
     >
       <Link
-        href='/work'
+        href='/?category=all'
         className='inline-flex items-center gap-2 px-5 py-3 rounded-full font-bold text-sm transition-all duration-300 whitespace-nowrap'
         style={{
           backgroundColor: "#00B6E7",

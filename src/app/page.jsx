@@ -12,6 +12,7 @@ export default function Home() {
       {/* <ServicesShowcase /> */}
       <InfiniteScroller text={"About Us"} />
       <ClientsSection />
+      <InfiniteScroller text={"Our Work"} />
       <WorkDisplay />
       {/* <CTASection /> */}
     </div>

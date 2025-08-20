@@ -119,12 +119,6 @@ export default function WorkDisplay() {
       className='relative min-h-screen py-16 overflow-hidden'
     >
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* Heading */}
-        <h1 className='text-5xl md:text-6xl lg:text-7xl font-oswald font-black text-center mb-6'>
-          Our Creative <span className='text-[#00B6E7]'>Playground</span>
-        </h1>
-        <p className='text-lg text-center mb-12 text-gray-600'>Dive into our collection of campaigns and see how we bring brands to life.</p>
-
         <CategoryNavigation
           services={serviceList}
           activeCategory={activeCategory}

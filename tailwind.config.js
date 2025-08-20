@@ -9,6 +9,7 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+        "3xl": "2160px",
       },
     },
     extend: {
@@ -16,6 +17,9 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         caveat: ["Caveat", "cursive"],
         noto: ["Noto Sans", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        bebas: ["Bebas Neue", "sans-serif"],
+        oswald: ["Oswald", "sans-serif"],
       },
 
       colors: {

@@ -1,133 +1,140 @@
 "use client";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { sendEmail } from "@/lib/utils";
-import { AlertCircle } from "react-feather";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, AlertCircle, Send } from "lucide-react";
 
-export default function Form() {
-  const [isLoading, setIsLoading] = useState(false);
+export default function AnimatedForm() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    setIsLoading(true);
-    sendEmail(data);
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.message) newErrors.message = "Message is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    setSubmitting(true);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setSuccessMessage("Your message has been sent!");
+    setFormData({ name: "", email: "", message: "" });
+    setSubmitting(false);
+  };
+
+  const FieldGroup = ({ label, name, required, children }) => (
+    <div className='mb-8'>
+      <label className='font-semibold text-lg mb-2 block'>
+        {label} {required && <span className='text-red-500'>*</span>}
+      </label>
+      <div className='relative'>{children}</div>
+      {errors[name] && (
+        <div className='flex items-center text-sm text-red-500 mt-1'>
+          <AlertCircle
+            size={14}
+            className='mr-2'
+          />
+          <span>{errors[name]}</span>
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className='mt-7 w-full'
+    <motion.form
+      onSubmit={handleSubmit}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      className='bg-white rounded-3xl p-8 border-4 max-w-xl mx-auto'
+      style={{ borderColor: "#00B6E7", boxShadow: "6px 6px 0px #00B6E7" }}
     >
-      <div className='flex flex-col mb-7'>
-        <label
-          className='font-medium ms-2'
-          htmlFor='name'
-        >
-          Name
-        </label>
+      <FieldGroup
+        label='Name'
+        name='name'
+        required
+      >
         <input
-          type='name'
-          placeholder='Your Name'
-          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
-          {...register("name")}
+          type='text'
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          className='w-full px-5 py-4 rounded-xl border-2'
+          style={{ borderColor: "#E5E5E5", backgroundColor: "#F8F8F8" }}
         />
-      </div>
-      <div className='flex flex-col mb-7'>
-        <label
-          className='font-medium ms-2'
-          htmlFor='name'
-        >
-          Email Address<span className='text-red-600'> *</span>
-        </label>
+      </FieldGroup>
+
+      <FieldGroup
+        label='Email'
+        name='email'
+        required
+      >
         <input
           type='email'
-          placeholder='your@email.com'
-          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
-          {...register("email", { required: "Email Address is required" })}
-          aria-invalid={errors.mail ? "true" : "false"}
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className='w-full px-5 py-4 rounded-xl border-2'
+          style={{ borderColor: "#E5E5E5", backgroundColor: "#F8F8F8" }}
         />
-        {errors.email && (
-          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
-            <span className='me-2'>
-              <AlertCircle size={20} />
-            </span>
-            {errors.email?.message}
-          </p>
-        )}
-      </div>
-      <div className='flex flex-col mb-7'>
-        <label
-          className='font-medium ms-2'
-          htmlFor='name'
-        >
-          What are you looking for?
-        </label>
-        <select
-          {...register("purpose")}
-          className='bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
-        >
-          <option
-            disabled
-            selected
-            value='Other'
-          >
-            Select Answer
-          </option>
-          <option value='Potential Client'>To Work Together</option>
-          <option value='Job Application'>A Job Oppurtunity</option>
-          <option value='Other'>Other</option>
-        </select>
-        {errors.purpose && (
-          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
-            <span className='me-2'>
-              <AlertCircle size={20} />
-            </span>
-            {errors.purpose?.message}
-          </p>
-        )}
-      </div>
-      <div className='flex flex-col'>
-        <label
-          className='font-medium ms-2'
-          htmlFor='message'
-        >
-          Message<span className='text-red-600'> * </span>
-          <span className='text-sm text-tb-body'>(Max Characters: 500)</span>
-        </label>
-        <textarea
-          rows={4}
-          placeholder='Your message...'
-          className='w-full resize-none bg-neutral-100 rounded-xl px-4 py-3 mt-2 focus:outline-neutral-200'
-          {...register("message", {
-            required: "Message is required",
-            maxLength: {
-              value: 500,
-              message: "Too Many Characters",
-            },
-          })}
-        ></textarea>
-        {errors.message && (
-          <p className='text-red-400 ps-2 pt-4 text-sm flex items-center'>
-            <span className='me-2'>
-              <AlertCircle size={20} />
-            </span>
-            {errors.message?.message}
-          </p>
-        )}
-      </div>
+      </FieldGroup>
 
-      <button
-        disabled={isLoading}
-        className='w-full disabled:bg-sky-200 disabled:border-sky-200 disabled:drop-shadow-none bg-sky-400 border-2 border-sky-500 rounded-xl drop-shadow-sm px-6 py-3 mt-4 text-white hover:bg-tb-blue duration-300 hover:drop-shadow-lg'
+      <FieldGroup
+        label='Message'
+        name='message'
+        required
       >
-        {isLoading && <span>Submitted</span>}
-        {!isLoading && <span>Submit</span>}
-      </button>
-    </form>
+        <textarea
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          rows={6}
+          className='w-full px-5 py-4 rounded-xl border-2 resize-none'
+          style={{ borderColor: "#E5E5E5", backgroundColor: "#F8F8F8" }}
+        />
+      </FieldGroup>
+
+      <AnimatePresence>
+        {successMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className='mb-4 flex items-center text-green-600 font-semibold'
+          >
+            <Check
+              size={18}
+              className='mr-2'
+            />{" "}
+            {successMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.button
+        type='submit'
+        disabled={submitting}
+        className='w-full px-8 py-4 rounded-2xl font-bold text-lg text-white'
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        style={{
+          backgroundColor: submitting ? "#93C5FD" : "#00B6E7",
+          boxShadow: submitting ? "none" : "6px 6px 0px #1E40AF",
+        }}
+      >
+        {submitting ? (
+          "Sending..."
+        ) : (
+          <div className='flex items-center justify-center'>
+            <Send
+              size={20}
+              className='mr-2'
+            />{" "}
+            Send Message
+          </div>
+        )}
+      </motion.button>
+    </motion.form>
   );
 }

@@ -1,5 +1,13 @@
+"use client";
 import Image from "next/image";
-// FONT
+import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import Button from "./Button";
+import caseList from "@/data/caseList";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import Autoplay from "embla-carousel-autoplay";
+import { slugify } from "@/lib/utils";
+import CaseLarge from "./CaseLarge";
 
 export default function Jumbotron({ img, heading, subheading, body }) {
   return (
@@ -17,19 +25,78 @@ export default function Jumbotron({ img, heading, subheading, body }) {
     //     <p className={`  text-tb-body text-lg `}>{body}</p>
     //   </div>
     // </div>
-    <div className={`flex flex-col my-20 justify-center items-center`}>
+    <div className={`flex flex-col my-8 sm:my-12 md:my-16 lg:my-20 justify-center items-center px-4 sm:px-6`}>
       <Image
         src={img.src}
         alt={img.alt}
         height={img.height}
         width={img.width}
-        className='mx-20 mb-20'
+        className='mx-4 sm:mx-8 md:mx-16 lg:mx-20 mb-8 sm:mb-12 md:mb-16 lg:mb-20 w-full max-w-[600px] h-auto'
       />
-      {/* <div className={`w-2/3 2xl:w-1/3`}>
-        <p className={` font-caveat  text-tb-blue text-9xl font-bold w-1/2 drop-shadow-sm mb-8`}>{heading}</p>
-        <p className={` font-poppins text-tb-dark text-2xl  py-4 `}>{subheading}</p>
-        <p className={`  text-tb-body text-lg `}>{body}</p>
-      </div> */}
     </div>
+  );
+}
+
+export function JumboCase() {
+  return (
+    <Carousel
+      className='w-full pt-8 sm:pt-10 md:pt-12 lg:pt-14 mb-8 sm:mb-10 md:mb-12 lg:mb-14 px-4 sm:px-6'
+      plugins={[
+        Autoplay({
+          delay: 4000,
+        }),
+      ]}
+      opts={{
+        loop: true,
+      }}
+    >
+      {/* <p className='font-bebas uppercase text-tb-black text-8xl text-center'>Our Work</p> */}
+      <CarouselContent>
+        {caseList
+          .filter((item) => item.favourite === true) // only favoutites
+          .map((filteredCase) => {
+            return (
+              <CarouselItem
+                key={filteredCase.id}
+                className='basis-full flex justify-center'
+              >
+                <motion.div
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 0.98, transition: { duration: 0.2, type: "spring", bounce: 0.4 } }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <Link
+                    href={`/work/cases/${slugify(filteredCase.name)}`}
+                    className='z-10 flex w-fit justify-center items-center'
+                  >
+                    <CaseLarge caseStudy={filteredCase} />
+                    {/* <Image
+                      src='/assets/caseVert.jpg'
+                      alt='hello'
+                      width='300'
+                      height='400'
+                    />
+                    <div className='flex flex-col ms-14'>
+                      <p className='max-w-[720px] truncate text-5xl leading-tight font-bold text-tb-black font-bebas  hover:text-tb-body duration-300'>{filteredCase.name}</p>
+                      <p className='text-lg  text-tb-body mt-4'>{filteredCase.category.join(", ")}</p>
+                      <div className='flex flex-col mt-14'>
+                        <Image
+                          src={filteredCase.client.logo}
+                          alt={filteredCase.client.name}
+                          height='0'
+                          width='0'
+                          sizes='100vw'
+                          className='h-auto w-[160px]'
+                        />
+                        <p className=' mt-4 text-tb-body text-base'>{filteredCase.client.name}</p>
+                      </div>
+                    </div> */}
+                  </Link>
+                </motion.div>
+              </CarouselItem>
+            );
+          })}
+      </CarouselContent>
+    </Carousel>
   );
 }

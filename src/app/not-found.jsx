@@ -7,16 +7,16 @@ export const metadata = {
 
 export default function notFound() {
   return (
-    <div className='flex flex-col items-center justify-center h-[600px]'>
+    <div className='flex flex-col items-center justify-center min-h-[400px] sm:h-[500px] md:h-[600px] px-4 sm:px-6'>
       {/* <span className='bg-neutral-200 px-4 py-1 mb-2 rounded-full border-2 border-neutral-300 text-neutral-400'>404 Error</span> */}
-      <AlertTriangle />
+      <AlertTriangle size={48} className='sm:w-12 sm:h-12 md:w-16 md:h-16 text-neutral-400 mb-4' />
       <Title
         heading='Page Not Found'
         subheading="Sorry, the page you were looking for doesn't exist or has been moved."
       />
       {/* <p className='font-poppins text-5xl pb-4 font-semibold text-tb-black'>Page Not Found</p>
       <p className='py-4 text-lg '>Sorry, the page you were looking for doesn&apos;t exist or has been moved.</p> */}
-      <span className='mt-4'>
+      <span className='mt-6 sm:mt-8'>
         <Button
           link='/'
           content='Back to Homepage'

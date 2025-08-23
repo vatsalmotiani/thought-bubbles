@@ -4,17 +4,30 @@ import ClientsSection from "@/components/ClientsSection";
 import CTASection from "@/components/CTASection";
 import WorkDisplay from "@/components/WorkDisplay";
 import InfiniteScroller from "@/components/InfiniteScroller";
+import Footer from "@/components/Footer";
+import WorkDisplayTiles from "@/components/WorkDisplayTiles";
 
 export default function Home() {
   return (
     <div className='h-auto flex flex-col gap-16'>
-      <HeroSection />
+      <section id='jumbotron'>
+        <HeroSection />
+      </section>
       {/* <ServicesShowcase /> */}
-      <InfiniteScroller text={"About Us"} />
-      <ClientsSection />
-      <InfiniteScroller text={"Our Work"} />
-      <WorkDisplay />
-      {/* <CTASection /> */}
+      <section id='about'>
+        <InfiniteScroller text={"About Us"} />
+        <ClientsSection />
+      </section>
+      <section id='work'>
+        <InfiniteScroller text={"Our Work"} />
+        {/* <WorkDisplay /> */}
+        <WorkDisplayTiles />
+      </section>
+      <section id='contact'>
+        <InfiniteScroller text={"Get In Touch"} />
+        <Footer />
+      </section>
+      {/* <CTASect9ion /> */}
     </div>
   );
 }

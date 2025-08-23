@@ -7,6 +7,7 @@ import BackgroundElements from "@/components/BackgroundElements";
 import HomepageLoaderWrapper from "@/components/HomepageLoaderWrapper";
 import SpaceshipHunter from "@/components/SpaceshipHunter";
 import DesktopDockNavbar from "@/components/DesktopDockNavbar";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 export const metadata = {
   title: {
@@ -22,16 +23,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg pb-60'>
+      <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
         <SpaceshipHunter />
+        <FloatingSidebar />
         {/* <Navbar /> */}
         {/* <DesktopDockNavbar /> */}
-        {/* <HomepageLoaderWrapper /> */}
+        <HomepageLoaderWrapper />
         <div className='flex-grow w-full'>
           <SmoothScroll>{children}</SmoothScroll>
         </div>
-        {/* <Footer /> */}
         <Toaster />
       </body>
     </html>

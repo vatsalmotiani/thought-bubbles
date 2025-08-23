@@ -109,16 +109,7 @@ const ServicePlanet = ({ service, orbit, isAutoHighlighted, hoveredService, isMo
                 top: service.orbitIndex < 2 ? (isMobile ? "45px" : "60px") : "auto",
               }}
             >
-              <div
-                style={{
-                  backgroundColor: service.color,
-                  color: "white",
-                  boxShadow: "1px 1px 0 rgba(0,0,0,0.2)",
-                }}
-                className='px-3 py-1 rounded-full text-xs font-bold text-center'
-              >
-                {service.name}
-              </div>
+              <p className='px-3 py-1 rounded-full bg-tb-bg/60 text-tb-body font-inter text-xs text-start'>{service.name}</p>
             </motion.div>
           )}
         </div>
@@ -138,8 +129,8 @@ export default function RedesignedHeroSection() {
 
   const desktopOrbits = [
     { rx: 320, ry: 125 },
-    { rx: 450, ry: 160 },
-    { rx: 600, ry: 200 },
+    { rx: 420, ry: 160 },
+    { rx: 500, ry: 200 },
   ];
   const mobileOrbits = [
     { rx: 130, ry: 180 },

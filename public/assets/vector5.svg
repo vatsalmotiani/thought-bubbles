@@ -1,0 +1,36 @@
+<svg width="291" height="291" viewBox="0 0 291 291" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_g_42_63)">
+<circle cx="145.499" cy="145.5" r="121.5" fill="url(#paint0_radial_42_63)"/>
+</g>
+<g style="mix-blend-mode:soft-light" opacity="0.4" filter="url(#filter1_f_42_63)">
+<path d="M245.132 87.5007C227.153 52.4012 179 41.1577 179 41.1577L247.861 169.612C247.861 169.612 262.449 121.308 245.132 87.5007Z" fill="white"/>
+</g>
+<g style="mix-blend-mode:soft-light" opacity="0.4" filter="url(#filter2_f_42_63)">
+<path d="M50.9111 203.53C68.89 238.63 117.043 249.873 117.043 249.873L48.1818 121.419C48.1818 121.419 33.5941 169.723 50.9111 203.53Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_g_42_63" x="0.499023" y="0.5" width="290" height="290" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="5 5" numOctaves="3" seed="6203" />
+<feDisplacementMap in="shape" scale="47" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_42_63">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+<filter id="filter1_f_42_63" x="161.6" y="23.7577" width="109.405" height="163.254" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="8.7" result="effect1_foregroundBlur_42_63"/>
+</filter>
+<filter id="filter2_f_42_63" x="25.0375" y="104.019" width="109.405" height="163.254" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="8.7" result="effect1_foregroundBlur_42_63"/>
+</filter>
+<radialGradient id="paint0_radial_42_63" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(145.999 145) rotate(90.2348) scale(122.001)">
+<stop stop-color="#00B6E7"/>
+<stop offset="0.865417" stop-color="#AFEEFF"/>
+</radialGradient>
+</defs>
+</svg>

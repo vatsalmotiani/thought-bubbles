@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import clientList from "@/data/clients";
+import Reveal from "./Reveal";
+import RevealText from "./RevealText";
 
 export default function ClientsSection() {
   const featuredClients = clientList.filter((c) => c.favourite === true);
@@ -10,16 +12,7 @@ export default function ClientsSection() {
     <section className='py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-center mb-16'
-        >
-          {/* <h2 className='text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-tb-black mb-6'>Trusted By</h2> */}
-          <p className='text-xl md:text-2xl text-tb-body max-w-3xl mx-auto font-poppins'>Building bridges since 2009. We have proudly collaborated with esteemed clients, fostering lasting connections and delivering impactful results.</p>
-        </motion.div>
+        <RevealText lines={["Building bridges since 2009.", "We have proudly collaborated with esteemed clients,", "fostering lasting connections and delivering impactful results."]} />
 
         {/* Clients Grid */}
         <div className='flex justify-center'>

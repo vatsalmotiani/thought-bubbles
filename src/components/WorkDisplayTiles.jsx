@@ -33,7 +33,7 @@ export default function PostItCards() {
         return (
           <motion.div
             key={card.id}
-            className='relative cursor-pointer p-6 w-[460px] min-h-[420px] rounded-lg shadow-lg'
+            className='relative cursor-pointer p-6 w-[460px] min-h-[420px] rounded-lg shadow-lg cursor-effect-text'
             style={{
               backgroundColor: bgColor,
               rotate: `${randomRotate}deg`,

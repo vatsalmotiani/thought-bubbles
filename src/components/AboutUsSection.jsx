@@ -5,7 +5,7 @@ import clientList from "@/data/clients";
 import Reveal from "./Reveal";
 import RevealText from "./RevealText";
 
-export default function ClientsSection() {
+export default function AboutUsSection() {
   const featuredClients = clientList.filter((c) => c.favourite === true);
 
   return (

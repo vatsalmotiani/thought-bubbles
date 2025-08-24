@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import ServicesShowcase from "@/components/ServicesShowcase";
-import ClientsSection from "@/components/ClientsSection";
+import AboutUsSection from "@/components/AboutUsSection";
 import CTASection from "@/components/CTASection";
 import WorkDisplay from "@/components/WorkDisplay";
 import InfiniteScroller from "@/components/InfiniteScroller";
@@ -16,7 +16,7 @@ export default function Home() {
       {/* <ServicesShowcase /> */}
       <section id='about'>
         <InfiniteScroller text={"About Us"} />
-        <ClientsSection />
+        <AboutUsSection />
       </section>
       <section id='work'>
         <InfiniteScroller text={"Our Work"} />

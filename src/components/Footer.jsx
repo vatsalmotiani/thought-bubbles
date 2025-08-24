@@ -119,7 +119,7 @@ export default function Footer() {
             <div className='space-y-4'>
               {/* Email */}
               <div
-                className='flex items-start cursor-pointer'
+                className='flex items-start cursor-pointer cursor-effect-text'
                 onClick={() => copyToClipboard("manoj.motiani@thoughtbubbles.in", "Email Address copied to clipboard")}
               >
                 <Mail
@@ -134,7 +134,7 @@ export default function Footer() {
 
               {/* Phone */}
               <div
-                className='flex items-start cursor-pointer'
+                className='flex items-start cursor-pointer cursor-effect-text'
                 onClick={() => copyToClipboard("+919876543210", "Phone number copied to clipboard")}
               >
                 <Phone
@@ -227,7 +227,7 @@ export default function Footer() {
               onClick={scrollToTop}
               whileHover={{ scale: 1.1, y: -5, rotate: 10 }}
               whileTap={{ scale: 0.9 }}
-              className='p-3 rounded-full border-2  bg-white/60'
+              className='p-3 rounded-full border-2  bg-white/60 cursor-effect-text'
             >
               <ArrowUp
                 size={18}

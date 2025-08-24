@@ -59,7 +59,7 @@ const ServicePlanet = ({ service, orbit, isAutoHighlighted, hoveredService, isMo
 
   return (
     <motion.div
-      className='absolute top-1/2 left-1/2 cursor-pointer z-20'
+      className='absolute top-1/2 left-1/2 cursor-pointer cursor-effect-text z-20'
       style={{
         width: isMobile ? 40 : 50,
         height: isMobile ? 40 : 50,
@@ -207,11 +207,11 @@ export default function RedesignedHeroSection() {
   };
 
   const handlePlanetClick = (service) => {
-    const url = `?category=${slugify(service.name)}#work-display`;
+    const url = `#work`;
     router.push(url);
 
     setTimeout(() => {
-      const section = document.getElementById("work-display");
+      const section = document.getElementById("work");
       section?.scrollIntoView({ behavior: "smooth" });
     }, 150);
   };
@@ -220,18 +220,19 @@ export default function RedesignedHeroSection() {
     <section className='h-screen flex flex-col overflow-hidden bg-transparent'>
       <p className='font-caveat text-center pt-24 text-xl mb-[-3rem]'>A universe of brilliant thinking</p>
 
-      <div className='h-full relative flex items-center justify-center'>
+      <div className='h-full relative flex items-center justify-center '>
         <motion.div
           className='absolute z-10'
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ duration: 3.5, ease: "easeInOut", repeat: Infinity }}
         >
-          <Link href='/about'>
+          <Link href='#about'>
             <Image
               src='/tb-logo.svg'
               width={240}
               height={240}
               alt='Thought Bubbles Logo'
+              className='cursor-effect-text'
             />
           </Link>
         </motion.div>

@@ -14,10 +14,10 @@ export default function Home() {
         <HeroSection />
       </section>
       {/* <ServicesShowcase /> */}
-      <section id='about'>
+      {/* <section id='about'>
         <InfiniteScroller text={"About Us"} />
         <AboutUsSection />
-      </section>
+      </section> */}
       <section id='work'>
         <InfiniteScroller text={"Our Work"} />
         {/* <WorkDisplay /> */}

@@ -37,7 +37,7 @@ const InfiniteScroller = ({ text }) => {
   const repeatedText = Array(20).fill(text).join("   ");
 
   return (
-    <div className='relative w-full overflow-hidden py-20'>
+    <div className='relative w-full overflow-hidden py-8'>
       {/* Scroller with mask */}
       <div
         className='relative opacity-30'

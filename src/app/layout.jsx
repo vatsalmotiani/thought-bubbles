@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         <BackgroundElements />
         <CustomCursor />
         <SpaceshipHunter />
-        <FloatingSidebar />
+        {/* <FloatingSidebar /> */}
         {/* <Navbar /> */}
         {/* <DesktopDockNavbar /> */}
         <HomepageLoaderWrapper />

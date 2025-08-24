@@ -1,107 +1,184 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Instagram, Linkedin, Facebook, Mail, MapPin, ArrowUp } from "react-feather";
+import { Instagram, Linkedin, Facebook, Mail, MapPin, ArrowUp, Phone } from "react-feather";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Footer() {
+  const [toast, setToast] = useState(null);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const copyToClipboard = (text, message) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setToast(message);
+      setTimeout(() => setToast(null), 2000); // hide after 2s
+    });
   };
 
   return (
     <footer className='relative overflow-hidden bg-transparent'>
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
-        {/* Main Footer Content */}
-        <div className='flex flex-col lg:flex-row gap-12 mb-16'>
-          {/* Left - Logo */}
+        {/* Contact Form + Info Section */}
+        <div className='flex flex-col lg:flex-row gap-16 mb-16'>
+          {/* Left Side - Contact Form */}
           <motion.div
-            initial={{ opacity: 0, y: 30, rotate: -2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, type: "spring" }}
             viewport={{ once: true }}
-            className='lg:w-1/3 flex justify-center lg:justify-start'
+            className='lg:w-2/3 bg-white/70 rounded-2xl p-8 border border-gray-200'
           >
-            <motion.div
-              whileHover={{ scale: 1.02, rotate: 1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Image
-                src='/tb-logo.svg'
-                width={300}
-                height={50}
-                className='h-auto'
-                alt='Thought Bubbles Logo'
-              />
-            </motion.div>
+            <form className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+              {/* Name */}
+              <div className='col-span-1'>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>Full Name</label>
+                <input
+                  type='text'
+                  placeholder='Enter your name'
+                  className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-tb-blue outline-none'
+                />
+              </div>
+
+              {/* Email */}
+              <div className='col-span-1'>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>Email Address</label>
+                <input
+                  type='email'
+                  placeholder='Enter your email'
+                  className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-tb-blue outline-none'
+                />
+              </div>
+
+              {/* Mobile */}
+              <div className='col-span-1'>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>Mobile Number</label>
+                <input
+                  type='tel'
+                  placeholder='Enter your mobile'
+                  className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-tb-blue outline-none'
+                />
+              </div>
+
+              {/* Company Name */}
+              <div className='col-span-1'>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>Company Name</label>
+                <input
+                  type='text'
+                  placeholder='Enter your company'
+                  className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-tb-blue outline-none'
+                />
+              </div>
+
+              {/* Message */}
+              <div className='col-span-1 md:col-span-2'>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>Message</label>
+                <textarea
+                  rows={4}
+                  placeholder='Type your message...'
+                  className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-tb-blue outline-none'
+                ></textarea>
+              </div>
+
+              {/* Submit */}
+              <div className='flex justify-center '>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  type='submit'
+                  className='w-full px-6 py-3 rounded-xl bg-tb-blue text-white font-semibold  hover:bg-[#009ecc] transition cursor-effect-text'
+                >
+                  Send Message
+                </motion.button>
+              </div>
+            </form>
           </motion.div>
 
-          {/* Right - Contact Info + Socials */}
+          {/* Right Side - Logo + Contact Info + Socials */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
             viewport={{ once: true }}
-            className='lg:w-2/3'
+            className='lg:w-1/3 flex flex-col justify-between space-y-6'
           >
-            {/* Address + Email Side by Side */}
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8'>
+            {/* Logo */}
+            <div className='flex justify-center lg:justify-start'>
+              <Image
+                src='/tb-logo.svg'
+                width={220}
+                height={60}
+                className='h-auto'
+                alt='Thought Bubbles Logo'
+              />
+            </div>
+
+            {/* Info */}
+            <div className='space-y-4'>
               {/* Email */}
-              <div className='flex items-start'>
-                <div
-                  className='rounded-xl p-3 mr-4'
-                  style={{
-                    backgroundColor: "white",
-                    border: "2px solid #00B6E7",
-                    boxShadow: "2px 2px 0px #00B6E7",
-                  }}
-                >
-                  <Mail
-                    size={18}
-                    style={{ color: "#00B6E7" }}
-                  />
-                </div>
+              <div
+                className='flex items-start cursor-pointer'
+                onClick={() => copyToClipboard("manoj.motiani@thoughtbubbles.in", "Email Address copied to clipboard")}
+              >
+                <Mail
+                  className='text-tb-body mt-1 mr-3'
+                  size={20}
+                />
                 <div>
-                  <p className='font-poppins font-semibold text-sm text-[#1E1E1E]'>Email</p>
-                  <a
-                    href='mailto:manoj.motiani@thoughtbubbles.in'
-                    className='font-poppins text-sm text-[#828282] hover:text-[#00B6E7] transition-colors duration-300'
-                  >
-                    manoj.motiani@thoughtbubbles.in
-                  </a>
+                  <p className='font-semibold text-tb-black'>Email</p>
+                  <p className='text-tb-body'>manoj.motiani@thoughtbubbles.in</p>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div
+                className='flex items-start cursor-pointer'
+                onClick={() => copyToClipboard("+919876543210", "Phone number copied to clipboard")}
+              >
+                <Phone
+                  className='text-tb-body mt-1 mr-3'
+                  size={20}
+                />
+                <div>
+                  <p className='font-semibold text-tb-black'>Phone</p>
+                  <p className='text-tb-body'>+91 9876543210</p>
                 </div>
               </div>
 
               {/* Address */}
-              <div className='flex items-start'>
-                <div
-                  className='rounded-xl p-3 mr-4'
-                  style={{
-                    backgroundColor: "white",
-                    border: "2px solid #00B6E7",
-                    boxShadow: "2px 2px 0px #00B6E7",
-                  }}
-                >
-                  <MapPin
-                    size={18}
-                    style={{ color: "#00B6E7" }}
-                  />
-                </div>
+              <Link
+                href={"https://maps.app.goo.gl/DwT2JJrfy4PJG6aLA"}
+                target='_blank'
+                className='flex items-start cursor-effect-text'
+              >
+                <MapPin
+                  className='text-tb-body mt-1 mr-3'
+                  size={20}
+                />
                 <div>
-                  <p className='font-poppins font-semibold text-sm text-[#1E1E1E]'>Address</p>
-                  <p className='font-poppins text-sm text-[#828282]'>
-                    A-6, 1st Floor, My Mother&apos;s Society,
+                  <p className='font-semibold text-tb-black'>Address</p>
+                  <p className='text-tb-body'>
+                    A-6, 1st Floor, My Mother's Society,
                     <br />
                     RC Marg, Chembur, Mumbai-40071
                   </p>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* Social Icons */}
-            <div className='flex space-x-4 mb-8'>
+            <div className='flex space-x-4'>
               {[
-                { icon: Instagram, href: "https://www.instagram.com/thoughtbubbles_/" },
-                { icon: Linkedin, href: "https://in.linkedin.com/in/thought-bubbles-advertising-0aa385290" },
+                {
+                  icon: Instagram,
+                  href: "https://www.instagram.com/thoughtbubbles_/",
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://in.linkedin.com/in/thought-bubbles-advertising-0aa385290",
+                },
                 { icon: Facebook, href: "/" },
               ].map((social, index) => (
                 <motion.a
@@ -109,32 +186,31 @@ export default function Footer() {
                   href={social.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  whileHover={{
-                    scale: 1.1,
-                    y: -3,
-                    rotate: index % 2 === 0 ? 5 : -5,
-                  }}
+                  whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.9 }}
-                  className='relative group'
+                  className='p-3 rounded-xl bg-white/70 border border-gray-300 cursor-effect-text'
                 >
-                  <div
-                    className='relative rounded-xl p-3 transition-all duration-300'
-                    style={{
-                      backgroundColor: "white",
-                      border: "2px solid #00B6E7",
-                      boxShadow: "3px 3px 0px #00B6E7",
-                    }}
-                  >
-                    <social.icon
-                      size={20}
-                      style={{ color: "#1E1E1E" }}
-                    />
-                  </div>
+                  <social.icon
+                    size={20}
+                    className='text-gray-700'
+                  />
                 </motion.a>
               ))}
             </div>
           </motion.div>
         </div>
+
+        {/* Toast */}
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className='fixed bottom-6 right-6 bg-tb-blue text-white px-4 py-2 rounded-xl shadow-lg'
+          >
+            {toast}
+          </motion.div>
+        )}
 
         {/* Bottom Section */}
         <motion.div
@@ -142,41 +218,21 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
           viewport={{ once: true }}
-          className='border-t-2 pt-8'
-          style={{ borderColor: "#00B6E7", borderStyle: "dashed" }}
+          className='border-t pt-8 border-dashed border-tb-body/30'
         >
           <div className='flex flex-col md:flex-row justify-between items-center'>
-            <motion.p
-              className='font-poppins text-sm mb-4 md:mb-0 text-[#828282]'
-              whileHover={{ scale: 1.02 }}
-            >
-              © 2025 Thought Bubbles Advertising. All rights reserved.
-            </motion.p>
+            <motion.p className='text-sm text-gray-500 mb-4 md:mb-0'>© 2025 Thought Bubbles Advertising. All rights reserved.</motion.p>
 
             <motion.button
               onClick={scrollToTop}
-              whileHover={{
-                scale: 1.1,
-                y: -5,
-                rotate: 10,
-              }}
+              whileHover={{ scale: 1.1, y: -5, rotate: 10 }}
               whileTap={{ scale: 0.9 }}
-              className='relative group'
+              className='p-3 rounded-full border-2  bg-white/60'
             >
-              <div
-                className='rounded-full p-4 transition-all duration-300'
-                style={{
-                  backgroundColor: "white",
-                  border: "3px solid #00B6E7",
-                  boxShadow: "4px 4px 0px #00B6E7",
-                }}
-              >
-                <ArrowUp
-                  size={20}
-                  style={{ color: "#1E1E1E" }}
-                  className='group-hover:scale-110 transition-transform'
-                />
-              </div>
+              <ArrowUp
+                size={18}
+                className='text-tb-black'
+              />
             </motion.button>
           </div>
         </motion.div>

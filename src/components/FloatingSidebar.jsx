@@ -72,7 +72,7 @@ export default function FloatingSidebar() {
           return (
             <li
               key={item.id}
-              className='pointer-events-auto'
+              className='pointer-events-auto cursor-effect-text'
             >
               <a
                 href={`#${item.id}`}

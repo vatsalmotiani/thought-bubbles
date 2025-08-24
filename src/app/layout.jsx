@@ -8,6 +8,7 @@ import HomepageLoaderWrapper from "@/components/HomepageLoaderWrapper";
 import SpaceshipHunter from "@/components/SpaceshipHunter";
 import DesktopDockNavbar from "@/components/DesktopDockNavbar";
 import FloatingSidebar from "@/components/FloatingSidebar";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata = {
   title: {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
+        <CustomCursor />
         <SpaceshipHunter />
         <FloatingSidebar />
         {/* <Navbar /> */}

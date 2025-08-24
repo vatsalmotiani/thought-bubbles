@@ -40,7 +40,7 @@ const InfiniteScroller = ({ text }) => {
     <div className='relative w-full overflow-hidden py-20'>
       {/* Scroller with mask */}
       <div
-        className='relative opacity-20'
+        className='relative opacity-30'
         style={{
           WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 10%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 60%, rgba(0,0,0,0.2) 90%, rgba(0,0,0,0) 100%)",
           WebkitMaskRepeat: "no-repeat",
@@ -51,7 +51,7 @@ const InfiniteScroller = ({ text }) => {
         }}
       >
         <motion.div
-          className='flex whitespace-nowrap '
+          className='flex whitespace-nowrap'
           animate={{ x: ["0%", "-100%"] }}
           transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
         >

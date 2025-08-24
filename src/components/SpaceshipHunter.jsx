@@ -166,7 +166,7 @@ const SpaceshipHunter = () => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {showForm && (
           <EnquireNowForm
             onClose={handleClose}
@@ -174,7 +174,7 @@ const SpaceshipHunter = () => {
             type='spaceship'
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   );
 };

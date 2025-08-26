@@ -50,10 +50,10 @@ export default function Footer() {
                 className='flex items-start cursor-pointer cursor-effect-text'
                 onClick={() => copyToClipboard("manoj.motiani@thoughtbubbles.in", "Email copied")}
               >
-                <Mail
+                {/* <Mail
                   className='text-tb-body mt-1 mr-3'
                   size={20}
-                />
+                /> */}
                 <div>
                   <p className='font-semibold text-tb-black'>Email</p>
                   <p className='text-tb-body break-words'>manoj.motiani@thoughtbubbles.in</p>
@@ -64,10 +64,10 @@ export default function Footer() {
                 className='flex items-start cursor-pointer cursor-effect-text'
                 onClick={() => copyToClipboard("+919876543210", "Phone copied")}
               >
-                <Phone
+                {/* <Phone
                   className='text-tb-body mt-1 mr-3'
                   size={20}
-                />
+                /> */}
                 <div>
                   <p className='font-semibold text-tb-black'>Phone</p>
                   <p className='text-tb-body'>+91 9876543210</p>
@@ -79,10 +79,10 @@ export default function Footer() {
                 target='_blank'
                 className='flex items-start cursor-effect-text'
               >
-                <MapPin
+                {/* <MapPin
                   className='text-tb-body mt-1 mr-3'
                   size={20}
-                />
+                /> */}
                 <div>
                   <p className='font-semibold text-tb-black'>Address</p>
                   <p className='text-tb-body leading-relaxed'>

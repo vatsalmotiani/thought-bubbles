@@ -5,31 +5,36 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import caseList from "@/data/caseList";
 
+// tiny stable hash -> pseudo-random [0,1)
+function hashToUnit(seed) {
+  let h = 2166136261; // FNV-like
+  const s = String(seed);
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = (h * 16777619) >>> 0;
+  }
+  // map to [0,1)
+  return (h % 1_000_003) / 1_000_003;
+}
+
+// choose a corner deterministically from 4 options
+function cornerFor(seed) {
+  const corners = [
+    "top-0 left-0 -translate-x-1/3 -translate-y-1/3", // top-left
+    "top-0 right-0 translate-x-1/3 -translate-y-1/3", // top-right
+    "bottom-0 left-0 -translate-x-1/3 translate-y-1/3", // bottom-left
+    "bottom-0 right-0 translate-x-1/3 translate-y-1/3", // bottom-right
+  ];
+  const idx = Math.floor(hashToUnit(seed) * corners.length);
+  return corners[idx];
+}
+
 export default function CaseShowcase() {
   const [activeCard, setActiveCard] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
 
-  // randomly pick ~1/3 of cases for overlay
-  const overlayIndices = useMemo(() => {
-    const count = Math.floor(caseList.length / 3);
-    const indices = new Set();
-    while (indices.size < count) {
-      const rand = Math.floor(Math.random() * caseList.length);
-      indices.add(rand);
-    }
-    return indices;
-  }, []);
-
-  // assign random corner for each overlay card
-  const overlayCorner = () => {
-    const positions = [
-      "top-0 left-0 -translate-x-1/3 -translate-y-1/3", // top-left
-      "top-0 right-0 translate-x-1/3 -translate-y-1/3", // top-right
-      "bottom-0 left-0 -translate-x-1/3 translate-y-1/3", // bottom-left
-      "bottom-0 right-0 translate-x-1/3 translate-y-1/3", // bottom-right
-    ];
-    return positions[Math.floor(Math.random() * positions.length)];
-  };
+  // ~1/3 cards get an overlay, picked deterministically from card.id
+  const showOverlayForId = (id) => hashToUnit(id) < 1 / 3;
 
   const aspectForIndex = (i) => (i % 3 === 0 ? "aspect-[16/10]" : i % 3 === 1 ? "aspect-[4/5]" : "aspect-[5/4]");
 
@@ -72,9 +77,9 @@ export default function CaseShowcase() {
               )}
             </div>
 
-            {/* overlay vector3 (edges only) */}
-            {overlayIndices.has(i) && (
-              <div className={`absolute z-20 pointer-events-none ${overlayCorner()}`}>
+            {/* overlay vector3 (edges only) — deterministic */}
+            {showOverlayForId(card.id) && (
+              <div className={`absolute z-20 pointer-events-none ${cornerFor(card.id)}`}>
                 <Image
                   src='/assets/vector3.png'
                   alt='Vector Decoration'

@@ -1,13 +1,8 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackgroundElements from "@/components/BackgroundElements";
 import HomepageLoaderWrapper from "@/components/HomepageLoaderWrapper";
-import SpaceshipHunter from "@/components/SpaceshipHunter";
-import DesktopDockNavbar from "@/components/DesktopDockNavbar";
-import FloatingSidebar from "@/components/FloatingSidebar";
 import CustomCursor from "@/components/CustomCursor";
 
 export const metadata = {
@@ -19,6 +14,12 @@ export const metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  openGraph: {
+    type: "website",
+    url: "https://thoughtbubbles.in", // replace with your real domain
+    title: "Thought Bubbles Advertising",
+    description: "Thought Bubbles Advertising",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -27,10 +28,6 @@ export default function RootLayout({ children }) {
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
         <CustomCursor />
-        {/* <SpaceshipHunter /> */}
-        {/* <FloatingSidebar /> */}
-        {/* <Navbar /> */}
-        {/* <DesktopDockNavbar /> */}
         <HomepageLoaderWrapper />
         <div className='flex-grow w-full'>
           <SmoothScroll>{children}</SmoothScroll>

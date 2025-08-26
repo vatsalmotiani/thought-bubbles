@@ -134,7 +134,7 @@ export default function CaseShowcase() {
                         key={idx}
                         type='button'
                         onClick={() => setActiveImage(img)}
-                        className={`relative w-full aspect-square rounded-lg overflow-hidden cursor-effect-text border-2 ${activeImage === img ? "border-tb-black" : "border-transparent"}`}
+                        className={`relative w-full aspect-square rounded-lg overflow-hidden cursor-effect-text border-2 ${activeImage === img ? "border-tb-blue" : "border-transparent"}`}
                         aria-label='View image'
                       >
                         <Image

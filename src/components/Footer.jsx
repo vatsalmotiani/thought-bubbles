@@ -88,7 +88,7 @@ export default function Footer() {
                 <div>
                   <p className='font-semibold text-tb-black'>Address</p>
                   <p className='text-tb-body leading-relaxed'>
-                    A-6, 1st Floor, My Mother's Society, <br />
+                    A-6, 1st Floor, My Mother&apos;s Society, <br />
                     RC Marg, Chembur, Mumbai-40071
                   </p>
                 </div>
@@ -109,7 +109,7 @@ export default function Footer() {
                   rel='noopener noreferrer'
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.9 }}
-                  className='p-3 rounded-xl bg-white border border-gray-200 cursor-effect-text shadow-sm'
+                  className='p-3 rounded-xl bg-white/60 border border-gray-200 cursor-effect-text shadow-sm'
                 >
                   <social.icon
                     size={20}
@@ -126,7 +126,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, type: "spring" }}
             viewport={{ once: true }}
-            className='w-full bg-white p-6 md:p-10 lg:p-12 rounded-3xl lg:col-span-3'
+            className='w-full bg-white/60 p-6 md:p-10 lg:p-12 rounded-3xl lg:col-span-3'
           >
             {/* Header */}
             <h3 className='text-2xl md:text-3xl font-bold text-tb-black mb-6'>Get in Touch</h3>
@@ -134,7 +134,9 @@ export default function Footer() {
             <form className='grid grid-cols-1 md:grid-cols-2 gap-6'>
               {/* Name */}
               <div>
-                <label className='block text-sm font-semibold text-gray-700 mb-1'>Full Name</label>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>
+                  Full Name<span className='text-tb-blue'>*</span>
+                </label>
                 <input
                   type='text'
                   placeholder='Enter your name'
@@ -144,7 +146,9 @@ export default function Footer() {
 
               {/* Email */}
               <div>
-                <label className='block text-sm font-semibold text-gray-700 mb-1'>Email Address</label>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>
+                  Email Address<span className='text-tb-blue'>*</span>
+                </label>
                 <input
                   type='email'
                   placeholder='Enter your email'
@@ -154,7 +158,9 @@ export default function Footer() {
 
               {/* Mobile */}
               <div>
-                <label className='block text-sm font-semibold text-gray-700 mb-1'>Mobile Number</label>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>
+                  Mobile Number<span className='text-tb-blue'>*</span>
+                </label>
                 <input
                   type='tel'
                   placeholder='Enter your mobile'
@@ -174,7 +180,9 @@ export default function Footer() {
 
               {/* Message */}
               <div className='md:col-span-2'>
-                <label className='block text-sm font-semibold text-gray-700 mb-1'>Message</label>
+                <label className='block text-sm font-semibold text-gray-700 mb-1'>
+                  Message<span className='text-tb-blue'>*</span>
+                </label>
                 <textarea
                   rows={4}
                   placeholder='Type your message...'

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-const MAX_ELEMENTS = 6;
+const MAX_ELEMENTS = 5;
 const MIN_THRESHOLD = Math.floor(MAX_ELEMENTS * 0.6);
 const vectors = ["/assets/vector2.png", "/assets/vector3.png", "/assets/vector4.png"];
 const SAFE_RADIUS = 120; // min distance between elements

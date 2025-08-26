@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
         <CustomCursor />
-        <SpaceshipHunter />
+        {/* <SpaceshipHunter /> */}
         {/* <FloatingSidebar /> */}
         {/* <Navbar /> */}
         {/* <DesktopDockNavbar /> */}

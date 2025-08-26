@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const CustomCursor = () => {
   const [isHoveringText, setIsHoveringText] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // live mouse position
   const mouse = useRef({ x: 0, y: 0 });
@@ -13,7 +14,13 @@ const CustomCursor = () => {
   const cursorRef = useRef(null);
 
   useEffect(() => {
-    const ease = 0.1; // smaller = more lag
+    // detect mobile by screen size or touch
+    const mobileCheck = window.innerWidth < 768 || "ontouchstart" in window;
+    setIsMobile(mobileCheck);
+
+    if (mobileCheck) return; // don’t attach listeners if mobile
+
+    const ease = 0.1;
 
     const updateMouse = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
@@ -34,7 +41,6 @@ const CustomCursor = () => {
       requestAnimationFrame(animate);
     };
 
-    // hover text check
     const handleMouseOver = (e) => {
       const target = e.target;
       if (target.classList.contains("cursor-effect-text") || target.closest(".cursor-effect-text")) {
@@ -61,6 +67,8 @@ const CustomCursor = () => {
       document.removeEventListener("mouseout", handleMouseOut);
     };
   }, []);
+
+  if (isMobile) return null; // don’t render at all
 
   return (
     <div

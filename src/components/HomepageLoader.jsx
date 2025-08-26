@@ -9,7 +9,7 @@ export default function BubbleLoader({ onComplete }) {
   const HOLD_TIME = 1200;
   const SCALE_TIME = 2000;
   const MOVE_TIME = 1000;
-  const EXIT_X = "55vw";
+  const EXIT_X = "calc(100vw + 200px)"; // moves beyond screen width + bubble radius
   const EXIT_Y = "0vh";
   const FINAL_SCALE = 0.2;
 

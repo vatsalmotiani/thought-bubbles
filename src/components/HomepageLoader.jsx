@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import TBBubbleAnimation from "./TBBubbleAnimation";
 
 export default function BubbleLoader({ onComplete }) {
   // 🔧 Adjustable variables
-  const HOLD_TIME = 1200;
+  const HOLD_TIME = 1800;
   const SCALE_TIME = 2000;
   const MOVE_TIME = 1000;
   const EXIT_X = "calc(100vw + 200px)"; // moves beyond screen width + bubble radius
@@ -79,9 +80,11 @@ export default function BubbleLoader({ onComplete }) {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
               >
-                <Reveal>
+                <TBBubbleAnimation />
+
+                {/* <Reveal>
                   <p className='font-oswald uppercase text-white text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-semibold mt-4 pb-2 leading-tight'>Thinking…</p>
-                </Reveal>
+                </Reveal> */}
               </motion.div>
             )}
           </AnimatePresence>

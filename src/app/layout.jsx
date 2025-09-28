@@ -12,7 +12,7 @@ export const metadata = {
   },
   description: "Thought Bubbles Advertising",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.ico",
   },
   openGraph: {
     type: "website",

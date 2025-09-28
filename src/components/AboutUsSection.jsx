@@ -15,7 +15,7 @@ export default function AboutUsSection() {
         <RevealText lines={["Building bridges since 2009.", "We have proudly collaborated with esteemed clients,", "fostering lasting connections and delivering impactful results."]} />
 
         {/* Clients Grid */}
-        <div className='flex justify-center'>
+        {/* <div className='flex justify-center'>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export default function AboutUsSection() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </div> */}
 
         {/* Stats Section */}
         <motion.div

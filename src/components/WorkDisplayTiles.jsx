@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import caseList from "@/data/caseList";
 import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
+import { X } from "react-feather";
 
 // ========================================
 // CASE SHOWCASE COMPONENT
@@ -118,8 +119,8 @@ export default function CaseShowcase() {
               </div>
             )}
 
-            <h3 className='mt-6 font-space font-[500] text-xl sm:text-3xl text-tb-black'>{card.name}</h3>
-            {card.shortDescription && <p className='mt-1 font-space text-sm sm:text-lg text-neutral-600'>{card.shortDescription}</p>}
+            <h3 className='mt-6 font-space font-[500] text-lg sm:text-2xl text-tb-black'>{card.name}</h3>
+            {card.shortDescription && <p className='mt-1 font-space text-sm md:text-md text-neutral-600'>{card.shortDescription}</p>}
           </motion.div>
         ))}
       </div>
@@ -129,19 +130,19 @@ export default function CaseShowcase() {
         open={drawerOpen}
         onOpenChange={handleDrawerClose}
       >
-        <DrawerContent className='max-w-5xl mx-auto h-[80vh] rounded-t-3xl md:rounded-t-[2rem] z-[9999]'>
-          <DrawerHeader className='border-b border-neutral-200 pb-4'>
+        <DrawerContent className='mb-12 max-w-5xl mx-auto h-[80vh] rounded-t-3xl md:rounded-t-[2rem] z-[9999]'>
+          <DrawerHeader className='border-b border-neutral-200 pb-4 mx-6'>
             <div className='flex items-center justify-between'>
-              <div>
-                <DrawerTitle className='font-space text-xl sm:text-2xl text-tb-black font-[500]'>{activeCard?.name}</DrawerTitle>
+              <div className='text-start'>
+                <DrawerTitle className='font-space text-lg sm:text-2xl text-tb-black font-[500]'>{activeCard?.name}</DrawerTitle>
                 {activeCard?.client?.name && <p className='font-space text-sm text-neutral-500 mt-1'>{activeCard.client.name}</p>}
               </div>
               <DrawerClose asChild>
                 <button
-                  className='rounded-full bg-tb-black text-white px-4 py-2 text-sm hover:bg-tb-black transition-colors font-space '
+                  className='rounded-full bg-tb-body text-white px-2 py-2 hover:bg-tb-black/50 transition-colors'
                   aria-label='Close'
                 >
-                  Close
+                  <X className='w-4 h-4' />
                 </button>
               </DrawerClose>
             </div>

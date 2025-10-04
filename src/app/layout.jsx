@@ -14,9 +14,10 @@ export const metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  themeColor: "#D3D3D3",
   openGraph: {
     type: "website",
-    url: "https://thoughtbubbles.in", // replace with your real domain
+    url: "https://thoughtbubbles.in",
     title: "Thought Bubbles Advertising",
     description: "Thought Bubbles Advertising",
   },
@@ -25,6 +26,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
+      <head>
+        <meta
+          name='theme-color'
+          content='#D3D3D3'
+        />
+        <meta
+          name='apple-mobile-web-app-status-bar-style'
+          content='black-translucent'
+        />
+        <meta
+          name='msapplication-TileColor'
+          content='#D3D3D3'
+        />
+      </head>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>
         <BackgroundElements />
         <CustomCursor />

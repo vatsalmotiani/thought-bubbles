@@ -28,6 +28,34 @@ export default function CountdownScroll() {
   const digit3 = useTransform(yearString, (s) => s[2]);
   const digit4 = useTransform(yearString, (s) => s[3]);
 
+  // Text milestones based on years
+  const milestones = [
+    { year: 2022, text: "Building excellence since day one." },
+    { year: 2020, text: "Adapting and innovating through challenges." },
+    { year: 2015, text: "Expanding horizons and breaking boundaries." },
+    { year: 2011, text: "Where it all began - the foundation." },
+  ];
+
+  // State for current milestone text
+  const [currentText, setCurrentText] = useState(milestones[0].text);
+
+  // Update text based on year
+  useEffect(() => {
+    const unsubscribe = displayYear.on("change", (latest) => {
+      // Find the appropriate milestone text
+      for (let i = 0; i < milestones.length; i++) {
+        if (latest >= milestones[i].year) {
+          if (currentText !== milestones[i].text) {
+            setCurrentText(milestones[i].text);
+          }
+          break;
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [displayYear, currentText]);
+
   // Check if countdown is complete
   useEffect(() => {
     const unsubscribe = displayYear.on("change", (latest) => {
@@ -77,9 +105,9 @@ export default function CountdownScroll() {
       {/* Sticky container */}
       <div className='sticky top-0 h-screen flex items-center overflow-hidden'>
         <div className='w-full max-w-7xl mx-auto px-4 md:px-8'>
-          <div className='grid md:grid-cols-2 gap-12 md:gap-20 lg:gap-32 items-center'>
+          <div className='grid gap-12 md:gap-20 lg:gap-32 items-center'>
             {/* Left side - Year countdown */}
-            <div className='flex items-center justify-center md:col-span-1 col-span-2 md:justify-end'>
+            <div className='flex items-center justify-center col-span-2'>
               <motion.div
                 className='text-[180px] sm:text-[220px] md:text-[200px] lg:text-[320px] font-bold leading-none font-space tracking-tighter'
                 style={{
@@ -94,7 +122,7 @@ export default function CountdownScroll() {
             </div>
 
             {/* Right side - Minimal info */}
-            <div className='hidden md:block'>
+            {/* <div className='hidden md:block'>
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -103,19 +131,22 @@ export default function CountdownScroll() {
               >
                 <p className='text-lg md:text-xl text-tb-body leading-relaxed max-w-md'>Building excellence since day one.</p>
               </motion.div>
-            </div>
+            </div> */}
           </div>
 
           {/* Bottom minimal text - mobile only */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-            className='absolute bottom-20 left-0 right-0 px-4 md:hidden'
-          >
+          <motion.div className='absolute bottom-20 left-0 right-0 px-4'>
             <div className='max-w-7xl mx-auto'>
-              <p className='text-sm text-tb-body text-center'>Building excellence since day one.</p>
+              <motion.p
+                key={currentText}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className='text-sm text-tb-body text-center'
+              >
+                {currentText}
+              </motion.p>
             </div>
           </motion.div>
 

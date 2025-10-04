@@ -1,6 +1,7 @@
 // components/CustomCursor.js
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const CustomCursor = () => {
   const [cursorState, setCursorState] = useState("default"); // "default" | "hover" | "hidden"
@@ -90,25 +91,32 @@ const CustomCursor = () => {
         willChange: "transform, left, top",
       }}
     >
-      {/* Base cursor */}
-      <img
-        src='/assets/blue-bubble-cursor.svg'
-        alt='cursor'
-        className={`absolute w-full h-full transition-opacity duration-300 ease-out ${cursorState === "default" ? "opacity-100" : "opacity-0"}`}
-      />
+      {/* Default cursor */}
+      <div className={`absolute inset-0 transition-opacity duration-300 ease-out ${cursorState === "default" ? "opacity-100" : "opacity-0"}`}>
+        <Image
+          src='/assets/blue-bubble-cursor.svg'
+          alt='cursor'
+          fill
+          sizes='40px'
+          priority
+          style={{ objectFit: "contain" }}
+        />
+      </div>
 
       {/* Hover cursor */}
-      <img
-        src='/assets/cursor-hover.svg'
-        alt='cursor hover'
-        className={`absolute w-full h-full transition-opacity duration-300 ease-out ${cursorState === "hover" ? "opacity-100" : "opacity-0"}`}
-      />
+      <div className={`absolute inset-0 transition-opacity duration-300 ease-out ${cursorState === "hover" ? "opacity-100" : "opacity-0"}`}>
+        <Image
+          src='/assets/cursor-hover.svg'
+          alt='cursor hover'
+          fill
+          sizes='40px'
+          priority
+          style={{ objectFit: "contain" }}
+        />
+      </div>
 
-      {/* Hide both when no-cursor-effect */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-300 ease-out ${cursorState === "hidden" ? "opacity-100" : "opacity-0"}`}
-        style={{ background: "transparent" }}
-      />
+      {/* Hidden state (no cursor effect) */}
+      <div className={`absolute inset-0 transition-opacity duration-300 ease-out ${cursorState === "hidden" ? "opacity-0" : "opacity-100"}`} />
     </div>
   );
 };

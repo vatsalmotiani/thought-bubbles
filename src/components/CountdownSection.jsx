@@ -4,7 +4,17 @@ import { useRef, useEffect, useState } from "react";
 
 export default function CountdownScroll() {
   const containerRef = useRef(null);
+  const yearRef = useRef(null); // <--- ref for visual-center checks
   const [isComplete, setIsComplete] = useState(false);
+
+  // ---------------------- CONFIG (change these) ----------------------
+  // Auto-scroll speed in pixels per second (changeable)
+  const AUTO_SCROLL_PX_PER_SEC = 800;
+  // How long (ms) after the last user interaction before autoscroll resumes
+  const USER_INACTIVITY_RESUME_MS = 300;
+  // How close to center (fraction of viewport height) the year must be to start auto-scrolling
+  const CENTER_TOLERANCE_FRAC = 0.8; // 8% of viewport height
+  // ------------------------------------------------------------------
 
   const COUNTDOWN_SPEED = 1300;
 
@@ -82,6 +92,171 @@ export default function CountdownScroll() {
       };
     }
   }, [isComplete, displayYear]);
+
+  // ---------------------- AUTO-SCROLL CONTROLLER ----------------------
+  const rafRef = useRef(null);
+  const lastTimestampRef = useRef(null);
+  const userInteractingRef = useRef(false);
+  const inactivityTimeoutRef = useRef(null);
+  const autoActiveRef = useRef(false);
+
+  const isDisplayInAutoRange = () => {
+    const v = displayYear.get();
+    // allow when in [2009, 2025) — autoscroll should continue until hitting 2025
+    return v >= 2009 && v < 2025;
+  };
+
+  const isYearCentered = () => {
+    const el = yearRef.current;
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+    const centerY = rect.top + rect.height / 2;
+    const viewportCenter = window.innerHeight / 2;
+    const tolerance = window.innerHeight * CENTER_TOLERANCE_FRAC;
+    return Math.abs(centerY - viewportCenter) <= tolerance;
+  };
+
+  function stopAutoScroll() {
+    autoActiveRef.current = false;
+    lastTimestampRef.current = null;
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  }
+
+  function startAutoScroll() {
+    if (autoActiveRef.current) return;
+    autoActiveRef.current = true;
+    lastTimestampRef.current = null;
+
+    const step = (time) => {
+      if (!autoActiveRef.current) return;
+      if (lastTimestampRef.current == null) lastTimestampRef.current = time;
+      const delta = (time - lastTimestampRef.current) / 1000;
+      lastTimestampRef.current = time;
+
+      // move the page down
+      const dy = AUTO_SCROLL_PX_PER_SEC * delta;
+      // use instant scroll (no smooth) to keep framerate consistent
+      window.scrollBy(0, dy);
+
+      // stop conditions
+      const reachedEndYear = displayYear.get() >= 2025 - 0.4; // a small tolerance
+      const reachedScrollEnd = containerRef.current && containerRef.current.getBoundingClientRect().bottom <= window.innerHeight + 2;
+
+      if (reachedEndYear || reachedScrollEnd) {
+        stopAutoScroll();
+
+        document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" });
+
+        return;
+      }
+
+      // if user suddenly interacts, stopAutoScroll will be called externally
+      rafRef.current = requestAnimationFrame(step);
+    };
+
+    rafRef.current = requestAnimationFrame(step);
+  }
+
+  const cancelInactivityResume = () => {
+    if (inactivityTimeoutRef.current) {
+      clearTimeout(inactivityTimeoutRef.current);
+      inactivityTimeoutRef.current = null;
+    }
+  };
+
+  const scheduleResumeIfEligible = () => {
+    cancelInactivityResume();
+    inactivityTimeoutRef.current = setTimeout(() => {
+      userInteractingRef.current = false;
+      // only restart if the display is in range and year is centered
+      if (isDisplayInAutoRange() && isYearCentered()) {
+        startAutoScroll();
+      }
+    }, USER_INACTIVITY_RESUME_MS);
+  };
+
+  // Called when the user interacts (wheel/touch/pointer/keyboard)
+  const onUserInteraction = () => {
+    // mark user as interacting, stop autoscroll immediately
+    userInteractingRef.current = true;
+    stopAutoScroll();
+    // schedule resume after inactivity
+    scheduleResumeIfEligible();
+  };
+
+  useEffect(() => {
+    // Add user interaction listeners (capture) to detect any manual scroll input
+    const opts = { passive: true, capture: true };
+    window.addEventListener("wheel", onUserInteraction, opts);
+    window.addEventListener("touchstart", onUserInteraction, opts);
+    window.addEventListener("touchmove", onUserInteraction, opts);
+    window.addEventListener("pointerdown", onUserInteraction, opts);
+    window.addEventListener("keydown", onUserInteraction, opts); // arrows, pageup/down, spacebar
+
+    return () => {
+      window.removeEventListener("wheel", onUserInteraction, opts);
+      window.removeEventListener("touchstart", onUserInteraction, opts);
+      window.removeEventListener("touchmove", onUserInteraction, opts);
+      window.removeEventListener("pointerdown", onUserInteraction, opts);
+      window.removeEventListener("keydown", onUserInteraction, opts);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Observe displayYear changes and attempt to start auto-scroll when conditions are met.
+    // We use a small debounce guard to avoid flapping.
+    let guardTimeout = null;
+    const unsub = displayYear.on("change", () => {
+      // if user is interacting, don't auto-start
+      if (userInteractingRef.current) {
+        // but still schedule resume
+        cancelInactivityResume();
+        scheduleResumeIfEligible();
+        return;
+      }
+
+      // Only start autoscroll when the visual year is in the [2009,2025) range
+      // AND the year element is roughly centered in the viewport.
+      // Add a short guard delay to avoid accidental rapid toggles.
+      if (guardTimeout) clearTimeout(guardTimeout);
+      guardTimeout = setTimeout(() => {
+        guardTimeout = null;
+        if (isDisplayInAutoRange() && isYearCentered()) {
+          startAutoScroll();
+        } else {
+          // If outside the range, ensure autoscroll is stopped
+          stopAutoScroll();
+        }
+      }, 80);
+    });
+
+    // cleanup
+    return () => {
+      if (guardTimeout) clearTimeout(guardTimeout);
+      unsub();
+      cancelInactivityResume();
+      stopAutoScroll();
+    };
+  }, [displayYear, scrollYProgress]);
+
+  // Allow external components (like Navbar) to manually stop auto scroll
+  useEffect(() => {
+    const stopHandler = () => {
+      stopAutoScroll();
+      userInteractingRef.current = true;
+      cancelInactivityResume(); // prevent it from resuming automatically
+    };
+
+    window.addEventListener("stopCountdownAutoScroll", stopHandler);
+    return () => {
+      window.removeEventListener("stopCountdownAutoScroll", stopHandler);
+    };
+  }, []);
+
+  // ---------------------- END AUTO-SCROLL CONTROLLER ----------------------
 
   // Floating particles that orbit the numbers
   const FloatingOrb = ({ delay, radius, speed }) => {
@@ -186,6 +361,7 @@ export default function CountdownScroll() {
 
             {/* Main year display */}
             <motion.div
+              ref={yearRef}
               className='text-[180px] sm:text-[220px] md:text-[200px] lg:text-[320px] font-bold leading-none font-space tracking-tighter relative z-10'
               style={{
                 color: useTransform(colorProgress, [0, 1], ["#1E1E1E", "#00B6E7"]),

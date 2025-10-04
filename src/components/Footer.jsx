@@ -9,6 +9,10 @@ export default function Footer() {
   const [toast, setToast] = useState(null);
 
   const scrollToTop = () => {
+    // Tell CountdownScroll to stop its auto scroll loop
+    window.dispatchEvent(new Event("stopCountdownAutoScroll"));
+
+    // Then scroll to top
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

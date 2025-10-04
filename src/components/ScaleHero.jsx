@@ -49,6 +49,10 @@ export default function HeroTextScaler() {
   }, []);
 
   const scrollToTop = () => {
+    // Tell CountdownScroll to stop its auto scroll loop
+    window.dispatchEvent(new Event("stopCountdownAutoScroll"));
+
+    // Then scroll to top
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -117,7 +121,7 @@ export default function HeroTextScaler() {
               <motion.span
                 key={line.id}
                 className='block relative h-[1.2em]'
-                style={{ lineHeight: "1.2" }}
+                style={{ lineHeight: "1.6" }}
               >
                 <motion.span
                   className='absolute left-0 top-0'

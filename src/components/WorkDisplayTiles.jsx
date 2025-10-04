@@ -91,8 +91,8 @@ export default function CaseShowcase() {
             )}
 
             {/* label */}
-            <h3 className='mt-4 font-oswald text-xl sm:text-2xl text-tb-black'>{card.name}</h3>
-            {card.shortDescription && <p className='mt-1 text-sm sm:text-base text-neutral-600'>{card.shortDescription}</p>}
+            <h3 className='mt-6 font-space font-[500] text-xl sm:text-3xl text-tb-black'>{card.name}</h3>
+            {card.shortDescription && <p className='mt-1 font-space text-sm sm:text-lg text-neutral-600'>{card.shortDescription}</p>}
           </motion.div>
         ))}
       </div>

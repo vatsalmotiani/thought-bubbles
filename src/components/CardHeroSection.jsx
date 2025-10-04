@@ -7,8 +7,8 @@ export default function CardHeroSection() {
   /* ------------------- SETTINGS ------------------- */
   const slides = ["/assets/dummy2.jpg", "/assets/dummy5.jpg"]; // add more images
   const intervalTime = 5000; // ms each image stays on screen
-  const transitionTime = 2; // seconds for fade transition
-  const overlayOpacity = 0.35; // black overlay strength (0–1)
+  const transitionTime = 0.3; // seconds for fade transition
+  const overlayOpacity = 0.5; // black overlay strength (0–1)
 
   /* ------------------- IMAGE CYCLER ------------------- */
   const [index, setIndex] = useState(0);
@@ -27,20 +27,8 @@ export default function CardHeroSection() {
     <section className='h-screen flex items-center justify-center p-4 bg-transparent'>
       <motion.div
         style={{ scale }}
-        className='relative w-full h-full max-w-7xl rounded-3xl overflow-hidden'
+        className='relative w-full h-full rounded-3xl overflow-hidden'
       >
-        {/* ---------- Logo ---------- */}
-        <div className='absolute top-6 left-6 z-20'>
-          <Image
-            src='/tb-logo-white.svg'
-            alt='Company Logo'
-            width={120}
-            height={40}
-            className='object-contain'
-            priority
-          />
-        </div>
-
         {/* ---------- Image Slideshow ---------- */}
         <AnimatePresence mode='wait'>
           <motion.div
@@ -70,7 +58,7 @@ export default function CardHeroSection() {
         </AnimatePresence>
 
         {/* ---------- Hero Content ---------- */}
-        <div className='relative z-10 flex flex-col items-start justify-center h-full p-10 text-white'>
+        {/* <div className='relative z-10 flex flex-col items-start justify-center h-full p-10 text-white'>
           <motion.h1
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -90,7 +78,7 @@ export default function CardHeroSection() {
           >
             We craft unforgettable brand experiences using creativity, strategy, and design that connect with audiences everywhere.
           </motion.p>
-        </div>
+        </div> */}
       </motion.div>
     </section>
   );

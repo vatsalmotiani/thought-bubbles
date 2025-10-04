@@ -10,7 +10,7 @@ export default function AboutUsSection() {
 
   return (
     <section className='py-20'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-space'>
         {/* Section Header */}
         <RevealText lines={["Building bridges since 2009.", "We have proudly collaborated with esteemed clients,", "fostering lasting connections and delivering impactful results."]} />
 

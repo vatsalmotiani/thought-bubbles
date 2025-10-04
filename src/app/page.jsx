@@ -4,12 +4,16 @@ import Footer from "@/components/Footer";
 import WorkDisplayTiles from "@/components/WorkDisplayTiles";
 import CardHeroSection from "@/components/CardHeroSection";
 import AboutUsSection from "@/components/AboutUsSection";
+import HeroTextScaler from "@/components/ScaleHero";
+import CountdownScroll from "@/components/CountdownSection";
 
 export default function Home() {
   return (
     <main className='flex flex-col'>
+      <HeroTextScaler />
       <CardHeroSection />
-      <AboutUsSection />
+      <CountdownScroll />
+      {/* <AboutUsSection /> */}
       {/* <HeroSection /> */}
       <section id='work'>
         <InfiniteScroller text={"Our Work"} />
@@ -17,6 +21,7 @@ export default function Home() {
       </section>
       <section id='contact'>
         <InfiniteScroller text={"Get In Touch"} />
+
         <Footer />
       </section>
     </main>

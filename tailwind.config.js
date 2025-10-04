@@ -16,6 +16,7 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         caveat: ["Caveat", "cursive"],
+        space: ["Space Grotesk", "sans-serif"],
         noto: ["Noto Sans", "sans-serif"],
         inter: ["Inter", "sans-serif"],
         bebas: ["Bebas Neue", "sans-serif"],

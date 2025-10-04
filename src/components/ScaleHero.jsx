@@ -33,12 +33,20 @@ export default function HeroTextScaler() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const smoothScrollTo = (e, targetId) => {
+    e.preventDefault();
+    const element = document.querySelector(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
-    <div className='relative max-h-[95vh] text-white overflow-hidden'>
+    <div className='relative max-h-[70vh] md:max-h-[95vh] text-white overflow-hidden'>
       {/* Navigation */}
       <nav className='fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 md:px-8 md:py-6'>
         <div className='flex items-center'>
-          <div className='text-xl md:text-2xl font-bold'>
+          <div className='text-xl md:text-2xl font-bold cursor-effect-text cursor-pointer'>
             <div className='z-20'>
               <Image
                 onClick={scrollToTop}
@@ -52,38 +60,34 @@ export default function HeroTextScaler() {
             </div>
           </div>
         </div>
-        <div className='hidden md:flex items-center gap-6 lg:gap-8'>
+        <div className='flex items-center gap-6 lg:gap-8'>
           <a
             href='#work'
-            className='text-sm text-tb-black hover:text-gray-800 transition-colors'
+            onClick={(e) => smoothScrollTo(e, "#work")}
+            className='text-sm text-tb-black hover:text-gray-800 transition-colors cursor-pointer'
           >
             WORK
           </a>
           <a
             href='#contact'
-            className='px-4 py-2 bg-white text-tb-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors'
+            onClick={(e) => smoothScrollTo(e, "#contact")}
+            className='px-4 py-2 bg-white text-tb-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors cursor-pointer'
           >
             LET'S TALK
           </a>
         </div>
-        <a
-          href='#contact'
-          className='md:hidden px-4 py-2 bg-white text-black rounded-full text-xs font-medium'
-        >
-          LET'S TALK
-        </a>
       </nav>
 
       {/* Main Content */}
-      <div className='flex items-end justify-start min-h-screen px-4 md:px-8 pb-20 md:pb-28'>
+      <div className='flex items-end justify-start min-h-[70vh] md:min-h-screen px-4 md:px-8 pb-20 md:pb-28'>
         <div className='relative w-full max-w-7xl'>
           <motion.h1
-            className='text-tb-black font-[500] leading-tight'
+            className='text-tb-black font-[600]'
             initial={{
-              fontSize: "clamp(2.5rem, 8vw, 6rem)",
+              fontSize: "clamp(2.5rem, 8vw, 8rem)",
             }}
             animate={{
-              fontSize: isScaled ? "clamp(1.75rem, 5vw, 3.5rem)" : "clamp(2.5rem, 8vw, 6rem)",
+              fontSize: isScaled ? "clamp(1.75rem, 5vw, 3.5rem)" : "clamp(2.5rem, 8vw, 8rem)",
             }}
             transition={{
               duration: 1.2,

@@ -129,7 +129,7 @@ export default function CountdownScroll() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className='w-6 h-10 border-2 border-tb-body rounded-full flex items-start justify-center p-2'
+              className='w-6 h-10 opacity-[30%] border-[1.5px] border-tb-body rounded-full flex items-start justify-center p-2'
             >
               <motion.div className='w-1 h-2 bg-tb-body rounded-full' />
             </motion.div>

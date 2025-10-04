@@ -61,7 +61,7 @@ export default function BubbleLoader({ onComplete }) {
             transition={phase === "shrink" ? { duration: SCALE_TIME / 1000, ease: "easeInOut" } : phase === "move" ? { duration: MOVE_TIME / 1000, ease: "easeInOut" } : { duration: 0.5 }}
           >
             <Image
-              src='/assets/vector1.svg'
+              src='/assets/vector8.svg'
               alt='main bubble'
               width={160}
               height={160}

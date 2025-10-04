@@ -91,6 +91,9 @@
 .cursor-effect-text {
   /* Add this class to any element you want to trigger the cursor transformation */
 }
+.no-cursor-effect {
+  /* Add this class to any element you want to trigger the cursor transformation */
+}
 
 html {
   scrollbar-gutter: stable;

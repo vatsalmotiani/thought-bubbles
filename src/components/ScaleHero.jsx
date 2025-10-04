@@ -65,7 +65,7 @@ export default function HeroTextScaler() {
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 md:px-8 md:py-6 transition-all duration-300 ${isScaled ? "bg-white/50 backdrop-blur-md border-b border-white/20 " : ""} ${isNavVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className='flex items-center'>
-          <div className='text-xl md:text-2xl font-bold cursor-effect-text cursor-pointer'>
+          <div className='text-xl md:text-2xl font-bold  cursor-pointer'>
             <div className='z-20'>
               <Image
                 onClick={scrollToTop}
@@ -73,7 +73,7 @@ export default function HeroTextScaler() {
                 alt='Company Logo'
                 width={80}
                 height={38}
-                className='object-contain'
+                className='object-contain cursor-effect-text'
                 priority
               />
             </div>
@@ -83,14 +83,14 @@ export default function HeroTextScaler() {
           <a
             href='#work'
             onClick={(e) => smoothScrollTo(e, "#work")}
-            className='text-sm text-tb-black hover:text-gray-800 transition-colors cursor-pointer'
+            className='text-sm text-tb-black hover:text-gray-800 transition-colors cursor-pointer cursor-effect-text'
           >
             WORK
           </a>
           <a
             href='#contact'
             onClick={(e) => smoothScrollTo(e, "#contact")}
-            className='px-4 py-2 bg-white text-tb-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors cursor-pointer'
+            className='px-4 py-2 bg-tb-blue/90 text-white rounded-full text-sm font-medium hover:bg-tb-blue transition-colors cursor-pointer cursor-effect-text'
           >
             LET'S TALK
           </a>

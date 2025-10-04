@@ -91,7 +91,7 @@ export default function CardHeroSection() {
 
       <div
         ref={containerRef}
-        className='relative'
+        className='relative no-cursor-effect'
         style={{
           height: `${totalImages * 100}vh`,
         }}
@@ -195,7 +195,7 @@ export default function CardHeroSection() {
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.5, type: "spring" }}
-                className='w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center shadow-2xl'
+                className='w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center shadow-2xl '
               >
                 <span className='text-black font-bold text-xs md:text-sm tracking-wider text-center leading-tight'>
                   OUR

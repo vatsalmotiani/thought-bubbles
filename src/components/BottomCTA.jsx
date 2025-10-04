@@ -69,7 +69,7 @@ export default function BottomCTAPopup() {
 
               <button
                 onClick={handleCTAClick}
-                className='px-4 py-2 bg-tb-blue/90 text-white rounded-full text-sm font-medium hover:bg-tb-blue transition-colors cursor-pointer'
+                className='cursor-effect-text px-4 py-2 bg-tb-blue/90 text-white rounded-full text-sm font-medium hover:bg-tb-blue transition-colors cursor-pointer'
               >
                 LET'S TALK
               </button>

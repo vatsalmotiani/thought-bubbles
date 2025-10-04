@@ -3,22 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 
 const CustomCursor = () => {
-  const [isHoveringText, setIsHoveringText] = useState(false);
+  const [cursorState, setCursorState] = useState("default"); // "default" | "hover" | "hidden"
   const [isMobile, setIsMobile] = useState(false);
 
-  // live mouse position
   const mouse = useRef({ x: 0, y: 0 });
-  // smoothed follower position
   const follower = useRef({ x: 0, y: 0 });
-
   const cursorRef = useRef(null);
 
   useEffect(() => {
-    // detect mobile by screen size or touch
     const mobileCheck = window.innerWidth < 768 || "ontouchstart" in window;
     setIsMobile(mobileCheck);
-
-    if (mobileCheck) return; // don’t attach listeners if mobile
+    if (mobileCheck) return;
 
     const ease = 0.1;
 
@@ -29,7 +24,6 @@ const CustomCursor = () => {
     const animate = () => {
       const dx = mouse.current.x - follower.current.x;
       const dy = mouse.current.y - follower.current.y;
-
       follower.current.x += dx * ease;
       follower.current.y += dy * ease;
 
@@ -43,15 +37,25 @@ const CustomCursor = () => {
 
     const handleMouseOver = (e) => {
       const target = e.target;
-      if (target.classList.contains("cursor-effect-text") || target.closest(".cursor-effect-text")) {
-        setIsHoveringText(true);
+
+      if (target.classList.contains("no-cursor-effect") || target.closest(".no-cursor-effect")) {
+        setCursorState("hidden");
+      } else if (target.classList.contains("cursor-effect-text") || target.closest(".cursor-effect-text")) {
+        setCursorState("hover");
+      } else {
+        setCursorState("default");
       }
     };
 
     const handleMouseOut = (e) => {
       const relatedTarget = e.relatedTarget;
-      if (!relatedTarget || !relatedTarget.closest(".cursor-effect-text")) {
-        setIsHoveringText(false);
+
+      if (relatedTarget && relatedTarget.closest(".no-cursor-effect")) {
+        setCursorState("hidden");
+      } else if (relatedTarget && relatedTarget.closest(".cursor-effect-text")) {
+        setCursorState("hover");
+      } else {
+        setCursorState("default");
       }
     };
 
@@ -68,23 +72,44 @@ const CustomCursor = () => {
     };
   }, []);
 
-  if (isMobile) return null; // don’t render at all
+  if (isMobile) return null;
+
+  const scale = cursorState === "hover" ? "translate(-50%, -50%) scale(1.3)" : "translate(-50%, -50%) scale(1)";
 
   return (
     <div
       ref={cursorRef}
       className='fixed pointer-events-none z-[9999]'
       style={{
-        transform: isHoveringText ? "translate(-50%, -50%) scale(2)" : "translate(-50%, -50%) scale(1)",
-        width: "24px",
-        height: "24px",
-        backgroundColor: isHoveringText ? "rgba(0,182,231,0.25)" : "#00B6E7",
-        borderRadius: "50%",
-        border: isHoveringText ? "1px solid #00B6E7" : "0px",
-        mixBlendMode: "multiply",
-        transition: "transform 0.6s ease-out, background-color 0.3s ease-out, border 0.3s ease-out",
+        left: 0,
+        top: 0,
+        width: "40px",
+        height: "40px",
+        transform: scale,
+        transition: "transform 0.4s ease-out",
+        willChange: "transform, left, top",
       }}
-    />
+    >
+      {/* Base cursor */}
+      <img
+        src='/assets/blue-bubble-cursor.svg'
+        alt='cursor'
+        className={`absolute w-full h-full transition-opacity duration-300 ease-out ${cursorState === "default" ? "opacity-100" : "opacity-0"}`}
+      />
+
+      {/* Hover cursor */}
+      <img
+        src='/assets/cursor-hover.svg'
+        alt='cursor hover'
+        className={`absolute w-full h-full transition-opacity duration-300 ease-out ${cursorState === "hover" ? "opacity-100" : "opacity-0"}`}
+      />
+
+      {/* Hide both when no-cursor-effect */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ease-out ${cursorState === "hidden" ? "opacity-100" : "opacity-0"}`}
+        style={{ background: "transparent" }}
+      />
+    </div>
   );
 };
 

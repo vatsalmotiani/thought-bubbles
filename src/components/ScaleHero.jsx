@@ -11,18 +11,37 @@ const textLines = [
 
 export default function HeroTextScaler() {
   const [isScaled, setIsScaled] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(true);
 
   useEffect(() => {
-    // Handle scroll
+    let lastScroll = 0;
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      const currentScrollY = window.scrollY;
+
+      // Handle text scaling
+      if (currentScrollY > 50) {
         setIsScaled(true);
       } else {
         setIsScaled(false);
+        setIsNavVisible(true); // Always show at top
+        lastScroll = currentScrollY;
+        return;
       }
+
+      // Handle navbar visibility - hide on down, show on up
+      if (currentScrollY > lastScroll) {
+        // Scrolling down - hide navbar
+        setIsNavVisible(false);
+      } else if (currentScrollY < lastScroll) {
+        // Scrolling up - show navbar
+        setIsNavVisible(true);
+      }
+
+      lastScroll = currentScrollY <= 0 ? 0 : currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -44,7 +63,7 @@ export default function HeroTextScaler() {
   return (
     <div className='relative max-h-[70vh] md:max-h-[95vh] text-white overflow-hidden'>
       {/* Navigation */}
-      <nav className='fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 md:px-8 md:py-6'>
+      <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 md:px-8 md:py-6 transition-all duration-300 ${isScaled ? "bg-white/50 backdrop-blur-md border-b border-white/20 " : ""} ${isNavVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className='flex items-center'>
           <div className='text-xl md:text-2xl font-bold cursor-effect-text cursor-pointer'>
             <div className='z-20'>
@@ -52,8 +71,8 @@ export default function HeroTextScaler() {
                 onClick={scrollToTop}
                 src='/tb-logo.svg'
                 alt='Company Logo'
-                width={120}
-                height={40}
+                width={80}
+                height={38}
                 className='object-contain'
                 priority
               />

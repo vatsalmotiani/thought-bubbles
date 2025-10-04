@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function CardHeroSection() {
   /* ------------------- SETTINGS ------------------- */
-  const slides = ["/assets/dummy2.jpg", "/assets/dummy5.jpg", "/assets/dummy3.jpg", "/assets/dummy4.jpg"];
+  const slides = ["/assets/dummy2.jpg", "/assets/dummy5.jpg", "/assets/dummy3.jpg"];
   const overlayOpacity = 0.5;
 
   /* ------------------- REFS & STATE ------------------- */

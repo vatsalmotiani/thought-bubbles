@@ -6,10 +6,12 @@ import CardHeroSection from "@/components/CardHeroSection";
 import AboutUsSection from "@/components/AboutUsSection";
 import HeroTextScaler from "@/components/ScaleHero";
 import CountdownScroll from "@/components/CountdownSection";
+import BottomCTAPopup from "@/components/BottomCTA";
 
 export default function Home() {
   return (
     <main className='flex flex-col'>
+      <BottomCTAPopup />
       <HeroTextScaler />
       <CardHeroSection />
       <CountdownScroll />

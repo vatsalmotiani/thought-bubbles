@@ -66,6 +66,8 @@ export default function CardHeroSection() {
 
   const handleCardClick = (e) => {
     e.preventDefault();
+    window.dispatchEvent(new Event("stopCountdownAutoScroll"));
+
     const element = document.querySelector("#work");
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import caseList from "@/data/caseList";
 import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { X } from "react-feather";
+import { X, ArrowLeft, ArrowRight } from "react-feather";
 
 // ========================================
 // CASE SHOWCASE COMPONENT
@@ -44,15 +44,15 @@ export default function CaseShowcase() {
     return [...new Set(imgs)];
   }, [activeCard]);
 
+  // open drawer and set active card/image
   const handleCardClick = (card) => {
-    console.log("Card clicked:", card.name);
     setActiveCard(card);
     setActiveImage(card.img || (card.gallery && card.gallery[0]) || null);
     setDrawerOpen(true);
   };
 
+  // onOpenChange from Drawer
   const handleDrawerClose = (open) => {
-    console.log("Drawer open state changed to:", open);
     setDrawerOpen(open);
     if (!open) {
       setTimeout(() => {
@@ -62,7 +62,26 @@ export default function CaseShowcase() {
     }
   };
 
-  // Hide scrollbar when drawer is open
+  // Prev / Next navigation (wraps)
+  const handleNextCase = () => {
+    if (!activeCard || !caseList || caseList.length === 0) return;
+    const currentIndex = caseList.findIndex((c) => c.id === activeCard.id);
+    const nextIndex = (currentIndex + 1) % caseList.length;
+    const nextCard = caseList[nextIndex];
+    setActiveCard(nextCard);
+    setActiveImage(nextCard.img || (nextCard.gallery && nextCard.gallery[0]) || null);
+  };
+
+  const handlePrevCase = () => {
+    if (!activeCard || !caseList || caseList.length === 0) return;
+    const currentIndex = caseList.findIndex((c) => c.id === activeCard.id);
+    const prevIndex = (currentIndex - 1 + caseList.length) % caseList.length;
+    const prevCard = caseList[prevIndex];
+    setActiveCard(prevCard);
+    setActiveImage(prevCard.img || (prevCard.gallery && prevCard.gallery[0]) || null);
+  };
+
+  // Hide scrollbar when drawer is open (restored original behavior)
   useEffect(() => {
     if (drawerOpen) {
       document.documentElement.style.overflow = "hidden";
@@ -105,6 +124,18 @@ export default function CaseShowcase() {
               ) : (
                 <div className='w-full h-full bg-neutral-200' />
               )}
+
+              {/* Subtle tappable indicator:
+                  - On small screens show "Tap to view"
+                  - On larger screens show "View details" on hover (using group)
+              */}
+              <div className='absolute left-3 bottom-3 z-30 sm:hidden'>
+                <div className='bg-tb-black/40 text-white text-xs rounded-full px-3 py-1 font-space'>Tap to view</div>
+              </div>
+
+              <div className='absolute left-3 bottom-3 z-30 hidden sm:block opacity-0 group-hover:opacity-90 transition-opacity'>
+                <div className='bg-tb-black/40 text-white text-xs rounded-full px-3 py-1 font-space'>View details</div>
+              </div>
             </div>
 
             {showOverlayForId(card.id) && (
@@ -125,7 +156,7 @@ export default function CaseShowcase() {
         ))}
       </div>
 
-      {/* DRAWER GALLERY */}
+      {/* DRAWER */}
       <Drawer
         open={drawerOpen}
         onOpenChange={handleDrawerClose}
@@ -137,14 +168,34 @@ export default function CaseShowcase() {
                 <DrawerTitle className='font-space text-lg sm:text-2xl text-tb-black font-[500]'>{activeCard?.name}</DrawerTitle>
                 {activeCard?.client?.name && <p className='font-space text-sm text-neutral-500 mt-1'>{activeCard.client.name}</p>}
               </div>
-              <DrawerClose asChild>
+
+              {/* Header arrow buttons (Prev, Next) + Close (no background) */}
+              <div className='flex items-center gap-4 text-neutral-700'>
                 <button
-                  className='rounded-full bg-tb-body text-white px-2 py-2 hover:bg-tb-black/50 transition-colors'
-                  aria-label='Close'
+                  onClick={handlePrevCase}
+                  className='transition-opacity hover:opacity-60'
+                  aria-label='Previous Case'
                 >
-                  <X className='w-4 h-4' />
+                  <ArrowLeft className='w-5 h-5' />
                 </button>
-              </DrawerClose>
+
+                <button
+                  onClick={handleNextCase}
+                  className='transition-opacity hover:opacity-60'
+                  aria-label='Next Case'
+                >
+                  <ArrowRight className='w-5 h-5' />
+                </button>
+
+                <DrawerClose asChild>
+                  <button
+                    className='transition-opacity hover:opacity-60'
+                    aria-label='Close'
+                  >
+                    <X className='w-5 h-5' />
+                  </button>
+                </DrawerClose>
+              </div>
             </div>
           </DrawerHeader>
 

@@ -232,9 +232,9 @@ export default function CountdownScroll() {
             </motion.div>
           </motion.div>
 
-          {/* PROGRESS SCROLL WHEEL INDICATOR - Right on mobile, Left on desktop */}
+          {/* PROGRESS SCROLL WHEEL INDICATOR - Hidden on mobile, Left on desktop */}
           <motion.div
-            className='fixed top-1/2 right-4 md:right-auto md:left-8 -translate-y-1/2 z-40'
+            className='hidden md:flex fixed top-1/2 left-8 -translate-y-1/2 z-40'
             style={{ opacity: useTransform(scrollYProgress, [0, 0.1, 0.9, 0.95], [0, 1, 1, 0]) }}
           >
             <div className='flex flex-col items-center gap-3'>
@@ -383,7 +383,7 @@ export default function CountdownScroll() {
                         sizes='(max-width: 1024px) 50vw, 40vw'
                         className='object-cover rounded-2xl shadow-2xl'
                         style={{
-                          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
+                          boxShadow: "0 15px 30px -8px rgba(0, 0, 0, 0.25)",
                         }}
                         priority
                       />
@@ -396,9 +396,9 @@ export default function CountdownScroll() {
           </div>
 
           {/* MOBILE LAYOUT */}
-          <div className='md:hidden flex flex-col items-center justify-center h-full gap-8'>
+          <div className='md:hidden flex flex-col items-center justify-center h-full gap-12'>
             {/* 1. YEAR at top */}
-            <div className='relative flex flex-col items-center justify-center pt-16'>
+            <div className='relative flex flex-col items-center justify-center'>
               <div className='relative flex items-center justify-center'>
                 {[0, 90, 180, 270, 45, 135, 225, 315].map((d, i) => (
                   <FloatingOrb
@@ -424,7 +424,7 @@ export default function CountdownScroll() {
               </div>
 
               {/* MILESTONE TEXT - Under year on mobile */}
-              <motion.div className='mt-6 px-4'>
+              <motion.div className='mt-8 px-4'>
                 <AnimatePresence mode='wait'>
                   <motion.p
                     key={currentMilestone.text}
@@ -504,7 +504,7 @@ export default function CountdownScroll() {
                         sizes='90vw'
                         className='object-cover rounded-2xl shadow-2xl'
                         style={{
-                          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
+                          boxShadow: "0 15px 30px -8px rgba(0, 0, 0, 0.25)",
                         }}
                         priority
                       />

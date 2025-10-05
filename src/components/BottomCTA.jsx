@@ -13,7 +13,7 @@ export default function BottomCTAPopup() {
       if (!isDismissed) {
         setIsVisible(true);
       }
-    }, 8000);
+    }, 20000);
 
     return () => clearTimeout(timer);
   }, [isDismissed]);

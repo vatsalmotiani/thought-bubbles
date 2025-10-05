@@ -58,6 +58,9 @@ export default function HeroTextScaler() {
 
   const smoothScrollTo = (e, targetId) => {
     e.preventDefault();
+    // Tell CountdownScroll to stop its auto scroll loop
+    window.dispatchEvent(new Event("stopCountdownAutoScroll"));
+
     const element = document.querySelector(targetId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });

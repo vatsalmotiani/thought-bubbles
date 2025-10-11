@@ -134,6 +134,7 @@ const BackgroundElements = () => {
               width={el.size}
               height={el.size}
               className='opacity-100'
+              priority
             />
           </motion.div>
         ))}

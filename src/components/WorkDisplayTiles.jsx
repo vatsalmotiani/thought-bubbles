@@ -118,7 +118,7 @@ export default function CaseShowcase() {
                   alt={card.name}
                   fill
                   sizes='(max-width: 768px) 100vw, 50vw'
-                  className='object-cover transition-transform duration-500 group-hover:scale-110'
+                  className='object-cover transition-transform duration-500 md:group-hover:scale-110'
                   priority={i < 2}
                 />
               ) : (
@@ -169,37 +169,23 @@ export default function CaseShowcase() {
                 {activeCard?.client?.name && <p className='font-space text-sm text-neutral-500 mt-1'>{activeCard.client.name}</p>}
               </div>
 
-              {/* Header arrow buttons (Prev, Next) + Close (no background) */}
-              <div className='flex items-center gap-4 text-neutral-700'>
+              {/* Close button only in header */}
+              <DrawerClose asChild>
                 <button
-                  onClick={handlePrevCase}
-                  className='transition-opacity hover:opacity-60'
-                  aria-label='Previous Case'
+                  className='bg-tb-black text-white p-3 rounded-full shadow-lg hover:bg-tb-black/80 transition-all hover:scale-105'
+                  aria-label='Close'
                 >
-                  <ArrowLeft className='w-5 h-5' />
+                  <X className='w-5 h-5' />
                 </button>
-
-                <button
-                  onClick={handleNextCase}
-                  className='transition-opacity hover:opacity-60'
-                  aria-label='Next Case'
+                {/* <button
+                  className='transition-opacity hover:opacity-60 text-neutral-700'
                 >
-                  <ArrowRight className='w-5 h-5' />
-                </button>
-
-                <DrawerClose asChild>
-                  <button
-                    className='transition-opacity hover:opacity-60'
-                    aria-label='Close'
-                  >
-                    <X className='w-5 h-5' />
-                  </button>
-                </DrawerClose>
-              </div>
+                </button> */}
+              </DrawerClose>
             </div>
           </DrawerHeader>
 
-          <div className='flex-1 overflow-y-auto overscroll-contain px-6 py-6'>
+          <div className='flex-1 overflow-y-auto overscroll-contain px-6 py-6 relative'>
             {activeCard && (
               <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12'>
                 <div className='flex flex-col gap-5'>
@@ -259,6 +245,25 @@ export default function CaseShowcase() {
                 </div>
               </div>
             )}
+
+            {/* Floating navigation buttons at bottom right */}
+            <div className='fixed bottom-8 right-8 flex items-center gap-3 z-50'>
+              <button
+                onClick={handlePrevCase}
+                className='bg-tb-blue text-white p-3 rounded-full shadow-lg hover:bg-tb-blue/80 transition-all hover:scale-105'
+                aria-label='Previous Case'
+              >
+                <ArrowLeft className='w-6 h-6' />
+              </button>
+
+              <button
+                onClick={handleNextCase}
+                className='bg-tb-blue text-white p-3 rounded-full shadow-lg hover:bg-tb-blue/80 transition-all hover:scale-105'
+                aria-label='Next Case'
+              >
+                <ArrowRight className='w-6 h-6' />
+              </button>
+            </div>
           </div>
         </DrawerContent>
       </Drawer>

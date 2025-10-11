@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import WorkDisplayTiles from "@/components/WorkDisplayTiles";
 import CardHeroSection from "@/components/CardHeroSection";
 import HeroTextScaler from "@/components/ScaleHero";
-import CountdownScroll from "@/components/CountdownSection";
 import BottomCTAPopup from "@/components/BottomCTA";
+import MinimalCountdown from "@/components/MinimalCountdown";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <BottomCTAPopup />
       <HeroTextScaler />
       <CardHeroSection />
-      <CountdownScroll />
+      <MinimalCountdown />
       <section id='work'>
         <InfiniteScroller text={"Our Work"} />
         <WorkDisplayTiles />

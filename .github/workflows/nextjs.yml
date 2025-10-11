@@ -58,8 +58,8 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        # Removed static_site_generator to prevent automatic basePath injection
-        # We're managing basePath manually in next.config.js
+        with:
+          static_site_generator: next
 
       - name: Restore cache
         uses: actions/cache@v4
@@ -83,9 +83,6 @@ jobs:
         env:
           NEXT_PUBLIC_STATIC_EXPORT: true
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-
-      - name: Add .nojekyll file
-        run: touch ./out/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

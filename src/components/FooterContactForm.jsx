@@ -256,7 +256,7 @@ export default function FooterContactForm() {
 
         {submitStatus === "success" && (
           <div className='md:col-span-2'>
-            <p className='text-xs text-green-600 bg-green-50 p-3 rounded-lg'>✓ Message sent successfully! We'll get back to you soon.</p>
+            <p className='text-xs text-green-600 bg-green-50 p-3 rounded-lg'>✓ Message sent successfully! We&apos;sll get back to you soon.</p>
           </div>
         )}
 

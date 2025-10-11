@@ -1,28 +1,25 @@
-import Button from "@/components/Button";
-import Title from "@/components/old/Title";
-import { AlertTriangle } from "react-feather";
+import Link from "next/link";
+
 export const metadata = {
   title: { absolute: "Page Not Found" },
 };
 
-export default function notFound() {
+export default function NotFound() {
   return (
     <div className='flex flex-col items-center justify-center min-h-[400px] sm:h-[500px] md:h-[600px] px-4 sm:px-6'>
-      <AlertTriangle
-        size={48}
-        className='sm:w-12 sm:h-12 md:w-16 md:h-16 text-neutral-400 mb-4'
-      />
-      <Title
-        heading='Page Not Found'
-        subheading="Sorry, the page you were looking for doesn't exist or has been moved."
-      />
-      <span className='mt-6 sm:mt-8'>
-        <Button
-          link='/'
-          content='Back to Homepage'
-          type='white'
-        />
-      </span>
+      <div className='text-center'>
+        <h1 className='text-2xl sm:text-3xl md:text-4xl font-semibold text-tb-black'>Page Not Found</h1>
+        <p className='mt-2 text-sm sm:text-base text-tb-body'>Sorry, the page you were looking for doesn&apos;t exist or has been moved.</p>
+      </div>
+
+      <div className='mt-6 sm:mt-8'>
+        <Link
+          href='/'
+          className='inline-flex items-center rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-tb-black shadow-sm hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2'
+        >
+          Back to Homepage
+        </Link>
+      </div>
     </div>
   );
 }

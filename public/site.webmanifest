@@ -1,0 +1,39 @@
+{
+  "name": "Thought Bubbles Advertising",
+  "short_name": "Thought Bubbles",
+  "description": "Creative marketing and branding agency specializing in innovative advertising solutions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#D3D3D3",
+  "theme_color": "#D3D3D3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

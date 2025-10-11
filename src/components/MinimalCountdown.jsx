@@ -1,11 +1,12 @@
 "use client";
-import { motion, useScroll, useTransform, AnimatePresence, useSpring } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function MinimalCountdown() {
   const containerRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [displayedYear, setDisplayedYear] = useState(2009);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -15,12 +16,21 @@ export default function MinimalCountdown() {
   // Smooth spring config
   const springConfig = { stiffness: 50, damping: 25, mass: 1 };
 
-  // Year changes from 2009 to 2025
-  const rawYear = 2009;
+  // Year changes from 2009 to 2025 based on scroll
+  const rawYear = useTransform(scrollYProgress, [0, 0.5], [2025, 2009]);
   const displayYear = useSpring(rawYear, springConfig);
 
-  // Subtitle changes
-  const subtitle = "16 years of excellence";
+  // Subscribe to year changes
+  useEffect(() => {
+    const unsubscribe = displayYear.on("change", (latest) => {
+      setDisplayedYear(Math.round(latest));
+    });
+    return unsubscribe;
+  }, [displayYear]);
+
+  // Subtitle opacity - fades in as we reach 2025
+  const subtitleOpacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
+  const subtitle = "16 years of legacy";
 
   // Image positions - start immediately at scroll position 0
   const img1X = useTransform(scrollYProgress, [0, 0.3], [-600, 0]);
@@ -57,25 +67,23 @@ export default function MinimalCountdown() {
   return (
     <div
       ref={containerRef}
-      className='relative h-[200vh]'
+      className='relative h-[100vh]'
     >
       <div className='sticky top-0 h-screen flex items-center justify-center overflow-hidden px-4'>
         <div className='relative z-20 text-center'>
           <motion.h1
-            className='text-[100px] sm:text-[140px] md:text-[180px] font-bold leading-none text-gray-900 mb-4'
+            className='text-[100px] sm:text-[140px] md:text-[180px] font-space font-bold leading-none text-tb-black mb-4 tabular-nums'
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.span>{displayYear}</motion.span>
+            {displayedYear}
           </motion.h1>
           <motion.p
-            className='text-lg sm:text-xl md:text-2xl text-gray-600 font-light'
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            className='text-lg sm:text-xl md:text-2xl text-tb-body font-light'
+            style={{ opacity: subtitleOpacity }}
           >
-            <motion.span>{subtitle}</motion.span>
+            {subtitle}
           </motion.p>
         </div>
 
@@ -236,7 +244,7 @@ export default function MinimalCountdown() {
                 onClick={() => setSelectedImage(null)}
                 className='absolute top-4 right-4 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center text-gray-900 font-bold text-2xl shadow-lg transition-all hover:scale-110'
               >
-                ×
+                X
               </button>
             </motion.div>
 

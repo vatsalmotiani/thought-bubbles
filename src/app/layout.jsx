@@ -1,3 +1,5 @@
+// app/layout.jsx
+
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -14,30 +16,29 @@ export const metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  themeColor: "#D3D3D3",
   openGraph: {
     type: "website",
     url: "https://thoughtbubbles.in",
     title: "Thought Bubbles Advertising",
     description: "Thought Bubbles Advertising",
   },
+  // themeColor must be moved to `viewport`
+};
+
+export const viewport = {
+  themeColor: "#D3D3D3",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
+      {/* Next.js will inject theme-color from `viewport`. Keep only custom tags you need */}
       <head>
-        <meta
-          name='theme-color'
-          content='#D3D3D3'
-        />
         <meta
           name='apple-mobile-web-app-status-bar-style'
           content='black-translucent'
-        />
-        <meta
-          name='msapplication-TileColor'
-          content='#D3D3D3'
         />
       </head>
       <body className='font-inter text-neutral-500 flex flex-col min-h-screen relative bg-tb-bg'>

@@ -7,6 +7,7 @@ export default function CountdownScroll() {
   const containerRef = useRef(null);
   const yearRef = useRef(null);
   const [isComplete, setIsComplete] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
 
   // ---------------------- CONFIG ----------------------
   const AUTO_SCROLL_PX_PER_SEC = 800;
@@ -14,6 +15,14 @@ export default function CountdownScroll() {
   const CENTER_TOLERANCE_FRAC = 0.8;
   const COUNTDOWN_SPEED = 1300;
   // -----------------------------------------------------
+
+  // Set window width on mount
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -328,7 +337,7 @@ export default function CountdownScroll() {
                 >
                   <motion.div
                     initial={{
-                      x: window.innerWidth * 0.6,
+                      x: windowWidth > 0 ? windowWidth * 0.6 : 600,
                       opacity: 0,
                       scale: 1.8,
                       rotate: 25,
@@ -340,7 +349,7 @@ export default function CountdownScroll() {
                       rotate: 0,
                     }}
                     exit={{
-                      x: window.innerWidth * 0.6,
+                      x: windowWidth > 0 ? windowWidth * 0.6 : 600,
                       opacity: 0,
                       scale: 0.7,
                       rotate: 15,
@@ -449,7 +458,7 @@ export default function CountdownScroll() {
                 >
                   <motion.div
                     initial={{
-                      x: currentMilestone.side === "left" ? -window.innerWidth * 1.2 : window.innerWidth * 1.2,
+                      x: windowWidth > 0 ? (currentMilestone.side === "left" ? -windowWidth * 1.2 : windowWidth * 1.2) : currentMilestone.side === "left" ? -500 : 500,
                       opacity: 0,
                       scale: 1.8,
                       rotate: currentMilestone.side === "left" ? -25 : 25,
@@ -461,7 +470,7 @@ export default function CountdownScroll() {
                       rotate: 0,
                     }}
                     exit={{
-                      x: currentMilestone.side === "left" ? -window.innerWidth : window.innerWidth,
+                      x: windowWidth > 0 ? (currentMilestone.side === "left" ? -windowWidth : windowWidth) : currentMilestone.side === "left" ? -500 : 500,
                       opacity: 0,
                       scale: 0.7,
                       rotate: currentMilestone.side === "left" ? -15 : 15,
@@ -533,26 +542,6 @@ export default function CountdownScroll() {
               </AnimatePresence>
             </div>
           </motion.div>
-
-          {/* SCROLL INDICATOR - Bottom center - HIDDEN ON MOBILE */}
-          {/* <motion.div
-            initial={{ opacity: 1 }}
-            animate={{ opacity: isComplete ? 0 : 1 }}
-            transition={{ duration: 0.5 }}
-            className='absolute bottom-8 left-1/2 -translate-x-1/2 z-30 hidden md:block'
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className='w-6 h-10 opacity-[30%] border-[1.5px] border-tb-body rounded-full flex items-start justify-center p-2'
-            >
-              <motion.div
-                className='w-1 h-2 bg-tb-body rounded-full'
-                animate={{ height: [8, 12, 8], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </motion.div>
-          </motion.div> */}
         </div>
       </div>
     </div>

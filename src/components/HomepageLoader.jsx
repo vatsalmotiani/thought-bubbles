@@ -15,6 +15,15 @@ export default function BubbleLoader({ onComplete }) {
   const FINAL_SCALE = 0.2;
 
   const [phase, setPhase] = useState("full");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile on mount and window resize
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const timers = [
@@ -29,6 +38,15 @@ export default function BubbleLoader({ onComplete }) {
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
 
+  // Calculate scale based on phase and device
+  const getScale = () => {
+    if (phase === "full") return 20;
+    if (phase === "shrink") return isMobile ? 2 : 4; // 50% smaller on mobile
+    if (phase === "move") return isMobile ? 0.6 : 1.2; // 50% smaller on mobile
+    if (phase === "settle") return FINAL_SCALE;
+    return 1;
+  };
+
   return (
     <AnimatePresence>
       {phase !== "done" && (
@@ -42,9 +60,9 @@ export default function BubbleLoader({ onComplete }) {
               phase === "full"
                 ? { scale: 20, opacity: 1 }
                 : phase === "shrink"
-                ? { scale: 4, opacity: 1 }
+                ? { scale: getScale(), opacity: 1 }
                 : phase === "move"
-                ? { scale: 1.2, x: EXIT_X, y: EXIT_Y, opacity: 0.8 }
+                ? { scale: getScale(), x: EXIT_X, y: EXIT_Y, opacity: 0.8 }
                 : phase === "settle"
                 ? {
                     scale: FINAL_SCALE,

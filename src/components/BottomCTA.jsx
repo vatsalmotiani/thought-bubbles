@@ -62,7 +62,7 @@ export default function BottomCTAPopup() {
             <div className='relative p-4 pr-10 sm:p-5 sm:pr-12'>
               <div className='mb-3'>
                 <h3 className='text-base sm:text-lg font-semibold text-tb-black mb-1 font-space'>Ready to start your project?</h3>
-                <p className='text-xs sm:text-sm text-tb-body leading-relaxed font-space'>Let's discuss how we can bring your vision to life.</p>
+                <p className='text-xs sm:text-sm text-tb-body leading-relaxed font-space'>Let&apos;s discuss how we can bring your vision to life.</p>
               </div>
 
               {/* CTA Button */}
@@ -71,7 +71,7 @@ export default function BottomCTAPopup() {
                 onClick={handleCTAClick}
                 className='cursor-effect-text px-4 py-2 bg-tb-blue/90 text-white rounded-full text-sm font-medium hover:bg-tb-blue transition-colors cursor-pointer'
               >
-                LET'S TALK
+                LET&apos;S TALK
               </button>
             </div>
           </div>

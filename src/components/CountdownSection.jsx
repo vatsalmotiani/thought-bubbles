@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 
 export default function CountdownScroll() {
@@ -52,13 +52,16 @@ export default function CountdownScroll() {
   const digit4 = useTransform(yearString, (s) => s[3]);
 
   // ---------------------- MILESTONES ----------------------
-  const milestones = [
-    { year: 2022, text: "Building excellence since day one.", image: "/assets/dummy1.jpg", side: "right" },
-    { year: 2020, text: "Adapting and innovating through challenges.", image: "/assets/dummy2.jpg", side: "left" },
-    { year: 2016, text: "Laying the groundwork for future innovation.", image: "/assets/dummy3.jpg", side: "right" },
-    { year: 2013, text: "Expanding horizons and breaking boundaries.", image: "/assets/dummy4.jpg", side: "left" },
-    { year: 2009, text: "Where it all began - the foundation.", image: "/assets/dummy5.jpg", side: "right" },
-  ];
+  const milestones = useMemo(
+    () => [
+      { year: 2022, text: "Building excellence since day one.", image: "/assets/dummy1.jpg", side: "right" },
+      { year: 2020, text: "Adapting and innovating through challenges.", image: "/assets/dummy2.jpg", side: "left" },
+      { year: 2016, text: "Laying the groundwork for future innovation.", image: "/assets/dummy3.jpg", side: "right" },
+      { year: 2013, text: "Expanding horizons and breaking boundaries.", image: "/assets/dummy4.jpg", side: "left" },
+      { year: 2009, text: "Where it all began - the foundation.", image: "/assets/dummy5.jpg", side: "right" },
+    ],
+    [] // dependencies — empty means it stays constant
+  );
 
   const [currentMilestone, setCurrentMilestone] = useState(milestones[0]);
   const [milestoneKey, setMilestoneKey] = useState(0);
@@ -76,7 +79,7 @@ export default function CountdownScroll() {
       }
     });
     return () => unsubscribe();
-  }, [displayYear, currentMilestone]);
+  }, [displayYear, currentMilestone, milestones]);
 
   // ---------------------- AUTO SCROLL ----------------------
   const rafRef = useRef(null);
@@ -85,10 +88,10 @@ export default function CountdownScroll() {
   const inactivityTimeoutRef = useRef(null);
   const autoActiveRef = useRef(false);
 
-  const isDisplayInAutoRange = () => {
+  const isDisplayInAutoRange = useCallback(() => {
     const v = displayYear.get();
     return v >= 2009 && v < 2024;
-  };
+  }, [displayYear]);
 
   const isYearCentered = () => {
     const el = yearRef.current;
@@ -109,7 +112,7 @@ export default function CountdownScroll() {
     }
   }
 
-  function startAutoScroll() {
+  const startAutoScroll = useCallback(() => {
     if (autoActiveRef.current) return;
     autoActiveRef.current = true;
     lastTimestampRef.current = null;
@@ -139,7 +142,7 @@ export default function CountdownScroll() {
     };
 
     rafRef.current = requestAnimationFrame(step);
-  }
+  }, [displayYear]);
 
   const cancelInactivityResume = () => {
     if (inactivityTimeoutRef.current) {
@@ -148,25 +151,25 @@ export default function CountdownScroll() {
     }
   };
 
-  const scheduleResumeIfEligible = () => {
+  const scheduleResumeIfEligible = useCallback(() => {
     cancelInactivityResume();
     inactivityTimeoutRef.current = setTimeout(() => {
       userInteractingRef.current = false;
       if (isDisplayInAutoRange() && isYearCentered()) startAutoScroll();
     }, USER_INACTIVITY_RESUME_MS);
-  };
+  }, [isDisplayInAutoRange, startAutoScroll]);
 
-  const onUserInteraction = () => {
+  const onUserInteraction = useCallback(() => {
     userInteractingRef.current = true;
     stopAutoScroll();
     scheduleResumeIfEligible();
-  };
+  }, [scheduleResumeIfEligible]);
 
   useEffect(() => {
     const opts = { passive: true, capture: true };
     ["wheel", "touchstart", "touchmove", "pointerdown", "keydown"].forEach((evt) => window.addEventListener(evt, onUserInteraction, opts));
     return () => ["wheel", "touchstart", "touchmove", "pointerdown", "keydown"].forEach((evt) => window.removeEventListener(evt, onUserInteraction, opts));
-  }, []);
+  }, [onUserInteraction]);
 
   useEffect(() => {
     let guardTimeout = null;
@@ -189,7 +192,7 @@ export default function CountdownScroll() {
       cancelInactivityResume();
       stopAutoScroll();
     };
-  }, [displayYear, scrollYProgress]);
+  }, [displayYear, scrollYProgress, isDisplayInAutoRange, scheduleResumeIfEligible, startAutoScroll]);
 
   useEffect(() => {
     const stopHandler = () => {

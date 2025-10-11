@@ -16,6 +16,7 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         caveat: ["Caveat", "cursive"],
+        space: ["Space Grotesk", "sans-serif"],
         noto: ["Noto Sans", "sans-serif"],
         inter: ["Inter", "sans-serif"],
         bebas: ["Bebas Neue", "sans-serif"],
@@ -25,7 +26,8 @@ module.exports = {
       colors: {
         "tb-blue": "#00B6E7",
         "tb-black": "#1E1E1E",
-        "tb-bg": "#F2F2F2",
+        "tb-bg": "#fff",
+        // "tb-bg": "#F2F2F2",
         "tb-body": "#828282",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

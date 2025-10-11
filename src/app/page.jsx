@@ -1,19 +1,26 @@
-import HeroSection from "@/components/HeroSection";
-import ServicesShowcase from "@/components/ServicesShowcase";
-import ClientsSection from "@/components/ClientsSection";
-import CTASection from "@/components/CTASection";
-import WorkDisplay from "@/components/WorkDisplay";
 import InfiniteScroller from "@/components/InfiniteScroller";
+import Footer from "@/components/Footer";
+import WorkDisplayTiles from "@/components/WorkDisplayTiles";
+import CardHeroSection from "@/components/CardHeroSection";
+import HeroTextScaler from "@/components/ScaleHero";
+import CountdownScroll from "@/components/CountdownSection";
+import BottomCTAPopup from "@/components/BottomCTA";
 
 export default function Home() {
   return (
-    <div className='h-auto flex flex-col gap-16'>
-      <HeroSection />
-      {/* <ServicesShowcase /> */}
-      <InfiniteScroller text={"About Us"} />
-      <ClientsSection />
-      <WorkDisplay />
-      {/* <CTASection /> */}
-    </div>
+    <main className='flex flex-col'>
+      <BottomCTAPopup />
+      <HeroTextScaler />
+      <CardHeroSection />
+      <CountdownScroll />
+      <section id='work'>
+        <InfiniteScroller text={"Our Work"} />
+        <WorkDisplayTiles />
+      </section>
+      <section id='contact'>
+        <InfiniteScroller text={"Get In Touch"} />
+        <Footer />
+      </section>
+    </main>
   );
 }

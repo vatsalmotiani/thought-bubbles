@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import clientList from "@/data/clients";
-import Reveal from "./Reveal";
-import RevealText from "./RevealText";
+import Reveal from "../Reveal";
+import RevealText from "../RevealText";
 
 export default function AboutUsSection() {
   const featuredClients = clientList.filter((c) => c.favourite === true);

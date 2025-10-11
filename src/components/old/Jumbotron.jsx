@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
-import Button from "./Button";
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+import Button from "../Button";
 import caseList from "@/data/caseList";
 import Link from "next/link";
 import { motion } from "framer-motion";

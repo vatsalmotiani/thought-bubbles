@@ -5,7 +5,7 @@ import { slugify, unslugify } from "@/lib/utils";
 import caseList from "@/data/caseList";
 import serviceList from "@/data/services";
 import { usePathname, useSearchParams } from "next/navigation";
-import CaseStudyDisplay from "@/components/CaseCard";
+import CaseStudyDisplay from "@/components/old/CaseCard";
 
 // ---------------- Floating bubble ----------------
 const FloatingBubble = ({ size, x, y, delay, duration }) => (

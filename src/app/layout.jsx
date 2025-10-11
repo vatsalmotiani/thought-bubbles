@@ -34,7 +34,6 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      {/* Next.js will inject theme-color from `viewport`. Keep only custom tags you need */}
       <head>
         <meta
           name='apple-mobile-web-app-status-bar-style'

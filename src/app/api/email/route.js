@@ -3,27 +3,28 @@ import nodemailer from "nodemailer";
 import { headers } from "next/headers";
 import { generateEmailHTML, generatePlainTextEmail } from "@/lib/emailTemplate";
 
+// Make route compatible with static export
+export const dynamic = "force-static";
+export const revalidate = false;
+
 // Validation patterns
 const patterns = {
   name: /^[a-zA-Z\s]{2,50}$/,
   email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  phone: /^[6-9]\d{9}$/, // Indian mobile numbers
+  phone: /^[6-9]\d{9}$/,
   company: /^[a-zA-Z0-9\s&.,'-]{2,100}$/,
   message: /^[\s\S]{10,500}$/,
 };
 
-// Suspicious content detection
 function isSuspicious(text) {
   const suspiciousPatterns = [/<script/i, /javascript:/i, /on\w+\s*=/i, /(https?:\/\/){2,}/i, /(\w)\1{10,}/, /<iframe/i, /eval\(/i, /(viagra|cialis|casino|lottery|crypto|bitcoin|investment)/i];
   return suspiciousPatterns.some((pattern) => pattern.test(text));
 }
 
-// Basic sanitize to keep subject/replyTo safe from angle-bracket injection
 function sanitize(text) {
   return String(text).replace(/[<>]/g, "");
 }
 
-// Validate all fields
 function validateInput(data) {
   const errors = [];
 
@@ -43,18 +44,15 @@ function validateInput(data) {
     errors.push("Invalid message");
   }
 
-  // Check for suspicious content
   const allText = `${data.name} ${data.email} ${data.company || ""} ${data.message}`;
   if (isSuspicious(allText)) {
     errors.push("Suspicious content detected");
   }
 
-  // Honeypot check
   if (data.honeypot) {
     errors.push("Bot detected");
   }
 
-  // Time check (form filled too quickly)
   if (data.timestamp && Date.now() - data.timestamp < 3000) {
     errors.push("Form submitted too quickly");
   }
@@ -63,21 +61,31 @@ function validateInput(data) {
 }
 
 export async function POST(request) {
+  // Check if we're in static export mode
+  if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "true") {
+    return NextResponse.json(
+      {
+        error: "Email API is disabled in static export mode",
+        message: "Please use the FormSubmit service directly",
+      },
+      { status: 503 }
+    );
+  }
+
   try {
-    // Get client IP for logging
     const headersList = await headers();
     const forwardedFor = headersList.get("x-forwarded-for");
     const clientIp = forwardedFor ? forwardedFor.split(",")[0] : "unknown";
 
-    // Check origin (CSRF protection)
+    // CSRF protection
     const origin = headersList.get("origin");
     const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
-
-    if (!allowedOrigins.includes(origin)) {
+    console.log(origin);
+    console.log(allowedOrigins);
+    if (allowedOrigins.length > 0 && !allowedOrigins.includes(origin)) {
       return NextResponse.json({ error: "Unauthorized origin" }, { status: 403 });
     }
 
-    // Parse and validate request body
     const data = await request.json();
     const validationErrors = validateInput(data);
 
@@ -85,7 +93,6 @@ export async function POST(request) {
       return NextResponse.json({ error: "Validation failed", details: validationErrors }, { status: 400 });
     }
 
-    // Create transporter
     const transport = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -94,7 +101,6 @@ export async function POST(request) {
       },
     });
 
-    // Build email content
     const submittedAt = new Date().toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
     });
@@ -123,7 +129,6 @@ export async function POST(request) {
       html: htmlBody,
     };
 
-    // Send email
     await transport.sendMail(mailOptions);
 
     return NextResponse.json({
@@ -136,7 +141,7 @@ export async function POST(request) {
   }
 }
 
-// Block all other HTTP methods
+// Block other methods
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }
